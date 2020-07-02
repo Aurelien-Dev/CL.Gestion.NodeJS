@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>CL.Gestion</title>
+    <link rel="stylesheet" href="/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/simple-sidebar.css" rel="stylesheet">
+    {{{block "pageStyles"}}}
+
+</head>
+<body>
+    <div class="d-flex" id="wrapper">
+
+        <!-- Sidebar -->
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="sidebar-heading">Start Bootstrap </div>
+            <div class="list-group list-group-flush">
+                <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Home" asp-action="Index">Tableau de bord</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Risque" asp-action="ListeMembres">Membres</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Risque" asp-action="FormulaireInterne">Formulaire interne</a>
+                <a class="list-group-item list-group-item-action bg-light" asp-area="" asp-controller="Risque" asp-action="FormulaireExterne" target="_blank">Formulaire externe</a>
+            </div>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                {{{body}}}
+            </div>
+        </div>
+    </div>
+
+    <script src="/lib/jquery/dist/jquery.min.js"></script>
+    <script src="/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="/lib/jquery-validation/dist/localization/messages_fr.min.js"></script>
+    <script src="/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+    <script src="/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/site.js" asp-append-version="true"></script>
+    {{{block "pageScripts"}}}
+
+</body>
+</html>

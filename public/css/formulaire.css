@@ -1,0 +1,29 @@
+/* Overrride Bootstrap */
+.container {
+    max-width: 880px !important;
+}
+
+#page-content-wrapper {
+    font-family: initial;
+    margin: 35px 0;
+}
+
+.logo_entete {
+    text-align: center;
+    width: 125px;
+}
+
+.titre_formulaire {
+    margin: 3% 0;
+    text-align: center;
+}
+
+.champ {
+    font-style: italic;
+}
+
+.text-formulaire {
+    text-align: justify;
+    text-justify: inter-word;
+}
+
