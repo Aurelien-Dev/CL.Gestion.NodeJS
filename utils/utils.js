@@ -1,4 +1,4 @@
-var helpers = require('./helpers.js');
+var helpers = require('./helpers_components.js');
 var dates = require('./dates.js');
 
 //Regroupe l'enssemble des utilitaires dans un module 
