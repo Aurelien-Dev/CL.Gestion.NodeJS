@@ -17,7 +17,7 @@
                    Nom *
                 </label>
                 <div class="col-sm-9">
-                    <input class="form-control form-control-sm" placeholder="Nom" type="text" value="" >
+                    <input name="Nom" id="Nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -25,7 +25,7 @@
                    Prénom *
                 </label>
                 <div class="col-sm-9">
-                    <input class="form-control form-control-sm" placeholder="Prenom" type="text" value="">
+                    <input name="Prenom" id="Prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -33,7 +33,7 @@
                    Adresse courriel *
                 </label>
                 <div class="col-sm-9">
-                    <input class="form-control form-control-sm" placeholder="AdresseCourriel" type="text" value="">
+                    <input name="AdresseCourriel" id="AdresseCourriel" class="form-control form-control-sm" placeholder="" type="email" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -41,7 +41,7 @@
                    Téléphone *
                 </label>
                 <div class="col-sm-9">
-                    <input class="form-control form-control-sm" placeholder="Telephone" type="text" value="">
+                    <input name="Telephone" id="Telephone" class="form-control form-control-sm" placeholder="" type="text" required>
                 </div>
             </div>
             <div class="form-group row">
@@ -52,11 +52,6 @@
                     99999
                 </div>
             </div>
-
-            {{!-- 
-            @Html.EditorFor(m => Model.AdresseCourriel, "TextTemplate", new { Placeholder = "Adresse courriel" })
-            @Html.EditorFor(m => Model.Telephone, "TextTemplate", new { Placeholder = "Téléphone" })
-            @Html.DisplayFor(m => Model.NumeroMembre, "IntTemplate") --}}
         </p>
 
         <p class="text-formulaire">
@@ -95,20 +90,48 @@
         <p><strong>Contact en cas d’urgence</strong></p>
 
         <p>
-            {{!-- @Html.EditorFor(m => Model.NomPrenomContact, "TextTemplate", new { Placeholder = "Nom & prénom" })
-            @Html.EditorFor(m => Model.LienContact, "TextTemplate", new { Placeholder = "Lien" })
-            @Html.EditorFor(m => Model.TelephoneContact, "TextTemplate", new { Placeholder = "Téléphone" })
-            @Html.EditorFor(m => Model.AdresseContact, "TextareaTemplate", new { Placeholder = "Adresse" }) --}}
+            <div class="form-group row">
+                <label for="NomPrenomContact" class="col-sm-3 col-form-label champ">
+                   Nom & prénom *
+                </label>
+                <div class="col-sm-9">
+                    <input name="NomPrenomContact" id="NomPrenomContact" class="form-control form-control-sm" placeholder="" type="text" value="" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="LienContact" class="col-sm-3 col-form-label champ">
+                   Lien *
+                </label>
+                <div class="col-sm-9">
+                    <input name="LienContact" id="LienContact" class="form-control form-control-sm" placeholder="" type="text" value="" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="TelephoneContact" class="col-sm-3 col-form-label champ">
+                   Téléphone *
+                </label>
+                <div class="col-sm-9">
+                    <input name="TelephoneContact" id="TelephoneContact" class="form-control form-control-sm" placeholder="" type="text" value="" required>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="AdresseContact" class="col-sm-3 col-form-label champ">
+                   Adresse *
+                </label>
+                <div class="col-sm-9">
+                    <input name="AdresseContact" id="AdresseContact" class="form-control form-control-sm" placeholder="" type="text" value="" required>
+                </div>
+            </div>
         </p>
 
         <p class="champ">
-            {{!-- <div class="form-check">
-                @Html.CheckBoxFor(m => Model.AccepteRisque, new { @class = "form-check-input" })
-                <label class="form-check-label" for="@Html.IdFor(m => Model.AccepteRisque)">
+            <div class="form-check">
+                <input name="AccepteRisque" id="AccepteRisque" class="form-check-input" placeholder="" type="checkbox" value="" required>
+                
+                <label class="form-check-label" for="AccepteRisque">
                     <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong>
                 </label>
-                @Html.ValidationMessageFor(m => Model.AccepteRisque, string.Empty, new { @class = "text-danger" })
-            </div> --}}
+            </div>
         </p>
 
         <p class="champ text-center">
@@ -124,13 +147,5 @@
 {{/contentFor}}
 
 {{#contentFor "pageScripts"}}
-    <script>
-        $(function () {
-            //$('form').validate({
-            //    lang: 'fr'
-            //});
-            //$('form').valid();
-        });
-    </script>
-
+    <script src="/js/formulaire/formulaire.validation.js" asp-append-version="true"></script>
 {{/contentFor}}
