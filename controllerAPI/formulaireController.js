@@ -1,5 +1,6 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Sequelize = require('sequelize')
 
 /**
  * Permet l'ajout d'un nouveau formulaire d'accèptation des risques

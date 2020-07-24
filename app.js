@@ -1,9 +1,9 @@
 //Définition dse modules
-var express = require('express');
-var utils = require('./utils/utils.js');
-var expressHandle = require('express-handlebars');
-var bodyParser = require('body-parser');
-var helper = require('./utils/helperscomponents.js');
+const express = require('express');
+const utils = require('./utils/utils.js');
+const expressHandle = require('express-handlebars');
+const bodyParser = require('body-parser');
+const helper = require('./utils/helperscomponents.js');
 
 var app = module.exports = express();
 app.set('port', process.env.PORT || 3001);

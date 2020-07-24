@@ -1,6 +1,6 @@
-var mappers = require('../mappers/submitFormulaireMapper.js');
-var express = require('express');
-var router = express.Router();
+const mappers = require('../mappers/submitFormulaireMapper.js');
+const express = require('express');
+const router = express.Router();
 
 /*
  ** Affichage d'accueil
