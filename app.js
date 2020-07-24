@@ -25,10 +25,13 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var apiController = require('./controller/api');
+var apiController = require('./controllerAPI/formulaireController');
 app.use(apiController);
 
-var homeController = require('./controller/home');
+var formulaireController = require('./controller/formulaireController');
+app.use(formulaireController);
+
+var homeController = require('./controller/homeController');
 app.use(homeController);
 
 //Création sur serveur web
