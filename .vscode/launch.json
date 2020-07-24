@@ -12,6 +12,8 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}\\app.js",
+            "outputCapture": "std",
+            "internalConsoleOptions": "openOnSessionStart"
             //"console": "integratedTerminal"
         }
     ]

@@ -1,4 +1,5 @@
 const mappers = require('../mappers/submitFormulaireMapper.js');
+const formulaireDB = require('../db/formulaireDB')
 const express = require('express');
 const router = express.Router();
 
@@ -16,8 +17,11 @@ router.post('/EnregistrerFormulaireInterne', function(request, response) {
     var renseignementFormulaire = mappers.formulaire.mapperBody(request.body);
 
     //Procéder a l'enregistrement des données
+    formulaireDB.createFormulaire(renseignementFormulaire, (results) => {
+        //response.render('Home/formulaire');
+        response.redirect('./');
+    });
 
-    response.render('Home/formulaire');
 });
 
 module.exports = router;

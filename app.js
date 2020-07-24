@@ -34,6 +34,9 @@ app.use(formulaireController);
 var homeController = require('./controller/homeController');
 app.use(homeController);
 
+
+
+
 //Création sur serveur web
 var serveur = app.listen(process.env.PORT || 3001, function() {
     console.log(new Date().toLocaleString() + ' - Server web started on port http://127.0.0.1:' + app.get('port'));
