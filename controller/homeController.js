@@ -8,8 +8,7 @@ const router = express.Router();
  */
 router.get('/', function(request, response) {
     formulaireDB.getFormulaires((formulaires) => {
-        console.log(formulaires);
-        response.render('home/tableauBord', { formulaires: formulaires });
+        response.render('home/tableauBord', { frm: formulaires });
     });
 });
 
