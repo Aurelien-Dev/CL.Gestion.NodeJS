@@ -18,7 +18,7 @@ var hbs = expressHandle.create({
 //définition du moteur de rendu (ici handlebars)
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, "/views"));
+app.set('views', "views");
 
 //Ouverture d'un dossier public
 app.use(express.static(path.join(__dirname + '/public')));
