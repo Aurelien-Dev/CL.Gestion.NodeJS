@@ -21,8 +21,7 @@ app.set('view engine', 'handlebars');
 //app.set('view', path.join(__dirname, "views"));
 
 //Ouverture d'un dossier public
-app.use(express.static(path.join(__dirname + '../public')));
-console.log(path.join(__dirname + '../public'));
+app.use(express.static(path.join(__dirname + '/public')));
 
 app.use(bodyParser.urlencoded({
     extended: true
