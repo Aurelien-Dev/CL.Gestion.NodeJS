@@ -12,6 +12,17 @@
         </tr>
     </thead>
     <tbody>
-       
+        {{#each frm}}
+            <tr>
+                <td>{{this.nom}}</td>
+                <td>{{this.prenom}}</td>
+                <td>{{this.adresseCourriel}}</td>
+                <td>{{this.telephone}}</td>
+                <td>{{this.nomPrenomContact}}</td>
+                <td>{{this.lienContact}}</td>
+                <td>{{this.telephoneContact}}</td>
+                <td>{{this.adresseContact}}</td>
+            </tr>
+        {{/each}}
     </tbody>
 </table>
