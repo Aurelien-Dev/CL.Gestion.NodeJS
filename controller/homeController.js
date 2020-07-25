@@ -9,9 +9,9 @@ const router = express.Router();
 router.get('/', function(request, response) {
     response.render('home/tableau');
 
-    formulaireDB.getFormulaires((formulaires) => {
-        response.render('home/tableau', { frm: formulaires });
-    });
+    // formulaireDB.getFormulaires((formulaires) => {
+    //     response.render('home/tableau', { frm: formulaires });
+    // });
 });
 
 
