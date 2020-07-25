@@ -4,6 +4,7 @@ const utils = require('./utils/utils.js');
 const expressHandle = require('express-handlebars');
 const bodyParser = require('body-parser');
 const helper = require('./utils/helperscomponents.js');
+var path = require('path');
 
 var app = module.exports = express();
 app.set('port', process.env.PORT || 3001);
@@ -20,7 +21,9 @@ app.set('view engine', 'handlebars');
 //app.set('view', path.join(__dirname, "views"));
 
 //Ouverture d'un dossier public
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(path.join(__dirname + '../public')));
+console.log(path.join(__dirname + '../public'));
+
 app.use(bodyParser.urlencoded({
     extended: true
 }));
