@@ -7,7 +7,7 @@ const router = express.Router();
  ** Affichage d'accueil
  */
 router.get('/formulaire', function(request, response) {
-    response.render('/home/formulaire');
+    response.render('home/formulaire');
 });
 
 /*

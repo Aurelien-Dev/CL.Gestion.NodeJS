@@ -7,11 +7,9 @@ const router = express.Router();
  ** Affichage d'accueil
  */
 router.get('/', function(request, response) {
-    response.render('home/tableau.handlebars');
-
-    // formulaireDB.getFormulaires((formulaires) => {
-    //     response.render('home/tableau', { frm: formulaires });
-    // });
+    formulaireDB.getFormulaires((formulaires) => {
+        response.render('home/tableauBord', { frm: formulaires });
+    });
 });
 
 
