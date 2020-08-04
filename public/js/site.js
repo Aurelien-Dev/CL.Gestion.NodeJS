@@ -3,9 +3,10 @@
 
 // Write your JavaScript code.
 
-$(function() {
+$(function(window, $) {
+
+    if ('undefined' == typeof(window.CL)) { window.CL = {}; }
+    if ('undefined' == typeof(window.CL.Utilitaires)) { window.CL.Utilitaires = {}; }
 
 
-
-
-});
+}(window, $));

@@ -4,24 +4,53 @@ const express = require('express');
 const router = express.Router();
 
 /*
- ** Affichage d'accueil
+ ** Affichage de la page d'ajout d'un nouveau formulaire
  */
-router.get('/formulaire', function(request, response) {
+router.get('/ajouter-formulaire', function(request, response) {
     response.render('home/formulaire');
 });
 
+
 /*
- ** Affichage d'accueil
+ ** Permet d'ajouter le formulaire 
  */
 router.post('/EnregistrerFormulaireInterne', function(request, response) {
-    var renseignementFormulaire = mappers.formulaire.mapperBody(request.body);
-
     //Procéder a l'enregistrement des données
-    formulaireDB.createFormulaire(renseignementFormulaire, (results) => {
+    formulaireDB.createFormulaire(request.body, (results) => {
         //response.render('Home/formulaire');
         response.redirect('./');
     });
-
 });
+
+
+/*
+ ** Permet de consulter un formulaire existant, sinon retourne a la page d'accueil
+ */
+router.get('/consulter-formulaire/:id', function(request, response) {
+    const id = parseInt(request.params.id);
+
+    //Procéder a l'enregistrement des données
+    formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
+        if (result.length == 1) {
+            response.render('home/formulaire-lecture', result[0]);
+        } else {
+            response.redirect('./');
+        }
+    });
+});
+
+
+// /*
+//  ** Permet de supprimer un formulaire existant
+//  */
+// router.get('/supprimer-formulaire/:id', function(request, response) {
+//     const id = parseInt(request.params.id);
+
+//     //Procéder a l'enregistrement des données
+//     formulaireDB.deleteFormulaireByNumeroSequence(id, (result) => {
+//         response.redirect('./');
+//     });
+// });
+
 
 module.exports = router;

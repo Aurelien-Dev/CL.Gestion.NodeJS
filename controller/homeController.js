@@ -4,7 +4,7 @@ const express = require('express');
 const router = express.Router();
 
 /*
- ** Affichage d'accueil
+ ** Affichage de la page d'accueil qui est le tableau de bord
  */
 router.get('/', function(request, response) {
     formulaireDB.getFormulaires((formulaires) => {

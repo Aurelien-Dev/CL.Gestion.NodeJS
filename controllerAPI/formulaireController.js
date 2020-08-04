@@ -5,7 +5,7 @@ const router = express.Router();
 
 
 /**
- * Permet l'ajout d'un nouveau formulaire d'accèptation des risques
+ * Permet d'obtenir tout les formulaires d'accèptation des risques
  */
 router.get('/api/formulaires', function(request, response) {
     formulaireDB.getFormulaires((results) => {
@@ -14,7 +14,7 @@ router.get('/api/formulaires', function(request, response) {
 });
 
 /**
- * Permet l'ajout d'un nouveau formulaire d'accèptation des risques
+ * Permet d'obtenir un formulaire d'accèptation des risques par son numéro de séquence
  */
 router.get('/api/formulaires/:id', function(request, response) {
     const id = parseInt(request.params.id);
@@ -22,8 +22,17 @@ router.get('/api/formulaires/:id', function(request, response) {
     formulaireDB.getFormulaireByNumeroSequence(id, (results) => {
         response.status(200).json(results);
     });
+});
 
+/**
+ * Permet de supprimer un formulaire d'accèptation des risques par son numéro de séquence
+ */
+router.delete('/api/formulaires/:id', function(request, response) {
+    const id = parseInt(request.params.id);
 
+    formulaireDB.deleteFormulaireByNumeroSequence(id, (results) => {
+        response.status(200).json(results);
+    });
 });
 
 /**
@@ -46,6 +55,5 @@ router.post('/api/formulaires', function(request, response) {
         response.status(200).json(results);
     });
 });
-
 
 module.exports = router;
