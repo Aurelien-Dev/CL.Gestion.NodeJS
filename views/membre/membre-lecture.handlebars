@@ -3,7 +3,9 @@
         
         
     <div class="card text-white bg-dark mb-3">
-        <div class="card-header">Information générales</div>
+        <div class="card-header">
+            <strong>Information générales</strong>
+        </div>
         <div class="card-body">
             <p>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -24,9 +26,12 @@
         </div>
     </div>
 
+
     {{#each formulaires}}
         <div class="card bg-light mb-3">
-            <div class="card-header">Contact d'urgence</div>
+            <div class="card-header">
+                <strong>Contact d'urgence</strong>
+            </div>
             <div class="card-body">
                 <p>
                     <strong>Nom du contact : </strong>
@@ -59,3 +64,22 @@
         </div>
     {{/each}}
 </div>
+
+
+<p class="champ text-center">
+    <input class="btn btn-dark" type="button" value="retour" id="retour" />
+</p>
+
+
+
+{{#contentFor "pageScripts"}}
+    <script>
+        $(function() {
+
+            $('#retour').click(function() {
+                window.history.back();
+            }); 
+
+        });
+    </script>
+{{/contentFor}}

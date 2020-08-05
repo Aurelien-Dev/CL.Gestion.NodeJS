@@ -1,5 +1,4 @@
 (function(window, $) {
-
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
 
@@ -40,6 +39,28 @@
     });
 
 
+    $("#formulaires").DataTable(window.CL.Configuration.DatatableOptionsBase);
+
+
+    $('.supprimer-formulaire').click(function(e) {
+        e.preventDefault();
+
+        $that = $(this);
+        modalSupFormulaire.ligne = $that.parents('tr');
+        modalSupFormulaire.AfficherModal();
+    });
+
+    $('.ajouter-membre').click(function(e) {
+        e.preventDefault();
+
+        $that = $(this);
+        modalAjouterMembre.ligne = $that.parents('tr');
+        modalAjouterMembre.AfficherModal();
+    });
+
+
+
+
     function supprimerFormulaire(ligne) {
         var href = $(ligne).find('.supprimer-formulaire').attr('href');
 
@@ -65,8 +86,5 @@
             }
         });
     }
-
-    window.CL.View.tableauBord.modalSupFormulaire = modalSupFormulaire;
-    window.CL.View.tableauBord.modalAjouterMembre = modalAjouterMembre;
 
 }(window, $));

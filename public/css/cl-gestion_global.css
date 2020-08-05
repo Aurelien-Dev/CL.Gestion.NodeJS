@@ -48,3 +48,7 @@
 .cl-icons:active {
     color: green;
 }
+
+.cl-table-container {
+    margin: 25px 0;
+}

@@ -3,35 +3,31 @@ const express = require('express');
 const membreDB = require('../db/membreDB');
 const router = express.Router();
 const async = require('async');
+
+
+
 /*
- ** Affichage de la page d'accueil qui est le tableau de bord
+ ** Affichage de la page des formulaires en attente
  */
-router.get('/', function(request, response) {
-    async.waterfall([
-        function(callback) {
-            formulaireDB.getFormulairesNonAssocie((formulaires) => {
-                // since we did not return, this callback still will be called and
-                // `processData` will be called twice
-                callback(null, formulaires);
-            });
-        },
-        function(formulaires, callback) {
-            membreDB.getMembres((membres) => {
-                // since we did not return, this callback still will be called and
-                // `processData` will be called twice
-                callback(null, formulaires, membres);
-            });
-        }
-    ], function(err, formulaires, membres) {
-        response.render('home/tableauBord', {
-            formulaires: formulaires,
+router.get('/home/formulaires', AfficherFormulaires);
+router.get('/', AfficherFormulaires);
+
+function AfficherFormulaires(request, response) {
+    formulaireDB.getFormulairesNonAssocie((formulaires) => {
+        response.render('home/formulaires', {
+            formulaires: formulaires
+        });
+    });
+}
+
+/*
+ ** Affichage de la page des membres
+ */
+router.get('/home/membres', function(request, response) {
+    membreDB.getMembres((membres) => {
+        response.render('home/membres', {
             membres: membres
         });
-    })
-
-
-    formulaireDB.getFormulairesNonAssocie((formulaires) => {
-
     });
 });
 

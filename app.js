@@ -30,6 +30,8 @@ var formulaireApi = require('./controllerAPI/formulaireController');
 app.use(formulaireApi);
 var membreApi = require('./controllerAPI/membreController');
 app.use(membreApi);
+var configurationApi = require('./controllerAPI/configurationController');
+app.use(configurationApi);
 
 var formulaireController = require('./controller/formulaireController');
 app.use(formulaireController);
