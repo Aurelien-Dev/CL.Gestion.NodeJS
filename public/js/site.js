@@ -7,6 +7,7 @@ $(function(window, $) {
 
     if ('undefined' == typeof(window.CL)) { window.CL = {}; }
     if ('undefined' == typeof(window.CL.Utilitaires)) { window.CL.Utilitaires = {}; }
+    if ('undefined' == typeof(window.CL.View)) { window.CL.View = {}; }
 
 
 }(window, $));

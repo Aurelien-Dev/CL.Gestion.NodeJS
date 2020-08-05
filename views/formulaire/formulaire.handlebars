@@ -118,7 +118,7 @@
 
         <p class="champ">
             <div class="form-check">
-                <input name="accepte_risque" id="accepte_risque" class="form-check-input" placeholder="" type="checkbox">
+                <input name="accepte_risque" id="accepte_risque" class="form-check-input" placeholder="" type="checkbox" required>
                 
                 <label class="form-check-label" for="accepte_risque">
                     <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong>
@@ -139,6 +139,6 @@
 {{/contentFor}}
 
 {{#contentFor "pageScripts"}}
-    <script src="/js/formulaire.js" asp-append-version="true"></script>
+    <script src="/js/formulaire/formulaire.js" asp-append-version="true"></script>
     <script src="/js/plugin/CL-Modal.js" asp-append-version="true"></script>
 {{/contentFor}}

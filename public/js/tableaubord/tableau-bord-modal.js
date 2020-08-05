@@ -1,4 +1,7 @@
-$(function() {
+(function(window, $) {
+
+    if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
+
 
     var modalSupFormulaire = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -18,7 +21,7 @@ $(function() {
         ]
     });
 
-    var modalAjouterMembre = new window.CL.Utilitaires.Modal({
+    modalAjouterMembre = new window.CL.Utilitaires.Modal({
         titre: 'Ajouter le membre',
         body: "Veux-tu ajouter et lui associer son formulaire d'accèptation des risques ?",
         boutons: [{
@@ -34,22 +37,6 @@ $(function() {
                 }
             }
         ]
-    });
-
-    $('.supprimer-formulaire').click(function(e) {
-        e.preventDefault();
-
-        $that = $(this);
-        modalSupFormulaire.ligne = $that.parents('tr');
-        modalSupFormulaire.AfficherModal();
-    });
-
-    $('.ajouter-membre').click(function(e) {
-        e.preventDefault();
-
-        $that = $(this);
-        modalAjouterMembre.ligne = $that.parents('tr');
-        modalAjouterMembre.AfficherModal();
     });
 
 
@@ -78,4 +65,8 @@ $(function() {
             }
         });
     }
-});
+
+    window.CL.View.tableauBord.modalSupFormulaire = modalSupFormulaire;
+    window.CL.View.tableauBord.modalAjouterMembre = modalAjouterMembre;
+
+}(window, $));
