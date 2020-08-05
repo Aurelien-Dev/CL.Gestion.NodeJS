@@ -3,3 +3,48 @@
     font-weight: bold;
     font-size: 0.8em;
 }
+
+.cl-icons {
+    width: 20px;
+    height: 20px;
+}
+
+::-moz-selection {
+    /* Code for Firefox */
+    color: darkgreen;
+    background: lightgreen;
+}
+
+::selection {
+    color: darkgreen;
+    background: lightgreen;
+}
+
+
+/* unvisited link */
+
+.cl-icons:link {
+    color: lightgreen;
+}
+
+
+/* visited link */
+
+.cl-icons:visited {
+    color: lightgreen;
+}
+
+
+/* mouse over link */
+
+.cl-icons:hover {
+    color: green;
+    text-decoration: none;
+}
+
+
+/* selected link */
+
+.cl-icons:active {
+    color: green;
+}

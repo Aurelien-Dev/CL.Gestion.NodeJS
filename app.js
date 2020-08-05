@@ -26,8 +26,10 @@ app.use(bodyParser.urlencoded({
     extended: true
 }));
 
-var apiController = require('./controllerAPI/formulaireController');
-app.use(apiController);
+var formulaireApi = require('./controllerAPI/formulaireController');
+app.use(formulaireApi);
+var membreApi = require('./controllerAPI/membreController');
+app.use(membreApi);
 
 var formulaireController = require('./controller/formulaireController');
 app.use(formulaireController);

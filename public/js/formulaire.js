@@ -5,7 +5,7 @@
 
 $(function() {
 
-    $("#frm").validate({});
 
+    $("#frm").validate({});
 
 });

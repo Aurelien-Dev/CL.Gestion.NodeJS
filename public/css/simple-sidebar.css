@@ -46,14 +46,3 @@
         margin-left: -15rem;
     }
 }
-
-::-moz-selection {
-    /* Code for Firefox */
-    color: darkgreen;
-    background: lightgreen;
-}
-
-::selection {
-    color: darkgreen;
-    background: lightgreen;
-}

@@ -13,43 +13,35 @@
 
         <p>
             <div class="form-group row">
-                <label for="Nom" class="col-sm-3 col-form-label champ">
+                <label for="nom" class="col-sm-3 col-form-label champ">
                    Nom *
                 </label>
                 <div class="col-sm-9">
-                    <input name="Nom" id="Nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" required>
+                    <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Prenom" class="col-sm-3 col-form-label champ">
+                <label for="prenom" class="col-sm-3 col-form-label champ">
                    Prénom *
                 </label>
                 <div class="col-sm-9">
-                    <input name="Prenom" id="Prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" required>
+                    <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="AdresseCourriel" class="col-sm-3 col-form-label champ">
+                <label for="adresse_courriel" class="col-sm-3 col-form-label champ">
                    Adresse courriel *
                 </label>
                 <div class="col-sm-9">
-                    <input name="AdresseCourriel" id="AdresseCourriel" class="form-control form-control-sm" placeholder="" type="email" required>
+                    <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="Telephone" class="col-sm-3 col-form-label champ">
+                <label for="telephone" class="col-sm-3 col-form-label champ">
                    Téléphone *
                 </label>
                 <div class="col-sm-9">
-                    <input name="Telephone" id="Telephone" class="form-control form-control-sm" placeholder="" type="text" required>
-                </div>
-            </div>
-            <div class="form-group row">
-                <label for="NumeroMembre" class="col-sm-3 col-form-label champ">
-                   Numero de membre
-                </label>
-                <div class="col-sm-9">
-                    <input name="NumeroMembre" id="NumeroMembre" class="form-control form-control-sm" placeholder="" type="text" aria-readonly="true" readonly value="99999">
+                    <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
                 </div>
             </div>
         </p>
@@ -91,44 +83,44 @@
 
         <p>
             <div class="form-row">
-                <label for="NomPrenomContact" class="col-sm-3 col-form-label champ">
+                <label for="nom_prenom_contact" class="col-sm-3 col-form-label champ">
                    Nom & prénom *
                 </label>
                 <div class="col-sm-9">
-                    <input name="NomPrenomContact" id="NomPrenomContact" class="form-control form-control-sm" placeholder="" type="text" required>
+                    <input name="nom_prenom_contact" id="nom_prenom_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{nom_prenom_contact}}" required>
                 </div>
             </div>
             <div class="form-row">
-                <label for="LienContact" class="col-sm-3 col-form-label champ">
+                <label for="lien_contact" class="col-sm-3 col-form-label champ">
                    Lien *
                 </label>
                 <div class="col-sm-9">
-                    <input name="LienContact" id="LienContact" class="form-control form-control-sm" placeholder="" type="text" required>
+                    <input name="lien_contact" id="lien_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{lien_contact}}" required>
                 </div>
             </div>
             <div class="form-row">
-                <label for="TelephoneContact" class="col-sm-3 col-form-label champ">
+                <label for="telephone_contact" class="col-sm-3 col-form-label champ">
                    Téléphone *
                 </label>
                 <div class="col-sm-9">
-                    <input name="TelephoneContact" id="TelephoneContact" class="form-control form-control-sm" placeholder="" type="text" required>
+                    <input name="telephone_contact" id="telephone_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone_contact}}" required>
                 </div>
             </div>
             <div class="form-row">
-                <label for="AdresseContact" class="col-sm-3 col-form-label champ">
+                <label for="adresse_contact" class="col-sm-3 col-form-label champ">
                    Adresse *
                 </label>
                 <div class="col-sm-9">
-                    <input name="AdresseContact" id="AdresseContact" class="form-control form-control-sm" placeholder="" type="text" required>
+                    <input name="adresse_contact" id="adresse_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{adresse_contact}}" required>
                 </div>
             </div>
         </p>
 
         <p class="champ">
             <div class="form-check">
-                <input name="AccepteRisque" id="AccepteRisque" class="form-check-input" placeholder="" type="checkbox">
+                <input name="accepte_risque" id="accepte_risque" class="form-check-input" placeholder="" type="checkbox">
                 
-                <label class="form-check-label" for="AccepteRisque">
+                <label class="form-check-label" for="accepte_risque">
                     <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong>
                 </label>
             </div>
@@ -147,5 +139,6 @@
 {{/contentFor}}
 
 {{#contentFor "pageScripts"}}
-    <script src="/js/formulaire/formulaire.validation.js" asp-append-version="true"></script>
+    <script src="/js/formulaire.js" asp-append-version="true"></script>
+    <script src="/js/plugin/CL-Modal.js" asp-append-version="true"></script>
 {{/contentFor}}
