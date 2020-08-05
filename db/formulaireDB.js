@@ -64,6 +64,27 @@ const getFormulaireByNumeroSequence = (id, callback) => {
     });
 };
 
+const getFormulaireByNumeroSequenceMembre = (id, callback) => {
+    db.query(`select numero_sequence,
+                     nom, 
+                     prenom, 
+                     adresse_courriel, 
+                     telephone, 
+                     nom_prenom_contact, 
+                     adresse_contact, 
+                     telephone_contact, 
+                     lien_contact, 
+                     accepte_risque, 
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
+                from public.formulaire_risque 
+               where numero_sequence_membre = $1`, [id], (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        callback(results.rows);
+    });
+};
+
 
 const createFormulaire = (datas, callback) => {
     var donnees = [
@@ -117,6 +138,7 @@ module.exports = {
     getFormulaires,
     getFormulairesNonAssocie,
     getFormulaireByNumeroSequence,
+    getFormulaireByNumeroSequenceMembre,
     createFormulaire,
     deleteFormulaireByNumeroSequence,
     associeMembre

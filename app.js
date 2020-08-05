@@ -33,6 +33,8 @@ app.use(membreApi);
 
 var formulaireController = require('./controller/formulaireController');
 app.use(formulaireController);
+var membreController = require('./controller/membreController');
+app.use(membreController);
 
 var homeController = require('./controller/homeController');
 app.use(homeController);
