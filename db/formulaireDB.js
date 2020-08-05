@@ -1,8 +1,19 @@
 const db = require('../db/baseDB');
 const { result } = require('underscore');
+const moment = require('moment');
 
 const getFormulaires = (callback) => {
-    db.query(`select * 
+    db.query(`select numero_sequence,
+                     nom, 
+                     prenom, 
+                     adresse_courriel, 
+                     telephone, 
+                     nom_prenom_contact, 
+                     adresse_contact, 
+                     telephone_contact, 
+                     lien_contact, 
+                     accepte_risque, 
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
                 from public.formulaire_risque`, [], (error, results) => {
         if (error) {
             return next(error);
@@ -12,7 +23,17 @@ const getFormulaires = (callback) => {
 };
 
 const getFormulairesNonAssocie = (callback) => {
-    db.query(`select * 
+    db.query(`select numero_sequence,
+                     nom, 
+                     prenom, 
+                     adresse_courriel, 
+                     telephone, 
+                     nom_prenom_contact, 
+                     adresse_contact, 
+                     telephone_contact, 
+                     lien_contact, 
+                     accepte_risque, 
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
                 from public.formulaire_risque 
                where numero_sequence_membre is null`, [], (error, results) => {
         if (error) {
@@ -23,7 +44,17 @@ const getFormulairesNonAssocie = (callback) => {
 };
 
 const getFormulaireByNumeroSequence = (id, callback) => {
-    db.query(`select * 
+    db.query(`select numero_sequence,
+                     nom, 
+                     prenom, 
+                     adresse_courriel, 
+                     telephone, 
+                     nom_prenom_contact, 
+                     adresse_contact, 
+                     telephone_contact, 
+                     lien_contact, 
+                     accepte_risque, 
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
                 from public.formulaire_risque 
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
@@ -44,13 +75,14 @@ const createFormulaire = (datas, callback) => {
         datas.adresse_contact,
         datas.telephone_contact,
         datas.lien_contact,
-        (datas.accepte_risque != undefined ? true : false)
+        (datas.accepte_risque != undefined ? true : false),
+        moment().format('l')
     ];
 
     db.query(`insert into public.formulaire_risque 
-                     (nom, prenom, adresse_courriel, telephone, nom_prenom_contact, adresse_contact, telephone_contact, lien_contact, accepte_risque)
+                     (nom, prenom, adresse_courriel, telephone, nom_prenom_contact, adresse_contact, telephone_contact, lien_contact, accepte_risque, date_acceptation)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8, $9)`, donnees,
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`, donnees,
         (error, results) => {
             if (error) {
                 return next(error);

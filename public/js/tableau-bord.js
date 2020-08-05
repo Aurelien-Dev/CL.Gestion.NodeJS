@@ -73,11 +73,9 @@ $(function() {
             url: href,
             method: 'post',
             success: function(result, statut) {
-                modalSupFormulaire.CacherModal();
-                $(ligne).hide('slow');
+                modalAjouterMembre.CacherModal();
+                location.reload();
             }
         });
     }
-
-
 });

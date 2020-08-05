@@ -125,7 +125,7 @@
     </p>
 
     <p class="champ text-center">
-        <input class="btn btn-dark" type="submit" value="retour" />
+        <input class="btn btn-dark" type="submit" value="retour" id="retour" />
     </p>
 
 </div>
@@ -133,4 +133,16 @@
 
 {{#contentFor "pageStyles"}}
     <link href="/css/formulaire.css" rel="stylesheet">
+{{/contentFor}}
+
+{{#contentFor "pageScripts"}}
+    <script>
+        $(function() {
+
+            $('#retour').click(function() {
+                window.history.back();
+            }); 
+
+        });
+    </script>
 {{/contentFor}}
