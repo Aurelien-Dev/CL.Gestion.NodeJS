@@ -22,7 +22,7 @@
 
     modalAjouterMembre = new window.CL.Utilitaires.Modal({
         titre: 'Ajouter le membre',
-        body: "Veux-tu ajouter et lui associer son formulaire d'accèptation des risques ?",
+        body: "Veux-tu Creer à partire de ce formulaire de risque ?",
         boutons: [{
                 texte: 'Oui',
                 callback: function() {

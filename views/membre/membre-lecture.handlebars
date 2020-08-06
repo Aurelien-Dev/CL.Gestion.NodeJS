@@ -63,14 +63,39 @@
             </div>
         </div>
     {{/each}}
-</div>
 
+    <div class="card bg-light mb-3">
+        <div class="card-header">
+            <strong>Adhésion</strong>
+        </div>
+        <div class="card-body">
+
+            <table class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                        <th>Type d'adhésion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>2014-01-01</td>
+                        <td>2015-01-01</td>
+                        <td>Annuel</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <input class="btn btn-dark" type="button" value="Créer une nouvelle adhésion" id="retour" />
+
+        </div>
+    </div>
+</div>
 
 <p class="champ text-center">
     <input class="btn btn-dark" type="button" value="retour" id="retour" />
 </p>
-
-
 
 {{#contentFor "pageScripts"}}
     <script>

@@ -12,7 +12,7 @@ $(function(window, $) {
 
     window.CL.Configuration.DatatableOptionsBase = {
         paging: false,
-        scrollY: 300,
+        scrollY: 500,
         oLanguage: {
             sUrl: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/French.json'
         }
