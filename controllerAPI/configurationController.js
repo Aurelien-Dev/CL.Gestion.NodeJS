@@ -1,13 +1,23 @@
 const express = require('express');
 var configEnum = require('../configs/enumerations.json');
+const typeAdhesionDB = require('../db/typeAdhesionDB');
 const router = express.Router();
+const async = require('async');
 
-/**
- * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
- * @param {*} id Correspond à l'identifiant du formulaire à utiliser pour créer un membre 
- */
 router.get('/api/configuration', function(request, response) {
-    response.json(configEnum);
+    async.waterfall([
+        function(callback) {
+            typeAdhesionDB.getTypeAdhesion((resultat) => {
+                callback(null, resultat);
+            });
+        }
+    ], function(err, typeAdhesion) {
+        var configurationGlobal = {
+            Enums: configEnum,
+            TypeAdhesion: typeAdhesion
+        };
+        response.json(configurationGlobal);
+    });
 });
 
 module.exports = router;

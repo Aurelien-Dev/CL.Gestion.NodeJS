@@ -1,4 +1,4 @@
-(function(window, $) {
+$(function(window, $) {
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
 
@@ -6,62 +6,73 @@
         titre: 'Suppression',
         body: 'Veux-tu supprimer le formulaire ?',
         boutons: [{
-                texte: 'Oui',
-                callback: function() {
-                    supprimerFormulaire(modalSupFormulaire.ligne);
-                }
-            },
-            {
-                texte: 'Non',
-                callback: function() {
-                    modalSupFormulaire.CacherModal();
-                }
+            texte: 'Oui',
+            callback: function() {
+                supprimerFormulaireRisque(modalSupFormulaire.ligne);
             }
-        ]
+        }, {
+            texte: 'Non',
+            callback: function() {
+                modalSupFormulaire.CacherModal();
+            }
+        }]
     });
 
     modalAjouterMembre = new window.CL.Utilitaires.Modal({
         titre: 'Ajouter le membre',
-        body: "Veux-tu Creer à partire de ce formulaire de risque ?",
+        body: "Veux-tu creer le nouveau membre à partire de ce formulaire de risque ?",
         boutons: [{
-                texte: 'Oui',
-                callback: function() {
-                    ajouterMembre(modalAjouterMembre.ligne);
-                }
-            },
-            {
-                texte: 'Non',
-                callback: function() {
-                    modalAjouterMembre.CacherModal();
-                }
+            texte: 'Oui',
+            callback: function() {
+                ajouterNouveauMembre(modalAjouterMembre.ligne);
             }
-        ]
+        }, {
+            texte: 'Non',
+            callback: function() {
+                modalAjouterMembre.CacherModal();
+            }
+        }]
     });
 
+    initialiserPage();
 
-    $("#formulaires").DataTable(window.CL.Configuration.DatatableOptionsBase);
 
+    function initialiserPage() {
+        $("#formulaires").DataTable(window.CL.Configuration.DatatableOptionsBase);
 
-    $('.supprimer-formulaire').click(function(e) {
+        $('.supprimer-formulaire').click(eventClickSupprimerFormulaire);
+        $('.ajouter-membre').click(eventClickAjouterMembre);
+    }
+
+    /**
+     * Evenement permettant de faire la suppression d'un formulaire
+     * @param {jQuery} e event object
+     */
+    function eventClickSupprimerFormulaire(e) {
         e.preventDefault();
 
         $that = $(this);
         modalSupFormulaire.ligne = $that.parents('tr');
         modalSupFormulaire.AfficherModal();
-    });
+    }
 
-    $('.ajouter-membre').click(function(e) {
+    /**
+     * Evenement qui permet de faire l'ajout d'un nouveau membre via son formulaire de risque
+     * @param {jQuery} e event object
+     */
+    function eventClickAjouterMembre(e) {
         e.preventDefault();
 
         $that = $(this);
         modalAjouterMembre.ligne = $that.parents('tr');
         modalAjouterMembre.AfficherModal();
-    });
+    }
 
-
-
-
-    function supprimerFormulaire(ligne) {
+    /**
+     * Permet de supprimer un formulaire via une requête AJAX et de faire disparaitre la ligne du tableau
+     * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
+     */
+    function supprimerFormulaireRisque(ligne) {
         var href = $(ligne).find('.supprimer-formulaire').attr('href');
 
         $.ajax({
@@ -74,7 +85,11 @@
         });
     }
 
-    function ajouterMembre(ligne) {
+    /**
+     * Permet d'ajouter un nouveau membre via une requête AJAX et de recharger la page
+     * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
+     */
+    function ajouterNouveauMembre(ligne) {
         var href = $(ligne).find('.ajouter-membre').attr('href');
 
         $.ajax({

@@ -3,9 +3,9 @@
 
 // Write your JavaScript code.
 
-$(function() {
+$(function(window, $) {
 
 
     $("#frm").validate({});
 
-});
+}(window, $));

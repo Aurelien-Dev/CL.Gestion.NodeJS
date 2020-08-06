@@ -1,7 +1,6 @@
 {
     "ROLE": {
         "ANIM": "Animateur",
-        "COANIM": "Co-animateur",
-        "MEMBRE": "Membre"
+        "COANIM": "Co-animateur"
     }
 }

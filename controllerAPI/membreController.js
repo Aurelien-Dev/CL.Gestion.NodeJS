@@ -40,4 +40,17 @@ router.post('/api/membres/:id', function(request, response) {
     });
 });
 
+/**
+ * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
+ * @param {*} id Correspond à l'identifiant du formulaire à utiliser pour créer un membre 
+ */
+router.put('/api/membres/ModifierRole/:id', function(request, response) {
+    const id = parseInt(request.params.id);
+    const role = request.body.role;
+
+    membreDB.modifierRoleMembre(id, role, function(formulaires) {
+        response.status(200).json({ success: true });
+    });
+});
+
 module.exports = router;

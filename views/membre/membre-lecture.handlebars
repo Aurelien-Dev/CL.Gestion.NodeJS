@@ -7,6 +7,7 @@
             <strong>Information générales</strong>
         </div>
         <div class="card-body">
+            <input type="hidden" name="numero_sequence_membre" id="numero_sequence_membre" value="{{membre.numero_sequence}}" />
             <p>
                 <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
@@ -23,6 +24,23 @@
                     <path fill-rule="evenodd" d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1v7.5a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 1 14.5V7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zM1 4v2h6V4H1zm8 0v2h6V4H9zm5 3H9v8h4.5a.5.5 0 0 0 .5-.5V7zm-7 8V7H2v7.5a.5.5 0 0 0 .5.5H7z"/>
                 </svg>
                 {{membre.date_creation}}
+                <br />
+                
+                <div class="form-group row">
+                    <div class="col-sm-1 col-form-label">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-badge" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12 1H4a1 1 0 0 0-1 1v11.755S4 12 8 12s5 1.755 5 1.755V2a1 1 0 0 0-1-1zM4 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4z"/>
+                            <path fill-rule="evenodd" d="M8 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM6 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5z"/>
+                        </svg>
+                        <label for="role">Rôle :</label>
+                    </div>
+                    <div class="col-sm-2">
+                        <select class="form-control form-control-sm" name="role_membre" id="role_membre" data-value="{{membre.role}}"></select> 
+                    </div>
+                    <div class="col-sm-2">
+                        <button class="btn btn-sm btn-primary" type="button" id="enregistrerRole" data-loading-text="Chargement ..."> Enregistrer</button>
+                    </div>
+                </div>
             </p>
         </div>
     </div>
@@ -88,7 +106,7 @@
                 </tbody>
             </table>
             
-            <input class="btn btn-dark" type="button" value="Créer une nouvelle adhésion" />
+            <input class="btn btn-dark" type="button" value="Créer une nouvelle adhésion" id="eventCreerAdhesion"/>
 
         </div>
     </div>
@@ -98,7 +116,68 @@
     <input class="btn btn-dark" type="button" value="retour" id="retour" />
 </p>
 
+
+<form>
+    <div id="creerAdhesionModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Nouvelle adhésion</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info" role="alert">  
+                        <h5 class="alert-heading">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                            </svg>
+                            Informations
+                        </h5>
+                        <hr>
+                        <p>
+                            <strong>Hiver</strong> 1 janvier au 30 avril<br />
+                            <strong>Été</strong>  1 mai au 31 août<br />
+                            <strong>Automne</strong> 1 septembre au 31 décembre
+                        </p>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Type d'adhésion</label>
+                        <div class="col-sm-8">
+                            <select class="form-control" name="type_adhesion" id="type_adhesion" required>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" class="col-sm-4 col-form-label">Date de début</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="date_debut" id="date_debut" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="inputPassword" class="col-sm-4 col-form-label">Date de fin</label>
+                        <div class="col-sm-8">
+                            <input type="date" class="form-control" name="date_fin" id="date_fin" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
 {{#contentFor "pageScripts"}}
+    <script src="/js/membre/membre.js" asp-append-version="true"></script>
     <script>
         $(function() {
 

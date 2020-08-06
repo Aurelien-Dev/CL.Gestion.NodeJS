@@ -54,20 +54,23 @@ const createMembre = (datas, callback) => {
         });
 };
 
-// const desactiverMembreByNumeroSequence = (id, callback) => {
 
-//     db.query('update from public.formulaire_risque where numero_sequence = $1', [id], (error, results) => {
-//         if (error) {
-//             return next(error);
-//         }
-//         callback(results.rows);
-//     });
-// };
+
+const modifierRoleMembre = (id, role, callback) => {
+    db.query(`update public.membre
+                 set role = $2
+               where numero_sequence = $1`, [id, role], (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        callback(results.rows);
+    });
+};
 
 
 module.exports = {
     getMembres,
     getMembreByNumeroSequence,
-    createMembre
-    // deleteFormulaireByNumeroSequence
+    createMembre,
+    modifierRoleMembre
 };
