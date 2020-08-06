@@ -25,7 +25,10 @@ $(function(window, $) {
             data: { role: role },
             method: 'PUT',
             success: function(result, statut) {
-                console.log(result);
+                $.ambiance({
+                    message: "Modification enregistrée.",
+                    type: "success"
+                });
             }
         });
     }
@@ -65,9 +68,14 @@ $(function(window, $) {
             });
 
             _.each(window.CL.Configuration.Types.Enums.ROLE, function(element, index, list) {
-                $(SELECTOR_ROLE_MEMBRE).append(`<option value="` + index + `">` + element + `</option>`);
+                var selected = '';
+                if ($(SELECTOR_ROLE_MEMBRE).data('value') === index) {
+                    selected = 'selected';
+                }
+
+                $(SELECTOR_ROLE_MEMBRE).append(`<option value="` + index + `" ` + selected + `>` + element + `</option>`);
             });
-        }, 500);
+        }, 200);
     }
 
 

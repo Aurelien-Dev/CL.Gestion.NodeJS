@@ -2,8 +2,8 @@ const formulaireDB = require('../db/formulaireDB')
 const express = require('express');
 const membreDB = require('../db/membreDB');
 const router = express.Router();
-const async = require('async');
-
+const _ = require('underscore');
+const config = require('../configs/enumerations.json')
 
 
 /*
@@ -25,6 +25,11 @@ function AfficherFormulaires(request, response) {
  */
 router.get('/home/membres', function(request, response) {
     membreDB.getMembres((membres) => {
+
+        membres.forEach(membre => {
+            membre.role_libelle = config.ROLE[membre.role];
+        });
+
         response.render('home/membres', {
             membres: membres
         });

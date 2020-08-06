@@ -7,6 +7,7 @@ const getMembres = (callback) => {
                      prenom, 
                      adresse_courriel, 
                      telephone,
+                     role,
                      to_char(date_creation, 'YYYY-MM-DD') as date_creation                     
                 from public.membre`, [], (error, results) => {
         if (error) {
@@ -22,6 +23,7 @@ const getMembreByNumeroSequence = (id, callback) => {
                      prenom, 
                      adresse_courriel, 
                      telephone, 
+                     role,
                      to_char(date_creation, 'YYYY-MM-DD') as date_creation
                 from public.membre 
                where numero_sequence = $1`, [id], (error, results) => {
