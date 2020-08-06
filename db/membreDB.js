@@ -1,8 +1,14 @@
 const db = require('../db/baseDB');
-const { result } = require('underscore');
+const moment = require('moment');
 
 const getMembres = (callback) => {
-    db.query('select * from public.membre', [], (error, results) => {
+    db.query(`select numero_sequence,
+                     nom, 
+                     prenom, 
+                     adresse_courriel, 
+                     telephone,
+                     to_char(date_creation, 'YYYY-MM-DD') as date_creation                     
+                from public.membre`, [], (error, results) => {
         if (error) {
             return next(error);
         }
@@ -11,7 +17,14 @@ const getMembres = (callback) => {
 };
 
 const getMembreByNumeroSequence = (id, callback) => {
-    db.query('select * from public.membre where numero_sequence = $1', [id], (error, results) => {
+    db.query(`select numero_sequence,
+                     nom, 
+                     prenom, 
+                     adresse_courriel, 
+                     telephone, 
+                     to_char(date_creation, 'YYYY-MM-DD') as date_creation
+                from public.membre 
+               where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
             return next(error);
         }
@@ -24,13 +37,14 @@ const createMembre = (datas, callback) => {
         datas.nom,
         datas.prenom,
         datas.adresse_courriel,
-        datas.telephone
+        datas.telephone,
+        moment().format('l')
     ];
 
     db.query(`insert into public.membre 
-                     (nom, prenom, adresse_courriel, telephone)
+                     (nom, prenom, adresse_courriel, telephone, date_creation)
               values     
-                     ($1, $2, $3, $4) 
+                     ($1, $2, $3, $4, $5) 
            returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
