@@ -1,5 +1,5 @@
 <div class="container">
-    <h2>{{membre.prenom}} {{membre.nom}}</h2>
+    <h2 class="text-center">{{membre.prenom}} {{membre.nom}}</h2>
         
         
     <div class="card text-white bg-dark mb-3">
@@ -95,14 +95,18 @@
                         <th>Date de début</th>
                         <th>Date de fin</th>
                         <th>Type d'adhésion</th>
+                        <th>Montant</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>2014-01-01</td>
-                        <td>2015-01-01</td>
-                        <td>Annuel</td>
-                    </tr>
+                    {{#each adhesions}}
+                        <tr>
+                            <td>{{this.date_debut}}</td>
+                            <td>{{this.date_fin}}</td>
+                            <td>{{this.nom}}</td>
+                            <td>{{this.montant}} $</td>
+                        </tr>
+                    {{/each}}
                 </tbody>
             </table>
             

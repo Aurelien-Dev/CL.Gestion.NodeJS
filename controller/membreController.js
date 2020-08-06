@@ -1,5 +1,6 @@
 const formulaireDB = require('../db/formulaireDB')
 const membreDB = require('../db/membreDB')
+const adhesionDB = require('../db/adhesionDB')
 const express = require('express');
 const router = express.Router();
 const async = require('async');
@@ -22,10 +23,20 @@ router.get('/membre/consulter/:id', function(request, response) {
             formulaireDB.getFormulaireByNumeroSequenceMembre(id, (infoFormulairesMembre) => {
                 callback(null, infoMembre, infoFormulairesMembre);
             });
+        },
+        //Obtention de ces formulaires de risques
+        function(infoMembre, infoFormulairesMembre, callback) {
+            adhesionDB.getAdhesionByNumeroSequenceMembre(id, (infoAdhesionMembre) => {
+                callback(null, infoMembre, infoFormulairesMembre, infoAdhesionMembre);
+            });
         }
-    ], function(err, infoMembre, infoFormulairesMembre) {
+    ], function(err, infoMembre, infoFormulairesMembre, infoAdhesionMembre) {
         if (infoMembre.length == 1) {
-            response.render('membre/membre-lecture', { membre: infoMembre[0], formulaires: infoFormulairesMembre });
+            response.render('membre/membre-lecture', {
+                membre: infoMembre[0],
+                formulaires: infoFormulairesMembre,
+                adhesions: infoAdhesionMembre
+            });
         } else {
             response.redirect('./');
         }

@@ -20,7 +20,7 @@ $(function(window, $) {
 
     modalAjouterMembre = new window.CL.Utilitaires.Modal({
         titre: 'Ajouter le membre',
-        body: "Veux-tu creer le nouveau membre à partire de ce formulaire de risque ?",
+        body: "Veux-tu creer le nouveau membre à partir de ce formulaire de risque ?",
         boutons: [{
             texte: 'Oui',
             callback: function() {
