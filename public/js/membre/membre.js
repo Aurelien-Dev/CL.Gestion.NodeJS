@@ -1,12 +1,6 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.membre)) { window.CL.View.membre = {}; }
 
-    const paramsDatatable = {
-        paging: false,
-        searching: false,
-        ordering: false
-    };
-
     const SELECTOR_TYPE_ADHESION = '#type_adhesion';
     const SELECTOR_ROLE_MEMBRE = '#role';
     const SELECTOR_NO_SEQ_MEMBRE = '#numero_sequence_membre';
@@ -31,6 +25,9 @@ $(function(window, $) {
     function initialiserDatatable() {
 
         var configDatatable = {
+            paging: false,
+            searching: false,
+            ordering: false,
             ajax: '/api/adhesion/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
                 render: function(data, type, row, meta) {
@@ -67,7 +64,7 @@ $(function(window, $) {
                 }
             }
         };
-        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase, paramsDatatable);
+        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
         $(SELECTOR_TBL_ADHESION).DataTable(configDatatable);
     }
