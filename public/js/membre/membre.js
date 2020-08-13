@@ -8,7 +8,7 @@ $(function(window, $) {
     };
 
     const SELECTOR_TYPE_ADHESION = '#type_adhesion';
-    const SELECTOR_ROLE_MEMBRE = '#role_membre';
+    const SELECTOR_ROLE_MEMBRE = '#role';
     const SELECTOR_NO_SEQ_MEMBRE = '#numero_sequence_membre';
     const SELECTOR_BTN_ENR_ROLE = '#enregistrerRole';
     const SELECTOR_MODAL_CREER_ADH = '#modalCreerAdhesion';
