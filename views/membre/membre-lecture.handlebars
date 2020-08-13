@@ -35,7 +35,16 @@
                         <label for="role">Rôle :</label>
                     </div>
                     <div class="col-sm-2">
-                        <select class="form-control form-control-sm" name="role_membre" id="role_membre" data-value="{{membre.role}}"></select> 
+                        <select class="form-control form-control-sm" name="role" id="role" data-value="{{membre.role}}">
+                            <option></option>
+                            {{#each enumeration.ROLE}}
+                                {{#if (eq this.code ../membre.role)}}
+                                    <option value="{{this.code}}" selected>{{this.libelle}}</option>
+                                {{else}}
+                                    <option value="{{this.code}}">{{this.libelle}}</option>
+                                {{/if}}
+                            {{/each}}
+                        </select> 
                     </div>
                     <div class="col-sm-2">
                         <button class="btn btn-sm btn-primary" type="button" id="enregistrerRole" data-loading-text="Chargement ..."> Enregistrer</button>
@@ -134,7 +143,16 @@
                     <div class="form-group row">
                         <label for="type_adhesion" class="col-sm-4 col-form-label">Type d'adhésion</label>
                         <div class="col-sm-8">
-                            <select class="form-control" name="type_adhesion" id="type_adhesion" required>
+                            <select class="form-control" name="type_adhesion" id="type_adhesion" required>                                
+                                <option></option>
+                                {{#each typeAdhesion}}
+                                    <option value="{{this.numero_sequence}}" 
+                                            data-montant="{{this.montant}}" 
+                                            data-nbr-jour="{{this.nombre_jour}}"
+                                            data-debut="{{this.date_debut}}" 
+                                            data-fin="{{this.date_fin}}">{{this.nom}}
+                                    </option>
+                                {{/each}}
                             </select>
                         </div>
                     </div>
@@ -169,8 +187,10 @@
                         <label for="type_transaction" class="col-sm-4 col-form-label">Type de transaction</label>
                         <div class="col-sm-8">
                             <select class="form-control" name="type_transaction" id="type_transaction" required>
-                                <option value="INTERAC">INTERAC</option>
-                                <option value="Espèce">Espèce</option>
+                                <option></option>
+                                {{#each enumeration.TYPE_TRANSAC}}
+                                    <option value="{{this.code}}">{{this.libelle}}</option>
+                                {{/each}}                                
                             </select>
                         </div>
                     </div>
@@ -193,7 +213,6 @@
 
 {{#contentFor "pageScripts"}}
     <script src="/lib/datatable/datatables.min.js"></script>
-    <script src="/js/plugin/CL-FormData.js"></script>
 
     <script src="/js/membre/membre.js"></script>
     

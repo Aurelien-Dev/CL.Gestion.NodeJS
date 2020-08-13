@@ -24,7 +24,6 @@ $(function(window, $) {
         $(SELECTOR_BTN_ENR_ROLE).click((e) => { modifierRole(); });
         $(SELECTOR_FRM_CREER_ADH).submit(creerAdhesion);
         $(SELECTOR_TBL_ADHESION).click((e) => { e.preventDefault(); });
-        remplireTypesAdhesion();
 
         initialiserDatatable();
     }
@@ -131,31 +130,5 @@ $(function(window, $) {
         $(SELECTOR_MODAL_CREER_ADH + ' #date_fin').val(dateFin);
         $(SELECTOR_MODAL_CREER_ADH + ' #montant_paye').val(montantPaye);
     }
-
-    function remplireTypesAdhesion() {
-        $(SELECTOR_TYPE_ADHESION).append('<option value=""></option>');
-        $(SELECTOR_ROLE_MEMBRE).append('<option value=""></option>');
-
-        setTimeout(() => {
-            _.each(window.CL.Configuration.Types.TypeAdhesion, function(element, index, list) {
-                $(SELECTOR_TYPE_ADHESION).append(`<option value="` + element.numero_sequence + `" 
-                                                    data-montant="` + element.montant + `" 
-                                                    data-nbr-jour="` + element.nombre_jour + `" 
-                                                    data-debut="` + element.date_debut + `" 
-                                                    data-fin="` + element.date_fin + `">` + element.nom +
-                    `</option>`);
-            });
-
-            _.each(window.CL.Configuration.Types.Enums.ROLE, function(element, index, list) {
-                var selected = '';
-                if ($(SELECTOR_ROLE_MEMBRE).data('value') === index) {
-                    selected = 'selected';
-                }
-
-                $(SELECTOR_ROLE_MEMBRE).append(`<option value="` + index + `" ` + selected + `>` + element + `</option>`);
-            });
-        }, 200);
-    }
-
 
 }(window, $));

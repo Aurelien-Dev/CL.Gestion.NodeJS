@@ -1,6 +1,6 @@
 //Définition dse modules
 const express = require('express');
-const utils = require('./utils/utils.js');
+const utils = require('./utils/utilitaires.js');
 const expressHandle = require('express-handlebars');
 const bodyParser = require('body-parser');
 const helper = require('./utils/helperscomponents.js');
