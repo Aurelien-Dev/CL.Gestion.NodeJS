@@ -53,7 +53,7 @@ $(function(window, $) {
                     return data + ' $';
                 }
             }, {
-                data: 'type_transaction',
+                data: 'type_transaction_libelle',
                 title: 'Transaction'
             }],
             rowCallback: function(row, data) {

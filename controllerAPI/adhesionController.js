@@ -1,6 +1,7 @@
 const adhesionDB = require('../db/adhesionDB')
 const express = require('express');
 const router = express.Router();
+const config = require('../configs/enumerations.json')
 
 
 /**
@@ -11,6 +12,10 @@ router.get('/api/adhesion/:id', function(request, response) {
     const id = parseInt(request.params.id);
 
     adhesionDB.getAdhesionByNumeroSequenceMembre(id, (infoAdhesionMembre) => {
+        infoAdhesionMembre.forEach(adhesion => {
+            adhesion.type_transaction_libelle = config.TYPE_TRANSAC[adhesion.type_transaction];
+        });
+
         response.status(200).json({ data: infoAdhesionMembre });
     });
 });
