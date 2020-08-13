@@ -9,11 +9,12 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
                      date_transaction,
                      type_transaction,
                      tadh.nom,
-                     adh.date_fin < NOW() as adh_actif
+                     NOW() < adh.date_fin as adh_actif
                 from public.adhesion adh
           inner join public.type_adhesion tadh
             on adh.numero_sequence_type_adhesion= tadh.numero_sequence
-               where adh.numero_sequence_membre = $1`, [id], (error, results) => {
+               where adh.numero_sequence_membre = $1
+            order by adh.date_debut desc`, [id], (error, results) => {
         if (error) {
             return next(error);
         }

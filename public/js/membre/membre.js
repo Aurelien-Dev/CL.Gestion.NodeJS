@@ -13,8 +13,8 @@ $(function(window, $) {
     const SELECTOR_BTN_ENR_ROLE = '#enregistrerRole';
     const SELECTOR_MODAL_CREER_ADH = '#modalCreerAdhesion';
     const SELECTOR_FRM_CREER_ADH = '#frmCreerAdhesion';
-
-    var datatable = null;
+    const SELECTPR_SUP_ADHESION = '.supprimer-adhesion';
+    const SELECTOR_TBL_ADHESION = '#tblAdhesions';
 
     initialiserPage();
 
@@ -23,15 +23,25 @@ $(function(window, $) {
         $(SELECTOR_TYPE_ADHESION).change((e) => { appliquerInformationsAdhesion(); });
         $(SELECTOR_BTN_ENR_ROLE).click((e) => { modifierRole(); });
         $(SELECTOR_FRM_CREER_ADH).submit(creerAdhesion);
+        $(SELECTOR_TBL_ADHESION).click((e) => { e.preventDefault(); });
         remplireTypesAdhesion();
 
         initialiserDatatable();
     }
 
     function initialiserDatatable() {
+
         var configDatatable = {
-            ajax: '/api/adhesion/1',
+            ajax: '/api/adhesion/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
+                render: function(data, type, row, meta) {
+                    return `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
+                                <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z"/>
+                                </svg>                    
+                            </a>`;
+                }
+            }, {
                 data: 'date_debut',
                 title: 'Date début'
             }, {
@@ -51,12 +61,16 @@ $(function(window, $) {
                 title: 'Transaction'
             }],
             rowCallback: function(row, data) {
-
+                if (data.adh_actif) {
+                    $(row).addClass('alert-success');
+                } else {
+                    $(row).addClass('alert-danger');
+                }
             }
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase, paramsDatatable);
 
-        datatable = $('#tblAdhesions').DataTable(configDatatable);
+        $(SELECTOR_TBL_ADHESION).DataTable(configDatatable);
     }
 
 
@@ -72,7 +86,7 @@ $(function(window, $) {
             data: donnees,
             method: 'POST',
             success: function(result, statut) {
-                $('#tblAdhesions').DataTable().ajax.reload();
+                $(SELECTOR_TBL_ADHESION).DataTable().ajax.reload();
                 $(SELECTOR_MODAL_CREER_ADH).modal('hide');
             }
         });
