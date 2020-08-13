@@ -1,6 +1,10 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
+    const paramsDatatable = {
+        paging: false,
+        scrollY: 500
+    };
 
     var modalSupFormulaire = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -38,7 +42,11 @@ $(function(window, $) {
 
 
     function initialiserPage() {
-        $("#formulaires").DataTable(window.CL.Configuration.DatatableOptionsBase);
+
+        var configDatatable = {};
+        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase, paramsDatatable);
+
+        $("#formulaires").DataTable(configDatatable);
 
         $('.supprimer-formulaire').click(eventClickSupprimerFormulaire);
         $('.ajouter-membre').click(eventClickAjouterMembre);

@@ -1,53 +1,28 @@
 const adhesionDB = require('../db/adhesionDB')
 const express = require('express');
 const router = express.Router();
-const async = require('async');
+
 
 /**
- * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
- * @param {*} id Correspond à l'identifiant du membre
+ * Permet d'obtenir les adhésions d'un membre
+ * @param {int} id Correspond à l'identifiant du membre
  */
-router.post('/api/adhesion/:id', function(request, response) {
+router.get('/api/adhesion/:id', function(request, response) {
     const id = parseInt(request.params.id);
-    adhesionDB.getAdhesionByNumeroSequenceMembre
 
-    // async.waterfall([
-    //     //Obtention des information du formulaire
-    //     function(callback) {
-    //         formulaireDB.getFormulaireByNumeroSequence(id, function(formulaires) {
-    //             callback(null, formulaires[0]);
-    //         });
-    //     },
-    //     //Création du membre via le formulaire
-    //     function(formulaire, callback) {
-    //         membreDB.createMembre(formulaire, function(numSequenceMembre) {
-    //             callback(null, formulaire.numero_sequence, numSequenceMembre);
-    //         });
-    //     },
-    //     //Association du formulaire au membre qui vient d'être crée
-    //     function(numSeqFormulaire, numSeqMembre, callback) {
-    //         formulaireDB.associeMembre(numSeqFormulaire, numSeqMembre, function(numSequence) {
-    //             callback(null);
-    //         });
-    //     }
-    // ], function(err) {
-    //     if (typeof err != 'undefined') {
-    //         response.status(500);
-    //     }
-
-    //     response.status(200).json({ success: true });
-    // });
+    adhesionDB.getAdhesionByNumeroSequenceMembre(id, (infoAdhesionMembre) => {
+        response.status(200).json({ data: infoAdhesionMembre });
+    });
 });
 
+
 /**
  * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
- * @param {*} id Correspond à l'identifiant du formulaire à utiliser pour créer un membre 
+ * @param {int} id Correspond à l'identifiant du membre
  */
-router.put('/api/membres/ModifierRole/:id', function(request, response) {
-    const id = parseInt(request.params.id);
-    const role = request.body.role;
+router.post('/api/adhesion/:id', function(request, response) {
 
-    membreDB.modifierRoleMembre(id, role, function(formulaires) {
+    adhesionDB.createAdhesion(request.body, (results) => {
         response.status(200).json({ success: true });
     });
 });

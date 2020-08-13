@@ -5,9 +5,9 @@
     if ('undefined' == typeof(window.CL.Configuration)) { window.CL.Configuration = {}; }
     if ('undefined' == typeof(window.CL.View)) { window.CL.View = {}; }
 
+
+
     window.CL.Configuration.DatatableOptionsBase = {
-        paging: false,
-        scrollY: 500,
         oLanguage: {
             sUrl: 'https://cdn.datatables.net/plug-ins/1.10.21/i18n/French.json'
         }

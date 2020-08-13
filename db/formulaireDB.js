@@ -103,7 +103,8 @@ const createFormulaire = (datas, callback) => {
     db.query(`insert into public.formulaire_risque 
                      (nom, prenom, adresse_courriel, telephone, nom_prenom_contact, adresse_contact, telephone_contact, lien_contact, accepte_risque, date_acceptation)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)`, donnees,
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+              returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
                 return next(error);
