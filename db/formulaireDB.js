@@ -88,14 +88,14 @@ const getFormulaireByNumeroSequenceMembre = (id, callback) => {
 
 const createFormulaire = (datas, callback) => {
     var donnees = [
-        datas.nom,
-        datas.prenom,
-        datas.adresse_courriel,
-        datas.telephone,
-        datas.nom_prenom_contact,
-        datas.adresse_contact,
-        datas.telephone_contact,
-        datas.lien_contact,
+        datas.nom.trim(),
+        datas.prenom.trim(),
+        datas.adresse_courriel.trim().toLowerCase(),
+        datas.telephone.trim(),
+        datas.nom_prenom_contact.trim(),
+        datas.adresse_contact.trim(),
+        datas.telephone_contact.trim(),
+        datas.lien_contact.trim(),
         (datas.accepte_risque != undefined ? true : false),
         moment().format('l')
     ];

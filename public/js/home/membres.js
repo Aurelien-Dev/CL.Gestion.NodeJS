@@ -1,16 +1,13 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
-    const paramsDatatable = {
-        paging: false,
-        scrollY: 500
-    };
-
     initialiserPage();
 
     function initialiserPage() {
-        var configDatatable = {};
-        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase, paramsDatatable);
+        var configDatatable = {
+            paging: false
+        };
+        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
         $("#membres").DataTable(configDatatable);
     }

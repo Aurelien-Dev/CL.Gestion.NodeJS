@@ -36,10 +36,10 @@ const getMembreByNumeroSequence = (id, callback) => {
 
 const createMembre = (datas, callback) => {
     var donnees = [
-        datas.nom,
-        datas.prenom,
-        datas.adresse_courriel,
-        datas.telephone,
+        datas.nom.trim(),
+        datas.prenom.trim(),
+        datas.adresse_courriel.trim().toLowerCase(),
+        datas.telephone.trim(),
         moment().format('l')
     ];
 

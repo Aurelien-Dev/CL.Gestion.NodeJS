@@ -1,11 +1,6 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
-    const paramsDatatable = {
-        paging: false,
-        scrollY: 500
-    };
-
     var modalSupFormulaire = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
         body: 'Veux-tu supprimer le formulaire ?',
@@ -43,8 +38,11 @@ $(function(window, $) {
 
     function initialiserPage() {
 
-        var configDatatable = {};
-        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase, paramsDatatable);
+        var configDatatable = {
+            paging: false,
+            scrollY: 500
+        };
+        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
         $("#formulaires").DataTable(configDatatable);
 

@@ -28,7 +28,7 @@ const createAdhesion = (datas, callback) => {
     var donnees = [
         datas.date_debut,
         datas.date_fin,
-        datas.montant_paye,
+        datas.montant_paye.trim(),
         datas.date_transaction,
         datas.type_transaction,
         datas.etudiant,
