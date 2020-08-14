@@ -18,6 +18,7 @@ $(function(window, $) {
         $(SELECTOR_BTN_ENR_ROLE).click((e) => { modifierRole(); });
         $(SELECTOR_FRM_CREER_ADH).submit(creerAdhesion);
         $(SELECTOR_TBL_ADHESION).click((e) => { e.preventDefault(); });
+        $('input[name=etudiant]').change(appliquerInformationsEtudiant);
 
         initialiserDatatable();
     }
@@ -46,6 +47,9 @@ $(function(window, $) {
             }, {
                 data: 'nom',
                 title: 'Adhésion'
+            }, {
+                data: 'etudiant_libelle',
+                title: 'Étudiant'
             }, {
                 data: 'montant_paye',
                 title: 'Montant payé',
@@ -105,17 +109,42 @@ $(function(window, $) {
         });
     }
 
+    function appliquerInformationsEtudiant() {
+        var option = $('#type_adhesion>option:selected');
+        if (option.val() === '') {
+            return;
+        }
+
+        var etudiant = $('input[name=etudiant]:checked').val()
+        var montantPaye = 0;
+
+        if (etudiant.toLowerCase() === 'true') {
+            montantPaye = option.data('montant-etudiant');
+        } else {
+            montantPaye = option.data('montant');
+        }
+
+        $(SELECTOR_MODAL_CREER_ADH + ' #montant_paye').val(montantPaye);
+    }
+
     function appliquerInformationsAdhesion() {
         var option = $('#type_adhesion>option:selected');
+        var etudiant = $('input[name=etudiant]:checked').val()
 
         var anneeCourante = new Date().getFullYear();
 
         var dateDebut = option.data('debut');
         var dateFin = option.data('fin');
         var nbrJour = option.data('nbr-jour');
-        var montantPaye = option.data('montant');
+        var montantPaye = 0;
 
-        if (typeof nbrJour === 'undefined' || nbrJour == null) {
+        if (etudiant.toLowerCase() === 'true') {
+            montantPaye = option.data('montant-etudiant');
+        } else {
+            montantPaye = option.data('montant');
+        }
+
+        if (typeof nbrJour === 'undefined' || nbrJour === null || nbrJour === "") {
             dateDebut = moment(dateDebut, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
             dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
         } else {

@@ -133,6 +133,7 @@
                             Informations
                         </h5>
                         <hr>
+                        {{!-- TODO: Générer automatiquement ces données --}}
                         <p>
                             <strong>Hiver</strong> 1 janvier au 30 avril<br />
                             <strong>Été</strong>  1 mai au 31 août<br />
@@ -148,12 +149,26 @@
                                 {{#each typeAdhesion}}
                                     <option value="{{this.numero_sequence}}" 
                                             data-montant="{{this.montant}}" 
+                                            data-montant-etudiant="{{this.montant_etudiant}}" 
                                             data-nbr-jour="{{this.nombre_jour}}"
                                             data-debut="{{this.date_debut}}" 
                                             data-fin="{{this.date_fin}}">{{this.nom}}
                                     </option>
                                 {{/each}}
                             </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="etudiant" class="col-sm-4 col-form-label">Membre</label>
+                        <div class="col-sm-8">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="etudiant" id="etudiant" value="true" checked>
+                                <label class="form-check-label" for="inlineRadio1">Étudiant</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="etudiant" id="etudiant" value="false">
+                                <label class="form-check-label" for="inlineRadio2">Non étudiant</label>
+                            </div>
                         </div>
                     </div>
                     <div class="form-group row">

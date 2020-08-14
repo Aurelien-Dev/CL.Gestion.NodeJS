@@ -14,6 +14,7 @@ router.get('/api/adhesion/:id', function(request, response) {
     adhesionDB.getAdhesionByNumeroSequenceMembre(id, (infoAdhesionMembre) => {
         infoAdhesionMembre.forEach(adhesion => {
             adhesion.type_transaction_libelle = config.TYPE_TRANSAC[adhesion.type_transaction];
+            adhesion.etudiant_libelle = (adhesion.etudiant ? 'Oui' : 'Non');
         });
 
         response.status(200).json({ data: infoAdhesionMembre });
