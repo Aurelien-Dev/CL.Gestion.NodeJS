@@ -1,12 +1,7 @@
 .error {
-    color: red;
-    font-weight: bold;
-    font-size: 0.8em;
-}
-
-.cl-icons {
-    width: 20px;
-    height: 20px;
+    color: red !important;
+    font-weight: bold !important;
+    font-size: 0.8em !important;
 }
 
 ::-moz-selection {
@@ -18,35 +13,6 @@
 ::selection {
     color: darkgreen;
     background: lightgreen;
-}
-
-
-/* unvisited link */
-
-.cl-icons:link {
-    color: lightgreen;
-}
-
-
-/* visited link */
-
-.cl-icons:visited {
-    color: lightgreen;
-}
-
-
-/* mouse over link */
-
-.cl-icons:hover {
-    color: green;
-    text-decoration: none;
-}
-
-
-/* selected link */
-
-.cl-icons:active {
-    color: green;
 }
 
 .cl-table-container {

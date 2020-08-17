@@ -6,6 +6,6 @@
 $(function(window, $) {
 
 
-    $("#frm").validate({});
+    ///$("#frm").validate({});
 
 }(window, $));
