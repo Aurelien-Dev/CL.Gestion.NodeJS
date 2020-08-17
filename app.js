@@ -11,7 +11,7 @@ app.set('port', process.env.PORT || 3001);
 
 var hbs = expressHandle.create({
     layoutsDir: 'views/layout/',
-    defaultLayout: 'main',
+    defaultLayout: 'templateBase',
     helpers: utils.helpers
 });
 
@@ -40,7 +40,6 @@ var formulaireController = require('./controller/formulaireController');
 app.use(formulaireController);
 var membreController = require('./controller/membreController');
 app.use(membreController);
-
 var homeController = require('./controller/homeController');
 app.use(homeController);
 

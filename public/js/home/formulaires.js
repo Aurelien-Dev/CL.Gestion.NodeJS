@@ -39,8 +39,7 @@ $(function(window, $) {
     function initialiserPage() {
 
         var configDatatable = {
-            paging: false,
-            scrollY: 500
+            paging: false
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
