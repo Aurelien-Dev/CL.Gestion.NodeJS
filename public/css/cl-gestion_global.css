@@ -23,3 +23,7 @@ h2 {
     margin: 15px;
     font-weight: bold;
 }
+
+strong.obligatoire {
+    color: red;
+}

@@ -12,33 +12,33 @@
 
 
         <p>
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="nom" class="col-sm-3 col-form-label champ">
-                   Nom *
+                   Nom <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="prenom" class="col-sm-3 col-form-label champ">
-                   Prénom *
+                   Prénom <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="adresse_courriel" class="col-sm-3 col-form-label champ">
-                   Adresse courriel *
+                   Adresse courriel <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
                 </div>
             </div>
-            <div class="form-group row">
+            <div class="form-row">
                 <label for="telephone" class="col-sm-3 col-form-label champ">
-                   Téléphone *
+                   Téléphone <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
@@ -84,7 +84,7 @@
         <p>
             <div class="form-row">
                 <label for="nom_prenom_contact" class="col-sm-3 col-form-label champ">
-                   Nom & prénom *
+                   Nom & prénom <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="nom_prenom_contact" id="nom_prenom_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{nom_prenom_contact}}" required>
@@ -92,7 +92,7 @@
             </div>
             <div class="form-row">
                 <label for="lien_contact" class="col-sm-3 col-form-label champ">
-                   Lien *
+                   Lien <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="lien_contact" id="lien_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{lien_contact}}" required>
@@ -100,7 +100,7 @@
             </div>
             <div class="form-row">
                 <label for="telephone_contact" class="col-sm-3 col-form-label champ">
-                   Téléphone *
+                   Téléphone <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="telephone_contact" id="telephone_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone_contact}}" required>
@@ -108,7 +108,7 @@
             </div>
             <div class="form-row">
                 <label for="adresse_contact" class="col-sm-3 col-form-label champ">
-                   Adresse *
+                   Adresse <strong class="obligatoire">*</strong>
                 </label>
                 <div class="col-sm-9">
                     <input name="adresse_contact" id="adresse_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{adresse_contact}}" required>
@@ -121,7 +121,7 @@
                 <input name="accepte_risque" id="accepte_risque" class="form-check-input" placeholder="" type="checkbox" required>
                 
                 <label class="form-check-label" for="accepte_risque">
-                    <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong>
+                    <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong> <strong class="obligatoire">*</strong>
                 </label>
             </div>
         </p>
