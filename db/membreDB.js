@@ -8,8 +8,10 @@ const getMembres = (callback) => {
                      adresse_courriel, 
                      telephone,
                      role,
-                     to_char(date_creation, 'YYYY-MM-DD') as date_creation                     
-                from public.membre`, [], (error, results) => {
+                     to_char(date_creation, 'YYYY-MM-DD') as date_creation,
+                     est_supprime
+                from public.membre
+               where (est_supprime is null or est_supprime = false)`, [], (error, results) => {
         if (error) {
             return next(error);
         }
@@ -24,9 +26,11 @@ const getMembreByNumeroSequence = (id, callback) => {
                      adresse_courriel, 
                      telephone, 
                      role,
-                     to_char(date_creation, 'YYYY-MM-DD') as date_creation
+                     to_char(date_creation, 'YYYY-MM-DD') as date_creation,
+                     est_supprime
                 from public.membre 
-               where numero_sequence = $1`, [id], (error, results) => {
+               where numero_sequence = $1
+                 and (est_supprime is null or est_supprime = false)`, [id], (error, results) => {
         if (error) {
             return next(error);
         }
@@ -40,13 +44,14 @@ const createMembre = (datas, callback) => {
         datas.prenom.trim(),
         datas.adresse_courriel.trim().toLowerCase(),
         datas.telephone.trim(),
-        moment().format('l')
+        moment().format('l'),
+        false
     ];
 
     db.query(`insert into public.membre 
-                     (nom, prenom, adresse_courriel, telephone, date_creation)
+                     (nom, prenom, adresse_courriel, telephone, date_creation, est_supprime)
               values     
-                     ($1, $2, $3, $4, $5) 
+                     ($1, $2, $3, $4, $5, $6) 
            returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
@@ -70,9 +75,21 @@ const modifierRoleMembre = (id, role, callback) => {
 };
 
 
+const desactivationMembreByNumeroSequence = (id, callback) => {
+    db.query(`update public.membre 
+                set est_supprime = true 
+               where numero_sequence = $1`, [id], (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        callback(results.rows);
+    });
+};
+
 module.exports = {
     getMembres,
     getMembreByNumeroSequence,
     createMembre,
-    modifierRoleMembre
+    modifierRoleMembre,
+    desactivationMembreByNumeroSequence
 };

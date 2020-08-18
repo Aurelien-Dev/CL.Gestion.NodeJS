@@ -37,18 +37,21 @@ $(function(window, $) {
 
 
     function initialiserPage() {
+        $('#modalCreerAdhesion').modal();
+        $('.supprimer-formulaire').click(eventClickSupprimerFormulaire);
+        $('.ajouter-membre').click(eventClickAjouterMembre);
 
+        initialiserDatatable();
+    }
+
+    function initialiserDatatable() {
         var configDatatable = {
             paging: false
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
         $("#formulaires").DataTable(configDatatable);
-
-        $('.supprimer-formulaire').click(eventClickSupprimerFormulaire);
-        $('.ajouter-membre').click(eventClickAjouterMembre);
     }
-
     /**
      * Evenement permettant de faire la suppression d'un formulaire
      * @param {jQuery} e event object
