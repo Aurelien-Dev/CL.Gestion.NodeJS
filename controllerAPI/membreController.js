@@ -7,6 +7,15 @@ const async = require('async');
 
 /**
  * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
+ */
+router.get('/api/membres', function(request, response) {
+    membreDB.getMembresAutoComplete(function(membres) {
+        response.status(200).json(membres);
+    });
+});
+
+/**
+ * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
  * @param {*} id Correspond à l'identifiant du formulaire à utiliser pour créer un membre 
  */
 router.post('/api/membres/:id', function(request, response) {
