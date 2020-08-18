@@ -17,7 +17,7 @@ $(function(window, $) {
         }]
     });
 
-    modalAjouterMembre = new window.CL.Utilitaires.Modal({
+    var modalAjouterMembre = new window.CL.Utilitaires.Modal({
         titre: 'Ajouter le membre',
         body: "Veux-tu creer le nouveau membre à partir de ce formulaire de risque ?",
         boutons: [{
@@ -37,11 +37,13 @@ $(function(window, $) {
 
 
     function initialiserPage() {
-        $('#modalCreerAdhesion').modal();
+        //$('#modalCreerAdhesion').modal();
+
         $('.supprimer-formulaire').click(eventClickSupprimerFormulaire);
         $('.ajouter-membre').click(eventClickAjouterMembre);
 
         initialiserDatatable();
+        initialiserEasyAutocomplete();
     }
 
     function initialiserDatatable() {
