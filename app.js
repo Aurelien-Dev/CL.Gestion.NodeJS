@@ -34,6 +34,8 @@ var configurationApi = require('./controllerAPI/configurationController');
 app.use(configurationApi);
 var adhesionApi = require('./controllerAPI/adhesionController');
 app.use(adhesionApi);
+var utilitaireAPI = require('./controllerAPI/utilitaireController');
+app.use(utilitaireAPI);
 
 
 var formulaireController = require('./controller/formulaireController');

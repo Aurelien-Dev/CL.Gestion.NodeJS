@@ -9,7 +9,7 @@ $(function(window, $) {
     const SELECTOR_FRM_CREER_ADH = '#frmCreerAdhesion';
     const SELECTOR_TBL_ADHESION = '#tblAdhesions';
     const SELECTOR_SUPP_ADH = '.supprimer-adhesion';
-
+    const SELECTOR_BTN_CREER_ADH = '#btnCreerAdhesion';
 
     var modalSupAdhesion = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -34,13 +34,12 @@ $(function(window, $) {
      * Permet d'initialiser la page
      */
     function initialiserPage() {
-        $('#eventCreerAdhesion').click((e) => { $(SELECTOR_MODAL_CREER_ADH).modal(); });
+        $(SELECTOR_BTN_CREER_ADH).click((e) => { $(SELECTOR_MODAL_CREER_ADH).modal(); });
         $(SELECTOR_TYPE_ADHESION).change(appliquerInformationsAdhesion);
         $(SELECTOR_BTN_ENR_ROLE).click(modifierRole);
         $(SELECTOR_FRM_CREER_ADH).submit(creerAdhesion);
-        $(SELECTOR_TBL_ADHESION).click((e) => { e.preventDefault(); });
         $('input[name=etudiant]').change(appliquerInformationsEtudiant);
-        $('#tblAdhesions').on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
+        $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
 
         initialiserDatatable();
     }

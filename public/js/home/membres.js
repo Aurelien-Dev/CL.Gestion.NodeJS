@@ -1,6 +1,9 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
+    const SELECTOR_SUPP_MBR = '.supprimer-membre';
+    const SELECTOR_TBL_MEMBRES = '#tbl-membres';
+
     var modalSupMembre = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
         body: 'Veux-tu supprimer le membre ?',
@@ -23,7 +26,7 @@ $(function(window, $) {
      * Initialisation de la page
      */
     function initialiserPage() {
-        $('.supprimer-membre').click(eventClickSupprimerMembre);
+        $(SELECTOR_SUPP_MBR).click(eventClickSupprimerMembre);
 
         initialiserDatatale();
     }
@@ -37,7 +40,7 @@ $(function(window, $) {
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
-        $("#membres").DataTable(configDatatable);
+        $(SELECTOR_TBL_MEMBRES).DataTable(configDatatable);
     }
 
     /**
@@ -57,7 +60,7 @@ $(function(window, $) {
      * @param {$ligne} ligne Élément jQuery qui correspond à la ligne du membre
      */
     function desactiverMembre(ligne) {
-        var href = $(ligne).find('.supprimer-membre').attr('href');
+        var href = $(ligne).find(SELECTOR_SUPP_MBR).attr('href');
 
         $.ajax({
             url: href,

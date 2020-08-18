@@ -1,18 +1,9 @@
 const formulaireDB = require('../db/formulaireDB')
 const membreDB = require('../db/membreDB')
 const express = require('express');
-const { result } = require('underscore');
 const router = express.Router();
 const async = require('async');
 
-/**
- * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
- */
-router.get('/api/membres', function(request, response) {
-    membreDB.getMembresAutoComplete(function(membres) {
-        response.status(200).json(membres);
-    });
-});
 
 /**
  * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques

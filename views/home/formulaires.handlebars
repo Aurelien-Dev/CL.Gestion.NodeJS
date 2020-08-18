@@ -2,7 +2,7 @@
     <div class="table-responsive-sm">
         <h3>Formulaire d'acceptation des risques</h3>
         <strong>en attente d'association a un membre</strong>
-        <table class="table table-bordered table-sm" id="formulaires">
+        <table class="table table-bordered table-sm" id="tbl-formulaires">
             <thead>
                 <tr>
                     <th>Actions</th>
@@ -17,7 +17,7 @@
                 {{#each formulaires}}
                     <tr>
                         <td>
-                            <a href="#" class="cl-icons">
+                            <a href="#" class="cl-icons lier-formulaire">
                                 <i class="fas fa-link"></i>
                             </a>
                             &nbsp;
@@ -56,8 +56,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                
-                
+                <div class="row">
+                    <select class="js-example-basic-multiple form-control" name="state">
+                    </select>
+                </div>
 
             </div>
             <div class="modal-footer">

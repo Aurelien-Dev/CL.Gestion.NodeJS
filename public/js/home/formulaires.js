@@ -1,6 +1,12 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.tableauBord)) { window.CL.View.tableauBord = {}; }
 
+    const SELECTOR_SUPP_FRM = '.supprimer-formulaire';
+    const SELECTOR_AJOUT_MBR = '.ajouter-membre';
+    const SELECTOR_LIER_FRM = '.lier-formulaire';
+    const SELECTOR_TBL_FRMS = '#tbl-formulaires';
+    const SELECTOR_MDL_CREER_ADH = '#modalCreerAdhesion';
+
     var modalSupFormulaire = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
         body: 'Veux-tu supprimer le formulaire ?',
@@ -36,24 +42,45 @@ $(function(window, $) {
     initialiserPage();
 
 
+    /**
+     * Initialisation de la page
+     */
     function initialiserPage() {
-        //$('#modalCreerAdhesion').modal();
+        $(SELECTOR_SUPP_FRM).click(eventClickSupprimerFormulaire);
+        $(SELECTOR_AJOUT_MBR).click(eventClickAjouterMembre);
+        $(SELECTOR_LIER_FRM).click((e) => { $(SELECTOR_MDL_CREER_ADH).modal(); });
 
-        $('.supprimer-formulaire').click(eventClickSupprimerFormulaire);
-        $('.ajouter-membre').click(eventClickAjouterMembre);
-
+        initialiserSelect2();
         initialiserDatatable();
-        initialiserEasyAutocomplete();
     }
 
+    /**
+     * Initialisation du datatable
+     */
     function initialiserDatatable() {
         var configDatatable = {
             paging: false
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
-        $("#formulaires").DataTable(configDatatable);
+        $(SELECTOR_TBL_FRMS).DataTable(configDatatable);
     }
+
+    /**
+     * Initialisation du champ select2 pour la recherche de membres
+     */
+    function initialiserSelect2() {
+        $('.js-example-basic-multiple').select2({
+            selectOnClose: true,
+            dropdownParent: SELECTOR_MDL_CREER_ADH,
+            placeholder: "Selectionne un membre",
+            ajax: {
+                url: '/api/utilitaire/membreAutocomplete',
+                dataType: 'json'
+            }
+        });
+    }
+
     /**
      * Evenement permettant de faire la suppression d'un formulaire
      * @param {jQuery} e event object
@@ -83,7 +110,7 @@ $(function(window, $) {
      * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
      */
     function supprimerFormulaireRisque(ligne) {
-        var href = $(ligne).find('.supprimer-formulaire').attr('href');
+        var href = $(ligne).find(SELECTOR_SUPP_FRM).attr('href');
 
         $.ajax({
             url: href,
@@ -100,7 +127,7 @@ $(function(window, $) {
      * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
      */
     function ajouterNouveauMembre(ligne) {
-        var href = $(ligne).find('.ajouter-membre').attr('href');
+        var href = $(ligne).find(SELECTOR_AJOUT_MBR).attr('href');
 
         $.ajax({
             url: href,
