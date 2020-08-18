@@ -33,4 +33,16 @@ router.post('/api/adhesion/:id', function(request, response) {
     });
 });
 
+
+/**
+ * Permet de supprimer une adhésion
+ */
+router.delete('/api/adhesion/:id', function(request, response) {
+    const id = parseInt(request.params.id);
+
+    adhesionDB.deleteAdhesionByNumeroSequence(id, (results) => {
+        response.status(200).json({ success: true, resultat: results });
+    });
+});
+
 module.exports = router;

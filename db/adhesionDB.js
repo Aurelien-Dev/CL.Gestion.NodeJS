@@ -50,7 +50,19 @@ const createAdhesion = (datas, callback) => {
 };
 
 
+const deleteAdhesionByNumeroSequence = (id, callback) => {
+    db.query(`delete 
+                from public.adhesion 
+               where numero_sequence = $1`, [id], (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        callback(results.rows);
+    });
+};
+
 module.exports = {
     getAdhesionByNumeroSequenceMembre,
-    createAdhesion
+    createAdhesion,
+    deleteAdhesionByNumeroSequence
 };

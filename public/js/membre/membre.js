@@ -7,22 +7,47 @@ $(function(window, $) {
     const SELECTOR_BTN_ENR_ROLE = '#enregistrerRole';
     const SELECTOR_MODAL_CREER_ADH = '#modalCreerAdhesion';
     const SELECTOR_FRM_CREER_ADH = '#frmCreerAdhesion';
-    const SELECTPR_SUP_ADHESION = '.supprimer-adhesion';
     const SELECTOR_TBL_ADHESION = '#tblAdhesions';
+    const SELECTOR_SUPP_ADH = '.supprimer-adhesion';
+
+
+    var modalSupAdhesion = new window.CL.Utilitaires.Modal({
+        titre: 'Suppression',
+        body: "Veux-tu supprimer l'adhésion ?",
+        boutons: [{
+            texte: 'Oui',
+            callback: function() {
+                supprimerFormulaireRisque(modalSupAdhesion.ligne);
+            }
+        }, {
+            texte: 'Non',
+            callback: function() {
+                modalSupAdhesion.CacherModal();
+            }
+        }]
+    });
+
 
     initialiserPage();
 
+    /**
+     * Permet d'initialiser la page
+     */
     function initialiserPage() {
         $('#eventCreerAdhesion').click((e) => { $(SELECTOR_MODAL_CREER_ADH).modal(); });
-        $(SELECTOR_TYPE_ADHESION).change((e) => { appliquerInformationsAdhesion(); });
-        $(SELECTOR_BTN_ENR_ROLE).click((e) => { modifierRole(); });
+        $(SELECTOR_TYPE_ADHESION).change(appliquerInformationsAdhesion);
+        $(SELECTOR_BTN_ENR_ROLE).click(modifierRole);
         $(SELECTOR_FRM_CREER_ADH).submit(creerAdhesion);
         $(SELECTOR_TBL_ADHESION).click((e) => { e.preventDefault(); });
         $('input[name=etudiant]').change(appliquerInformationsEtudiant);
+        $('#tblAdhesions').on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
 
         initialiserDatatable();
     }
 
+    /**
+     * Initialisation du datatable pour les adhésions
+     */
     function initialiserDatatable() {
 
         var configDatatable = {
@@ -72,6 +97,23 @@ $(function(window, $) {
     }
 
 
+    /**
+     * Evenement permettant de faire la suppression d'une adhésion
+     * @param {jQuery} e event object
+     */
+    function eventClickSupprimerAdhesion(e) {
+        e.preventDefault();
+
+        $that = $(this);
+        modalSupAdhesion.ligne = $that.parents('tr');
+        modalSupAdhesion.AfficherModal();
+    }
+
+
+    /**
+     * Permet de créer l'adhésion et de l'associer au membre
+     * @param {event JQuery} e event
+     */
     function creerAdhesion(e) {
         e.preventDefault();
 
@@ -90,7 +132,29 @@ $(function(window, $) {
         });
     }
 
-    function modifierRole() {
+    /**
+     * Permet de supprimer une adhésion via une requête AJAX et de recharger le tableau
+     * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
+     */
+    function supprimerFormulaireRisque(ligne) {
+        var href = $(ligne).find('.supprimer-adhesion').attr('href');
+
+        $.ajax({
+            url: href,
+            method: 'delete',
+            success: function(result, statut) {
+                modalSupAdhesion.CacherModal();
+                $(SELECTOR_TBL_ADHESION).DataTable().ajax.reload();
+            }
+        });
+    }
+
+
+    /**
+     * Permet d'effectuer la modification du rôle du membre
+     * @param {event JQuery} e Event
+     */
+    function modifierRole(e) {
         var numeroSequenceMembre = $(SELECTOR_NO_SEQ_MEMBRE).val();
         var role = $(SELECTOR_ROLE_MEMBRE).val();
 
@@ -107,7 +171,11 @@ $(function(window, $) {
         });
     }
 
-    function appliquerInformationsEtudiant() {
+    /**
+     * Permet de mettre à jour le montant lorsque l'on choisi étidiant ou non
+     * @param {event JQuery} e Event
+     */
+    function appliquerInformationsEtudiant(e) {
         var option = $('#type_adhesion>option:selected');
         if (option.val() === '') {
             return;
@@ -125,7 +193,12 @@ $(function(window, $) {
         $(SELECTOR_MODAL_CREER_ADH + ' #montant_paye').val(montantPaye);
     }
 
-    function appliquerInformationsAdhesion() {
+
+    /**
+     * Permet d'insérer les informations du type d'adhésion aux champs
+     * @param {event JQuery} e Event
+     */
+    function appliquerInformationsAdhesion(e) {
         var option = $('#type_adhesion>option:selected');
         var etudiant = $('input[name=etudiant]:checked').val()
 
