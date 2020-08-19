@@ -8,7 +8,7 @@ function GenererCarteMembre() {
     const canvas = createCanvas(width, height)
     const context = canvas.getContext('2d')
 
-    loadImage('./public/img/rectoCarteEte.png').then(image => {
+    loadImage('./public/img/rectoCarteHiver.png').then(image => {
         context.drawImage(image, 0, 0, 440, 228);
 
         context.font = "bold 17px Arial";
