@@ -142,6 +142,11 @@ $(function(window, $) {
                             <a href="/formulaire/consulter/` + data + `">
                                 <i class="fas fa-file-alt"></i>
                             </a>
+                            &nbsp;
+                            <a href="/membre/carte/` + data + `">
+                                <i class="far fa-address-card"></i>
+                            </a>
+                            
                             `;
                 }
             }, {

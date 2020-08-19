@@ -9,7 +9,8 @@ const json = require('../configs/enumerations.json');
 const utilitaires = require('../utils/utilitaires');
 var helpers = require('handlebars-helpers')();
 const middlewareBase = require('./middlewareBase');
-
+const service = require('../services/genererCarteMembre')
+const fs = require('fs');
 
 middlewareBase.forEach((middleware, index) => {
     router.use(middleware);
@@ -60,6 +61,15 @@ router.get('/membre/consulter/:id', function(request, response) {
             response.redirect('./');
         }
     });
+});
+
+router.get('/membre/carte/:idM/:idAdh', function(request, response) {
+    service.GenererCarteMembre();
+
+    var basePath = require('path').dirname(__dirname);
+    const file = basePath + `/image.png`;
+
+    response.download(file);
 });
 
 
