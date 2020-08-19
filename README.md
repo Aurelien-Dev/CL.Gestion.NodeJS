@@ -1,5 +1,13 @@
 # CL.Gestion.NodeJS
 
+### Librairies utilisés
+
+- NodeJS
+- ExpressJS
+- Handlebars
+- Bootstrap
+- PostgresSQL
+
 ### Schéma de la base de donnée
 
 ```sql
