@@ -10,7 +10,8 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
                      type_transaction,
                      etudiant,
                      tadh.nom,
-                     NOW() < adh.date_fin as adh_actif
+                     NOW() < adh.date_fin as adh_actif,
+                     commentaire
                 from public.adhesion adh
           inner join public.type_adhesion tadh
             on adh.numero_sequence_type_adhesion= tadh.numero_sequence
@@ -33,13 +34,14 @@ const createAdhesion = (datas, callback) => {
         datas.type_transaction,
         datas.etudiant,
         datas.numero_sequence_membre,
-        datas.numero_sequence_type_adhesion
+        datas.numero_sequence_type_adhesion,
+        datas.commentaire
     ];
 
     db.query(`insert into public.adhesion 
-                     (date_debut, date_fin, montant_paye, date_transaction, type_transaction, etudiant, numero_sequence_membre, numero_sequence_type_adhesion)
+                     (date_debut, date_fin, montant_paye, date_transaction, type_transaction, etudiant, numero_sequence_membre, numero_sequence_type_adhesion, commentaire)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8)
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9)
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {

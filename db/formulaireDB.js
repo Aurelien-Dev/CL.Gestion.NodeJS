@@ -142,6 +142,17 @@ const associeMembre = (numSeqFormulaire, numSeqMembre, callback) => {
     });
 };
 
+const dissocierMembre = (numSeqFormulaire, callback) => {
+    db.query(`update public.formulaire_risque 
+                 set numero_sequence_membre = null 
+               where numero_sequence = $1`, [numSeqFormulaire], (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        callback();
+    });
+};
+
 module.exports = {
     getFormulaires,
     getFormulairesNonAssocie,
@@ -149,5 +160,6 @@ module.exports = {
     getFormulaireByNumeroSequenceMembre,
     createFormulaire,
     deleteFormulaireByNumeroSequence,
-    associeMembre
+    associeMembre,
+    dissocierMembre
 };

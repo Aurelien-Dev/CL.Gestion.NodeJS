@@ -39,5 +39,16 @@ router.put('/api/formulaires/associer', function(request, response) {
     });
 });
 
+/**
+ * Permet d'associer un formulaire d'accèptation des risques à un membre
+ */
+router.put('/api/formulaires/dissocier/:id', function(request, response) {
+    const seqFiche = parseInt(request.params.id);
+
+    formulaireDB.dissocierMembre(seqFiche, function() {
+        response.status(200).json({ success: true });
+    });
+});
+
 
 module.exports = router;

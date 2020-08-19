@@ -17,19 +17,19 @@
                 {{#each formulaires}}
                     <tr data-info-fiche="{{this.nom}} {{this.prenom}}" data-seq-fiche="{{this.numero_sequence}}">
                         <td>
-                            <a href="#" class="cl-icons lier-formulaire">
+                            <a href="#" class="lier-formulaire">
                                 <i class="fas fa-link"></i>
                             </a>
                             &nbsp;
-                            <a href="/api/membres/{{this.numero_sequence}}" class="cl-icons ajouter-membre">
+                            <a href="/api/membres/{{this.numero_sequence}}" class="ajouter-membre">
                                 <i class="fas fa-user-plus"></i>
                             </a>
                             &nbsp;
-                            <a href="/formulaire/consulter/{{this.numero_sequence}}" class="cl-icons">
+                            <a href="/formulaire/consulter/{{this.numero_sequence}}">
                                 <i class="far fa-clipboard"></i>
                             </a>
                             &nbsp;
-                            <a href="/api/formulaires/{{this.numero_sequence}}" class="cl-icons supprimer-formulaire">
+                            <a href="/api/formulaires/{{this.numero_sequence}}" class="supprimer-formulaire">
                                 <i class="far fa-trash-alt"></i>                   
                             </a>
                         </td>

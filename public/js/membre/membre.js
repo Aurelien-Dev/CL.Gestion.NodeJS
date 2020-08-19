@@ -8,7 +8,9 @@ $(function(window, $) {
     const SELECTOR_MODAL_CREER_ADH = '#modalCreerAdhesion';
     const SELECTOR_FRM_CREER_ADH = '#frmCreerAdhesion';
     const SELECTOR_TBL_ADHESION = '#tblAdhesions';
+    const SELECTOR_TBL_FICH_RISQ = '#tblFicheRisque';
     const SELECTOR_SUPP_ADH = '.supprimer-adhesion';
+    const SELECTOR_DISSO_FICH = '.dissocier-formulaire';
     const SELECTOR_BTN_CREER_ADH = '#btnCreerAdhesion';
 
     var modalSupAdhesion = new window.CL.Utilitaires.Modal({
@@ -27,6 +29,22 @@ $(function(window, $) {
         }]
     });
 
+    var modalDissocierFormulaire = new window.CL.Utilitaires.Modal({
+        titre: 'Dissocier la fiche de risque',
+        body: "Veux-tu séparer la fiche de risque du membre ?",
+        boutons: [{
+            texte: 'Oui',
+            callback: function() {
+                dissocierFormulaireRisque(modalDissocierFormulaire.ligne);
+            }
+        }, {
+            texte: 'Non',
+            callback: function() {
+                modalDissocierFormulaire.CacherModal();
+            }
+        }]
+    });
+
 
     initialiserPage();
 
@@ -37,9 +55,10 @@ $(function(window, $) {
         $(SELECTOR_BTN_CREER_ADH).click((e) => { $(SELECTOR_MODAL_CREER_ADH).modal(); });
         $(SELECTOR_TYPE_ADHESION).change(appliquerInformationsAdhesion);
         $(SELECTOR_BTN_ENR_ROLE).click(modifierRole);
-        $(SELECTOR_FRM_CREER_ADH).submit(creerAdhesion);
+        $(SELECTOR_FRM_CREER_ADH).submit(eventCreerAdhesion);
         $('input[name=etudiant]').change(appliquerInformationsEtudiant);
         $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
+        $(SELECTOR_TBL_FICH_RISQ).on('click', SELECTOR_DISSO_FICH, eventClickDissocierFormulaire);
 
         initialiserDatatableAdh();
         initialiserDatatableFiche();
@@ -86,6 +105,9 @@ $(function(window, $) {
             }, {
                 data: 'type_transaction_libelle',
                 title: 'Transaction'
+            }, {
+                data: 'commentaire',
+                title: 'Commentaire'
             }],
             rowCallback: function(row, data) {
                 if (data.adh_actif) {
@@ -113,7 +135,7 @@ $(function(window, $) {
             columns: [{
                 data: 'numero_sequence',
                 render: (data, type, row, meta) => {
-                    return `<a href="/formulaire/consulter/` + data + `">
+                    return `<a href="/api/formulaires/dissocier/` + data + `" class="dissocier-formulaire">
                                 <i class="fas fa-unlink"></i>
                             </a>
                             &nbsp;
@@ -141,7 +163,7 @@ $(function(window, $) {
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
-        $('#tblFicheRisque').DataTable(configDatatable);
+        $(SELECTOR_TBL_FICH_RISQ).DataTable(configDatatable);
     }
 
 
@@ -157,12 +179,24 @@ $(function(window, $) {
         modalSupAdhesion.AfficherModal();
     }
 
+    /**
+     * Evenement permettant de faire la suppression d'une adhésion
+     * @param {jQuery} e event object
+     */
+    function eventClickDissocierFormulaire(e) {
+        e.preventDefault();
+
+        $that = $(this);
+        modalDissocierFormulaire.ligne = $that.parents('tr');
+        modalDissocierFormulaire.AfficherModal();
+    }
+
 
     /**
      * Permet de créer l'adhésion et de l'associer au membre
      * @param {event JQuery} e event
      */
-    function creerAdhesion(e) {
+    function eventCreerAdhesion(e) {
         e.preventDefault();
 
         var donnees = window.CL.Utilitaires.getFormData($(this));
@@ -176,6 +210,7 @@ $(function(window, $) {
             success: function(result, statut) {
                 $(SELECTOR_TBL_ADHESION).DataTable().ajax.reload();
                 $(SELECTOR_MODAL_CREER_ADH).modal('hide');
+                $(SELECTOR_FRM_CREER_ADH)[0].reset();
             }
         });
     }
@@ -197,6 +232,22 @@ $(function(window, $) {
         });
     }
 
+
+    /**
+     * Permet de supprimer un formulaire via une requête AJAX et de faire disparaitre la ligne du tableau
+     * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
+     */
+    function dissocierFormulaireRisque(ligne) {
+        var href = $(ligne).find(SELECTOR_DISSO_FICH).attr('href');
+
+        $.ajax({
+            url: href,
+            method: 'put',
+            success: function(result, statut) {
+                document.location.reload();
+            }
+        });
+    }
 
     /**
      * Permet d'effectuer la modification du rôle du membre
