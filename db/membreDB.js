@@ -19,13 +19,13 @@ const getMembres = (callback) => {
     });
 };
 
-const getMembresAutoComplete = (term, callback) => {
-    db.query(`select * 
-                from (select numero_sequence,
-                             nom || ' ' || prenom as nom_prenom
-                        from public.membre
-                       where (est_supprime is null or est_supprime = false)) mbr
-               where LOWER(mbr.nom_prenom) like LOWER('%` + term + `%')`, [], (error, results) => {
+const getMembresAutoComplete = (callback) => {
+    var sql = `select numero_sequence,
+                      nom || ' ' || prenom as nom_prenom
+                 from public.membre
+                where (est_supprime is null or est_supprime = false)`;
+
+    db.query(sql, [], (error, results) => {
         if (error) {
             return next(error);
         }

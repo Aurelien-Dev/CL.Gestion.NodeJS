@@ -41,13 +41,14 @@ $(function(window, $) {
         $('input[name=etudiant]').change(appliquerInformationsEtudiant);
         $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
 
-        initialiserDatatable();
+        initialiserDatatableAdh();
+        initialiserDatatableFiche();
     }
 
     /**
      * Initialisation du datatable pour les adhésions
      */
-    function initialiserDatatable() {
+    function initialiserDatatableAdh() {
 
         var configDatatable = {
             paging: false,
@@ -93,6 +94,50 @@ $(function(window, $) {
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
 
         $(SELECTOR_TBL_ADHESION).DataTable(configDatatable);
+    }
+
+    /**
+     * Initialisation du datatable pour les fuche de risques
+     */
+    function initialiserDatatableFiche() {
+
+        var configDatatable = {
+            paging: false,
+            searching: false,
+            ordering: false,
+            ajax: '/api/formulaires/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
+            columns: [{
+                data: 'numero_sequence',
+                render: (data, type, row, meta) => {
+                    return `<a href="/formulaire/consulter/` + data + `">
+                                <i class="fas fa-unlink"></i>
+                            </a>
+                            &nbsp;
+                            <a href="/formulaire/consulter/` + data + `">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                            `;
+                }
+            }, {
+                data: 'nom_prenom_contact',
+                title: 'Nom du contact'
+            }, {
+                data: 'adresse_contact',
+                title: 'Adresse du contact'
+            }, {
+                data: 'telephone_contact',
+                title: 'Téléphone du contact'
+            }, {
+                data: 'lien_contact',
+                title: 'Lien de parenté'
+            }, {
+                data: 'date_acceptation',
+                title: 'Date de signature'
+            }]
+        };
+        jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);
+
+        $('#tblFicheRisque').DataTable(configDatatable);
     }
 
 

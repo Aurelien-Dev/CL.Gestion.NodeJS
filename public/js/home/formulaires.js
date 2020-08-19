@@ -6,6 +6,8 @@ $(function(window, $) {
     const SELECTOR_LIER_FRM = '.lier-formulaire';
     const SELECTOR_TBL_FRMS = '#tbl-formulaires';
     const SELECTOR_MDL_CREER_ADH = '#modalCreerAdhesion';
+    const SELECTOR_BTN_ENR_ASSO = '#btnAssocierFiche';
+
 
     var modalSupFormulaire = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -38,6 +40,7 @@ $(function(window, $) {
             }
         }]
     });
+    var modalInstance = null;
 
     initialiserPage();
 
@@ -48,7 +51,8 @@ $(function(window, $) {
     function initialiserPage() {
         $(SELECTOR_SUPP_FRM).click(eventClickSupprimerFormulaire);
         $(SELECTOR_AJOUT_MBR).click(eventClickAjouterMembre);
-        $(SELECTOR_LIER_FRM).click((e) => { $(SELECTOR_MDL_CREER_ADH).modal(); });
+        $(SELECTOR_LIER_FRM).click(eventClickAssocierFormulaire);
+        $(SELECTOR_BTN_ENR_ASSO).click(eventEnregistrerAssociationFicheMembre);
 
         initialiserSelect2();
         initialiserDatatable();
@@ -70,15 +74,53 @@ $(function(window, $) {
      * Initialisation du champ select2 pour la recherche de membres
      */
     function initialiserSelect2() {
-        $('.js-example-basic-multiple').select2({
-            selectOnClose: true,
-            dropdownParent: SELECTOR_MDL_CREER_ADH,
-            placeholder: "Selectionne un membre",
-            ajax: {
-                url: '/api/utilitaire/membreAutocomplete',
-                dataType: 'json'
+        $.get('/api/utilitaire/membreAutocomplete', function(datas) {
+            $('#rechercheMembre').select2({
+                selectOnClose: true,
+                dropdownParent: SELECTOR_MDL_CREER_ADH,
+                placeholder: "Selectionne un membre",
+                data: datas.results,
+                width: 'resolve'
+            });
+        });
+    }
+
+    /**
+     * Permet d'enregistrer l'association de la fiche au membre
+     * @param {jQuery event} e Event
+     */
+    function eventEnregistrerAssociationFicheMembre(e) {
+        var ligne = modalInstance.ligne;
+        var seqFiche = ligne.data('seq-fiche');
+        var seqMembre = $('#rechercheMembre').val();
+
+        $.ajax({
+            url: '/api/formulaires/associer',
+            data: { seqFiche: seqFiche, seqMembre: seqMembre },
+            method: 'put',
+            success: function(result, statut) {
+                if (result.success) {
+                    document.location.reload();
+                }
             }
         });
+    }
+
+    /**
+     * Event qui ouver la modale d'association de la fiche des risques
+     * @param {jQuery} e event object
+     */
+    function eventClickAssocierFormulaire(e) {
+        $that = $(this);
+
+        modalInstance = $(SELECTOR_MDL_CREER_ADH).modal();
+
+        var ligne = $(e.currentTarget).parents('tr');
+        var info_fiche = ligne.data('info-fiche');
+        var seq_fiche = ligne.data('seq-fiche');
+
+        $('#infoFiche').html(info_fiche);
+        modalInstance.ligne = ligne;
     }
 
     /**

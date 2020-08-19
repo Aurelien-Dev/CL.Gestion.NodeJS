@@ -1,6 +1,7 @@
 <div class="container">
     <h2 class="text-center">{{membre.prenom}} {{membre.nom}}</h2>
         
+    {{!-- Information membre --}}
     <div class="card shadow mb-4">
         <!-- Card Header - Accordion -->
         <a href="#collapseCardIG" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardIG">
@@ -59,50 +60,12 @@
         </div>
     </div>
 
-
-    {{#each formulaires}}
-        <div class="card shadow mb-4">
-            <!-- Card Header - Accordion -->
-            <a href="#collapseCardCU" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardCU">
-                <h6 class="m-0 font-weight-bold text-primary">Contact d'urgence</h6>
-            </a>
-            <div class="collapse show" id="collapseCardCU">
-                <div class="card-body">
-                    <p>
-                        <strong>Nom du contact : </strong>
-                        {{this.nom_prenom_contact}}
-                        <br />
-
-                        <strong>Adresse du contact : </strong>
-                        {{this.adresse_contact}}
-                        <br />
-
-                        <strong>Téléphone du contact : </strong>
-                        {{this.telephone_contact}}
-                        <br />
-
-                        <strong>Lien de parenté : </strong>
-                        {{this.lien_contact}}
-                        <br />
-
-                        <strong>Date de signature : </strong>
-                        {{this.date_acceptation}}
-                        <br />
-                        
-                        <a href="/formulaire/consulter/{{this.numero_sequence}}">
-                            <i class="fas fa-file-alt"></i>
-                            Visualiser le formulaire
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    {{/each}}
+    {{!-- Adhésion --}}
 
     <div class="card shadow mb-4">
         <!-- Card Header - Accordion -->
         <a href="#collapseCardAdh" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardAdh">
-            <h6 class="m-0 font-weight-bold text-primary">Adhésion</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Adhésions</h6>
         </a>
         <div class="collapse show" id="collapseCardAdh">
             <div class="card-body">
@@ -114,6 +77,23 @@
                 
                 <input class="btn btn-dark" type="button" value="Créer une nouvelle adhésion" id="btnCreerAdhesion"/>
 
+            </div>
+        </div>
+    </div>
+
+    {{!-- Formulaires risques --}}
+
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardFiche" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardFiche">
+            <h6 class="m-0 font-weight-bold text-primary">Formulaires risques</h6>
+        </a>
+        <div class="collapse show" id="collapseCardFiche">
+            <div class="card-body">
+                <div class="table-responsive-sm">
+                    <table class="table table-bordered table-sm" id="tblFicheRisque">
+                    </table>
+                </div>
             </div>
         </div>
     </div>

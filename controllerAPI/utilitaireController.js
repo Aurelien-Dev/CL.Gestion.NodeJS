@@ -11,7 +11,7 @@ const async = require('async');
  */
 router.get('/api/utilitaire/membreAutocomplete', function(request, response) {
 
-    membreDB.getMembresAutoComplete(request.query.term, (membres) => {
+    membreDB.getMembresAutoComplete((membres) => {
         var retour = {
             results: [],
             pagination: {
