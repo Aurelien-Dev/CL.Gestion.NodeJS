@@ -4,8 +4,6 @@
 // Write your JavaScript code.
 
 $(function(window, $) {
-
-
-    ///$("#frm").validate({});
-
+    $('#telephone').mask('(000) 000-0000');
+    $('#telephone_contact').mask('(000) 000-0000');
 }(window, $));

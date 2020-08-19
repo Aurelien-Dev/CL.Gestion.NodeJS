@@ -43,8 +43,12 @@ $(function(window, $) {
 
         initialiserDatatableAdh();
         initialiserDatatableFiche();
+        initialiserMasks();
     }
 
+    function initialiserMasks() {
+        $('#montant_paye').mask('000');
+    }
     /**
      * Initialisation du datatable pour les adhésions
      */

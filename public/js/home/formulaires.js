@@ -6,8 +6,7 @@ $(function(window, $) {
     const SELECTOR_LIER_FRM = '.lier-formulaire';
     const SELECTOR_TBL_FRMS = '#tbl-formulaires';
     const SELECTOR_MDL_CREER_ADH = '#modalCreerAdhesion';
-    const SELECTOR_BTN_ENR_ASSO = '#btnAssocierFiche';
-
+    const SELECTOR_FRM_ENR_ASSO = '#frmAssocierFiche';
 
     var modalSupFormulaire = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -51,8 +50,8 @@ $(function(window, $) {
     function initialiserPage() {
         $(SELECTOR_SUPP_FRM).click(eventClickSupprimerFormulaire);
         $(SELECTOR_AJOUT_MBR).click(eventClickAjouterMembre);
-        $(SELECTOR_LIER_FRM).click(eventClickAssocierFormulaire);
-        $(SELECTOR_BTN_ENR_ASSO).click(eventEnregistrerAssociationFicheMembre);
+        $(SELECTOR_LIER_FRM).click(eventClickModalAssocierFormulaire);
+        $(SELECTOR_FRM_ENR_ASSO).submit(eventEnregistrerAssociationFicheMembre);
 
         initialiserSelect2();
         initialiserDatatable();
@@ -90,6 +89,8 @@ $(function(window, $) {
      * @param {jQuery event} e Event
      */
     function eventEnregistrerAssociationFicheMembre(e) {
+        e.preventDefault();
+
         var ligne = modalInstance.ligne;
         var seqFiche = ligne.data('seq-fiche');
         var seqMembre = $('#rechercheMembre').val();
@@ -110,7 +111,7 @@ $(function(window, $) {
      * Event qui ouver la modale d'association de la fiche des risques
      * @param {jQuery} e event object
      */
-    function eventClickAssocierFormulaire(e) {
+    function eventClickModalAssocierFormulaire(e) {
         $that = $(this);
 
         modalInstance = $(SELECTOR_MDL_CREER_ADH).modal();
