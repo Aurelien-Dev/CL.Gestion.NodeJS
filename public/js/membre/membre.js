@@ -73,10 +73,10 @@ $(function(window, $) {
                 title: 'Date fin'
             }, {
                 data: 'nom',
-                title: 'Adhésion'
-            }, {
-                data: 'etudiant_libelle',
-                title: 'Étudiant'
+                title: 'Adhésion',
+                render: function(data, type, row, meta) {
+                    return data + (row.etudiant ? ' (étudiant)' : ' (non étudiant)');
+                }
             }, {
                 data: 'montant_paye',
                 title: 'Montant payé',

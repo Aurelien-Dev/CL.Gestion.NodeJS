@@ -13,7 +13,8 @@ const getFormulaires = (callback) => {
                      telephone_contact, 
                      lien_contact, 
                      accepte_risque, 
-                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation,
+                     to_char(date_expiration, 'YYYY-MM-DD') as date_expiration
                 from public.formulaire_risque`, [], (error, results) => {
         if (error) {
             return next(error);
@@ -33,7 +34,8 @@ const getFormulairesNonAssocie = (callback) => {
                      telephone_contact, 
                      lien_contact, 
                      accepte_risque, 
-                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation,
+                     to_char(date_expiration, 'YYYY-MM-DD') as date_expiration
                 from public.formulaire_risque 
                where numero_sequence_membre is null`, [], (error, results) => {
         if (error) {
@@ -54,7 +56,8 @@ const getFormulaireByNumeroSequence = (id, callback) => {
                      telephone_contact, 
                      lien_contact, 
                      accepte_risque, 
-                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation,
+                     to_char(date_expiration, 'YYYY-MM-DD') as date_expiration
                 from public.formulaire_risque 
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
@@ -75,7 +78,8 @@ const getFormulaireByNumeroSequenceMembre = (id, callback) => {
                      telephone_contact, 
                      lien_contact, 
                      accepte_risque, 
-                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation
+                     to_char(date_acceptation, 'YYYY-MM-DD') as date_acceptation,
+                     to_char(date_expiration, 'YYYY-MM-DD') as date_expiration
                 from public.formulaire_risque 
                where numero_sequence_membre = $1`, [id], (error, results) => {
         if (error) {
@@ -97,13 +101,16 @@ const createFormulaire = (datas, callback) => {
         datas.telephone_contact.trim(),
         datas.lien_contact.trim(),
         (datas.accepte_risque != undefined ? true : false),
-        moment().format('l')
+        moment().format('l'),
+        moment().add(1, 'y')
     ];
 
     db.query(`insert into public.formulaire_risque 
-                     (nom, prenom, adresse_courriel, telephone, nom_prenom_contact, adresse_contact, telephone_contact, lien_contact, accepte_risque, date_acceptation)
+                     (nom, prenom, adresse_courriel, telephone, 
+                      nom_prenom_contact, adresse_contact, telephone_contact, 
+                      lien_contact, accepte_risque, date_acceptation, date_expiration)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {

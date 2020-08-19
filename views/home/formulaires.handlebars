@@ -6,11 +6,11 @@
             <thead>
                 <tr>
                     <th>Actions</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Nom / Prenom</th>
                     <th>Adresse courriel</th>
                     <th>Téléphone</th>
                     <th>Date d'acceptation</th>
+                    <th>Date d'expiration</th>
                 </tr>
             </thead>
             <tbody>
@@ -33,11 +33,11 @@
                                 <i class="far fa-trash-alt"></i>                   
                             </a>
                         </td>
-                        <td>{{this.nom}}</td>
-                        <td>{{this.prenom}}</td>
+                        <td>{{this.nom}} {{this.prenom}}</td>
                         <td>{{this.adresse_courriel}}</td>
                         <td>{{this.telephone}}</td>
                         <td>{{this.date_acceptation}}</td>
+                        <td>{{this.date_expiration}}</td>
                     </tr>
                 {{/each}}
             </tbody>
