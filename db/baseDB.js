@@ -1,4 +1,6 @@
 const { Pool } = require('pg');
+
+//TODO: odifier la section pour ajouter des variables d'environement
 const pool = new Pool({
     user: 'xtrtdlyjfpawxm',
     host: 'ec2-54-247-103-43.eu-west-1.compute.amazonaws.com',
