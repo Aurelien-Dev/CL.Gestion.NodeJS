@@ -64,12 +64,19 @@ router.get('/membre/consulter/:id', function(request, response) {
 });
 
 router.get('/membre/carte/:idM/:idAdh', function(request, response) {
-    service.GenererCarteMembre();
+    const idMembre = parseInt(request.params.idM);
+    const idAdhesion = parseInt(request.params.idAdh);
 
-    var basePath = require('path').dirname(__dirname);
-    const file = basePath + `/image.png`;
+    membreDB.getInformationCarteMembre(idMembre, idAdhesion, function(infoCarte) {
+        var nomCarteGenere = service.GenererCarteMembre(infoCarte);
 
-    response.download(file);
+        var basePath = require('path').dirname(__dirname);
+        const file = basePath + `/image.png`;
+
+        response.download(file);
+
+    });
+
 });
 
 

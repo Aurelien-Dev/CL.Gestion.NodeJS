@@ -38,6 +38,23 @@ const getMembreByNumeroSequence = (id, callback) => {
     });
 };
 
+const getInformationCarteMembre = (idMembre, idAdhesion, callback) => {
+    db.query(`select m.nom || ' ' || m.prenom as nom_prenom,
+                     to_char(a.date_debut, 'YYYY-MM-DD') as date_debut,
+                     to_char(a.date_debut, 'YYYY') as annee_debut,
+                     to_char(a.date_fin, 'YYYY-MM-DD') as date_fin,
+                     ta.nom as type_carte
+                from membre m
+               inner join adhesion a ON m.numero_sequence = a.numero_sequence_membre and a.numero_sequence = $2
+               inner join type_adhesion ta on a.numero_sequence_type_adhesion = ta.numero_sequence
+               where m.numero_sequence = $1`, [idMembre, idAdhesion], (error, results) => {
+        if (error) {
+            return next(error);
+        }
+        callback(results.rows[0]);
+    });
+};
+
 const createMembre = (datas, callback) => {
     var donnees = [
         datas.nom.trim(),
@@ -86,9 +103,13 @@ const desactivationMembreByNumeroSequence = (id, callback) => {
     });
 };
 
+
+
+
 module.exports = {
     getMembres,
     getMembreByNumeroSequence,
+    getInformationCarteMembre,
     createMembre,
     modifierRoleMembre,
     desactivationMembreByNumeroSequence

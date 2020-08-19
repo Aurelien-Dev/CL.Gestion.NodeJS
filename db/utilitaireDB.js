@@ -24,7 +24,6 @@ const getCompteurs = (callback) => {
     });
 };
 
-
 module.exports = {
     getMembresAutoComplete,
     getCompteurs

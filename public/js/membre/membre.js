@@ -82,6 +82,10 @@ $(function(window, $) {
                 render: function(data, type, row, meta) {
                     return `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
                                 <i class="far fa-trash-alt"></i>                   
+                            </a>
+                            &nbsp;
+                            <a href="/membre/carte/` + row.numero_sequence_membre + `/` + row.numero_sequence + `">
+                                <i class="far fa-address-card"></i>
                             </a>`;
                 }
             }, {
@@ -141,10 +145,6 @@ $(function(window, $) {
                             &nbsp;
                             <a href="/formulaire/consulter/` + data + `">
                                 <i class="fas fa-file-alt"></i>
-                            </a>
-                            &nbsp;
-                            <a href="/membre/carte/` + data + `">
-                                <i class="far fa-address-card"></i>
                             </a>
                             
                             `;
