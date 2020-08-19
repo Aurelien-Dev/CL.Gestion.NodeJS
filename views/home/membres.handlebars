@@ -5,12 +5,10 @@
             <thead>
                 <tr>
                     <th>Actions</th>
-                    <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Nom / Prenom</th>
                     <th>Adresse courriel</th>
-                    <th>Role</th>
                     <th>Téléphone</th>
-                    <th>desactivé</th>
+                    <th>Role</th>
                 </tr>
             </thead>
             <tbody>
@@ -25,12 +23,10 @@
                                 <i class="fas fa-eye"></i>
                             </a>
                         </td>
-                        <td>{{this.nom}}</td>
-                        <td>{{this.prenom}}</td>
+                        <td>{{this.nom}} {{this.prenom}}</td>
                         <td>{{this.adresse_courriel}}</td>
-                        <td>{{this.role_libelle}}</td>
                         <td>{{this.telephone}}</td>
-                        <td>{{this.est_supprime}}</td>
+                        <td>{{this.role_libelle}}</td>
                     </tr>
                 {{/each}}
             </tbody>
