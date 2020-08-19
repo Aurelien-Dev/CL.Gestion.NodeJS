@@ -19,20 +19,6 @@ const getMembres = (callback) => {
     });
 };
 
-const getMembresAutoComplete = (callback) => {
-    var sql = `select numero_sequence,
-                      nom || ' ' || prenom as nom_prenom
-                 from public.membre
-                where (est_supprime is null or est_supprime = false)`;
-
-    db.query(sql, [], (error, results) => {
-        if (error) {
-            return next(error);
-        }
-        callback(results.rows);
-    });
-};
-
 const getMembreByNumeroSequence = (id, callback) => {
     db.query(`select numero_sequence,
                      nom, 
@@ -102,7 +88,6 @@ const desactivationMembreByNumeroSequence = (id, callback) => {
 
 module.exports = {
     getMembres,
-    getMembresAutoComplete,
     getMembreByNumeroSequence,
     createMembre,
     modifierRoleMembre,

@@ -1,17 +1,14 @@
-const formulaireDB = require('../db/formulaireDB')
+const utilitaireDB = require('../db/utilitaireDB')
 const membreDB = require('../db/membreDB')
 const express = require('express');
-const { result } = require('underscore');
 const router = express.Router();
-const async = require('async');
-
 
 /**
- * Permet l'ajout d'un nouveau formulaire d'accèptation dess risques
+ * Permet de fournir les données pour l'autocompletion de la recherche de membres
  */
 router.get('/api/utilitaire/membreAutocomplete', function(request, response) {
 
-    membreDB.getMembresAutoComplete((membres) => {
+    utilitaireDB.getMembresAutoComplete((membres) => {
         var retour = {
             results: [],
             pagination: {

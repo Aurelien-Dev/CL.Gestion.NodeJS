@@ -8,6 +8,13 @@ const async = require('async');
 const json = require('../configs/enumerations.json');
 const utilitaires = require('../utils/utilitaires');
 var helpers = require('handlebars-helpers')();
+const middlewareBase = require('./middlewareBase');
+
+
+middlewareBase.forEach((middleware, index) => {
+    router.use(middleware);
+});
+
 
 /*
  ** Permet de consulter un formulaire existant, sinon retourne a la page d'accueil
@@ -54,5 +61,6 @@ router.get('/membre/consulter/:id', function(request, response) {
         }
     });
 });
+
 
 module.exports = router;

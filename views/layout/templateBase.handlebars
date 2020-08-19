@@ -47,20 +47,25 @@
       <!-- Nav Item - Dashboard -->
       <li class="nav-item">
         <a class="nav-link" href="/home/formulaires">
-        <i class="far fa-address-book"></i>
-          <span>Formulaires</span></a>
+          <i class="far fa-address-book"></i>
+          <span>Formulaires</span>
+          <span class="badge badge-pill badge-success">{{this.compteur.count_formulaire}}</span>
+        </a>
       </li>
       
       <li class="nav-item">
         <a class="nav-link" href="/home/membres">
           <i class="fas fa-users"></i>
-          <span>Membres</span></a>
+          <span>Membres</span>
+          <span class="badge badge-pill badge-success" id="compteurMembres">{{this.compteur.count_membres}}</span>
+        </a>
       </li>
       
       <li class="nav-item">
         <a class="nav-link" href="/formulaire/ajouter">
           <i class="fas fa-file-alt"></i>
-          <span>Formulaire</span></a>
+          <span>Formulaire</span>
+        </a>
       </li>
 
     </ul>

@@ -2,8 +2,13 @@ const formulaireDB = require('../db/formulaireDB')
 const membreDB = require('../db/membreDB');
 const express = require('express');
 const router = express.Router();
-const _ = require('underscore');
 const config = require('../configs/enumerations.json')
+const middlewareBase = require('./middlewareBase');
+
+
+middlewareBase.forEach((middleware, index) => {
+    router.use(middleware);
+});
 
 
 /*
@@ -20,12 +25,12 @@ function AfficherFormulaires(request, response) {
     });
 }
 
+
 /*
  ** Affichage de la page des membres
  */
 router.get('/home/membres', function(request, response) {
     membreDB.getMembres((membres) => {
-
         membres.forEach(membre => {
             membre.role_libelle = config.ROLE[membre.role];
         });
