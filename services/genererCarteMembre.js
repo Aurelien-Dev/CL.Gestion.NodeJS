@@ -14,6 +14,10 @@ function GenererCarteMembre(infoCarte, callback) {
         fs.unlinkSync(fileName);
     }
 
+    if (infoCarte.type_carte === 'Annuelle') {
+        dateAchat = infoCarte.date_debut;
+    }
+
     loadImage(infoCarte.url_carte).then(image => {
         context.drawImage(image, 0, 0, 440, 228);
 

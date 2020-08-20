@@ -2,11 +2,11 @@ const { Pool } = require('pg');
 
 //TODO: odifier la section pour ajouter des variables d'environement
 const pool = new Pool({
-    user: 'xtrtdlyjfpawxm',
-    host: 'ec2-54-247-103-43.eu-west-1.compute.amazonaws.com',
-    database: 'd9rl40ucgr7bta',
-    password: '508417421874049ce26fc0a24d4324e885c6a577cb7279403695741be57cef0b',
-    port: 5432,
+    user: process.env.PG_USER,
+    host: process.env.PG_HOST,
+    database: process.env.PG_DATABASE,
+    password: process.env.PG_PASSWD,
+    port: process.env.PG_PORT,
     ssl: { rejectUnauthorized: false }
 });
 

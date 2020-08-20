@@ -4,7 +4,7 @@ const utils = require('./utils/utilitaires.js');
 const expressHandle = require('express-handlebars');
 const bodyParser = require('body-parser');
 const helper = require('./utils/helperscomponents.js');
-var path = require('path');
+const configs = require('./config');
 
 var app = module.exports = express();
 app.set('port', process.env.PORT || 3001);
@@ -18,7 +18,6 @@ var hbs = expressHandle.create({
 //définition du moteur de rendu (ici handlebars)
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-//app.set('view', path.join(__dirname, "views"));
 
 //Ouverture d'un dossier public
 app.use(express.static('public/'));
@@ -44,8 +43,6 @@ var membreController = require('./controller/membreController');
 app.use(membreController);
 var homeController = require('./controller/homeController');
 app.use(homeController);
-
-
 
 
 //Création sur serveur web
