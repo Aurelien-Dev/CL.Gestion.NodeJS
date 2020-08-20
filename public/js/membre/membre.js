@@ -46,7 +46,6 @@ $(function(window, $) {
         }]
     });
 
-
     initialiserPage();
 
     /**
@@ -60,32 +59,20 @@ $(function(window, $) {
         $('input[name=etudiant]').change(appliquerInformationsEtudiant);
         $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
         $(SELECTOR_TBL_FICH_RISQ).on('click', SELECTOR_DISSO_FICH, eventClickDissocierFormulaire);
-        $(SELECTOR_INPUT_DAT_DEB).change(() => {
-            var optionSelected = $(SELECTOR_TYPE_ADHESION + '>option:selected');
-
-            var anneeCourante = new Date().getFullYear();
-            var dateDebut = $(SELECTOR_INPUT_DAT_DEB).val();
-            var dateFin = null;
-            var dateFin = optionSelected.data('fin');
-            var nbrJour = optionSelected.data('nbr-jour');
-
-            if (typeof nbrJour === 'undefined' || nbrJour === null || nbrJour === "") {
-                dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
-            } else {
-                dateFin = moment(dateDebut).add(nbrJour, 'd').format('YYYY-MM-DD');
-            }
-
-            $(SELECTOR_MODAL_CREER_ADH + ' #date_fin').val(dateFin);
-        });
+        $(SELECTOR_INPUT_DAT_DEB).change(eventModifierDateFin);
 
         initialiserDatatableAdh();
         initialiserDatatableFiche();
         initialiserMasks();
     }
 
+    /**
+     * Permet d'initialiser les masques de saisies
+     */
     function initialiserMasks() {
         $('#montant_paye').mask('000');
     }
+
     /**
      * Initialisation du datatable pour les adhésions
      */
@@ -99,13 +86,18 @@ $(function(window, $) {
             columns: [{
                 width: '50px',
                 render: function(data, type, row, meta) {
-                    return `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
-                                <i class="far fa-trash-alt"></i>                   
-                            </a>
-                            &nbsp;
-                            <a href="/membre/carte/` + row.numero_sequence_membre + `/` + row.numero_sequence + `">
-                                <i class="far fa-address-card"></i>
-                            </a>`;
+                    var composants = `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
+                                            <i class="far fa-trash-alt"></i>                   
+                                        </a>`;
+
+                    if (row.adresse_carte !== null) {
+                        composants += `&nbsp;
+                                        <a href="/membre/carte/` + row.numero_sequence_membre + `/` + row.numero_sequence + `">
+                                            <i class="far fa-address-card"></i>
+                                        </a>`;
+                    }
+
+                    return composants;
                 }
             }, {
                 data: 'date_debut',
@@ -193,6 +185,29 @@ $(function(window, $) {
 
 
     /**
+     * Permet de mettre à jour la date de fin au changement de la date de début
+     * @param {jQuery Event} e Evenement
+     */
+    function eventModifierDateFin(e) {
+        var optionSelected = $(SELECTOR_TYPE_ADHESION + '>option:selected');
+
+        var anneeCourante = new Date().getFullYear();
+        var dateDebut = $(SELECTOR_INPUT_DAT_DEB).val();
+        var dateFin = null;
+        var dateFin = optionSelected.data('fin');
+        var nbrJour = optionSelected.data('nbr-jour');
+
+        if (typeof nbrJour === 'undefined' || nbrJour === null || nbrJour === "") {
+            dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
+        } else {
+            dateFin = moment(dateDebut).add(nbrJour, 'd').format('YYYY-MM-DD');
+        }
+
+        $(SELECTOR_MODAL_CREER_ADH + ' #date_fin').val(dateFin);
+    }
+
+
+    /**
      * Evenement permettant de faire la suppression d'une adhésion
      * @param {jQuery} e event object
      */
@@ -203,6 +218,7 @@ $(function(window, $) {
         modalSupAdhesion.ligne = $that.parents('tr');
         modalSupAdhesion.AfficherModal();
     }
+
 
     /**
      * Evenement permettant de faire la suppression d'une adhésion
@@ -240,6 +256,7 @@ $(function(window, $) {
         });
     }
 
+
     /**
      * Permet de supprimer une adhésion via une requête AJAX et de recharger le tableau
      * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
@@ -274,6 +291,7 @@ $(function(window, $) {
         });
     }
 
+
     /**
      * Permet d'effectuer la modification du rôle du membre
      * @param {event JQuery} e Event
@@ -294,6 +312,7 @@ $(function(window, $) {
             }
         });
     }
+
 
     /**
      * Permet de mettre à jour le montant lorsque l'on choisi étidiant ou non

@@ -2,6 +2,11 @@ const fs = require('fs');
 const { createCanvas, loadImage } = require('canvas');
 
 function GenererCarteMembre(infoCarte, callback) {
+
+    if (infoCarte.url_carte === '') {
+        return null;
+    }
+
     const width = 440
     const height = 228
 

@@ -11,6 +11,7 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
                      type_transaction,
                      etudiant,
                      tadh.nom,
+                     tadh.adresse_carte,
                      NOW() < adh.date_fin as adh_actif,
                      commentaire,
                      numero_membre
