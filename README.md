@@ -22,6 +22,7 @@ CREATE TABLE public.adhesion (
 	etudiant bool NOT NULL,
 	numero_sequence_type_adhesion int4 NOT NULL,
 	commentaire varchar NULL,
+	numero_membre varchar NULL,
 	CONSTRAINT adhesion_pkey PRIMARY KEY (numero_sequence)
 );
 
@@ -75,6 +76,7 @@ CREATE TABLE public.type_adhesion (
 	nombre_jour int2 NULL,
 	montant int2 NULL,
 	montant_etudiant int2 NULL,
+	adresse_carte varchar NULL,
 	CONSTRAINT type_adhesion_pkey PRIMARY KEY (numero_sequence)
 );
 ```
@@ -85,5 +87,8 @@ INSERT INTO public.type_adhesion (numero_sequence,nom,date_debut,date_fin,nombre
 (2,'Saisonnier été','1971-05-01','1971-08-31',NULL,30,25),
 (3,'Saisonnier automne','1971-09-01','1971-12-31',NULL,30,25),
 (4,'Annuel',NULL,NULL,365,70,60)
+(5,'Journalière',NULL,NULL,1,10,10)
 ;
+
+ALTER SEQUENCE type_adhesion_numero_sequence_seq START WITH 6;
 ```

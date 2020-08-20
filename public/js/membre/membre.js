@@ -97,6 +97,7 @@ $(function(window, $) {
             ordering: false,
             ajax: '/api/adhesion/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
+                width: '50px',
                 render: function(data, type, row, meta) {
                     return `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
                                 <i class="far fa-trash-alt"></i>                   
@@ -156,6 +157,7 @@ $(function(window, $) {
             ajax: '/api/formulaires/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
                 data: 'numero_sequence',
+                width: '50px',
                 render: (data, type, row, meta) => {
                     return `<a href="/api/formulaires/dissocier/` + data + `" class="dissocier-formulaire">
                                 <i class="fas fa-unlink"></i>
@@ -169,7 +171,7 @@ $(function(window, $) {
                 }
             }, {
                 data: 'nom_prenom_contact',
-                title: 'Nom du contact'
+                title: "Nom du contact d'urgence"
             }, {
                 data: 'adresse_contact',
                 title: 'Adresse du contact'
