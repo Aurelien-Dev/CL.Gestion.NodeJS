@@ -12,6 +12,7 @@ $(function(window, $) {
     const SELECTOR_SUPP_ADH = '.supprimer-adhesion';
     const SELECTOR_DISSO_FICH = '.dissocier-formulaire';
     const SELECTOR_BTN_CREER_ADH = '#btnCreerAdhesion';
+    const SELECTOR_INPUT_DAT_DEB = '#date_debut';
 
     var modalSupAdhesion = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -59,6 +60,23 @@ $(function(window, $) {
         $('input[name=etudiant]').change(appliquerInformationsEtudiant);
         $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
         $(SELECTOR_TBL_FICH_RISQ).on('click', SELECTOR_DISSO_FICH, eventClickDissocierFormulaire);
+        $(SELECTOR_INPUT_DAT_DEB).change(() => {
+            var optionSelected = $(SELECTOR_TYPE_ADHESION + '>option:selected');
+
+            var anneeCourante = new Date().getFullYear();
+            var dateDebut = $(SELECTOR_INPUT_DAT_DEB).val();
+            var dateFin = null;
+            var dateFin = optionSelected.data('fin');
+            var nbrJour = optionSelected.data('nbr-jour');
+
+            if (typeof nbrJour === 'undefined' || nbrJour === null || nbrJour === "") {
+                dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
+            } else {
+                dateFin = moment(dateDebut).add(nbrJour, 'd').format('YYYY-MM-DD');
+            }
+
+            $(SELECTOR_MODAL_CREER_ADH + ' #date_fin').val(dateFin);
+        });
 
         initialiserDatatableAdh();
         initialiserDatatableFiche();
@@ -324,7 +342,7 @@ $(function(window, $) {
             dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
         } else {
             dateDebut = moment().format('YYYY-MM-DD');
-            dateFin = moment().add(1, 'y').format('YYYY-MM-DD');
+            dateFin = moment().add(nbrJour, 'd').format('YYYY-MM-DD');
         }
 
         $(SELECTOR_MODAL_CREER_ADH + ' #date_debut').val(dateDebut);

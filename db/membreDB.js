@@ -43,7 +43,9 @@ const getInformationCarteMembre = (idMembre, idAdhesion, callback) => {
                      to_char(a.date_debut, 'YYYY-MM-DD') as date_debut,
                      to_char(a.date_debut, 'YYYY') as annee_debut,
                      to_char(a.date_fin, 'YYYY-MM-DD') as date_fin,
-                     ta.nom as type_carte
+                     a.numero_membre,
+                     ta.nom as type_carte,
+                     ta.adresse_carte as url_carte
                 from membre m
                inner join adhesion a ON m.numero_sequence = a.numero_sequence_membre and a.numero_sequence = $2
                inner join type_adhesion ta on a.numero_sequence_type_adhesion = ta.numero_sequence

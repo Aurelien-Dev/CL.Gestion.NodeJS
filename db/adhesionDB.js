@@ -1,4 +1,5 @@
 const db = require('../db/baseDB');
+const moment = require('moment');
 
 const getAdhesionByNumeroSequenceMembre = (id, callback) => {
     db.query(`select adh.numero_sequence, 
@@ -11,7 +12,8 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
                      etudiant,
                      tadh.nom,
                      NOW() < adh.date_fin as adh_actif,
-                     commentaire
+                     commentaire,
+                     numero_membre
                 from public.adhesion adh
           inner join public.type_adhesion tadh
             on adh.numero_sequence_type_adhesion= tadh.numero_sequence
@@ -35,13 +37,18 @@ const createAdhesion = (datas, callback) => {
         datas.etudiant,
         datas.numero_sequence_membre,
         datas.numero_sequence_type_adhesion,
-        datas.commentaire
+        datas.commentaire,
+        moment(datas.date_debut).format('YYYY') + datas.numero_sequence_type_adhesion + datas.numero_sequence_membre
     ];
 
     db.query(`insert into public.adhesion 
-                     (date_debut, date_fin, montant_paye, date_transaction, type_transaction, etudiant, numero_sequence_membre, numero_sequence_type_adhesion, commentaire)
+                     (date_debut, date_fin, montant_paye, 
+                      date_transaction, type_transaction, 
+                      etudiant, numero_sequence_membre, 
+                      numero_sequence_type_adhesion, 
+                      commentaire, numero_membre)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {

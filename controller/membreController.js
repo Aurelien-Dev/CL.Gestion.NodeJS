@@ -68,15 +68,13 @@ router.get('/membre/carte/:idM/:idAdh', function(request, response) {
     const idAdhesion = parseInt(request.params.idAdh);
 
     membreDB.getInformationCarteMembre(idMembre, idAdhesion, function(infoCarte) {
-        var nomCarteGenere = service.GenererCarteMembre(infoCarte);
+        var nomCarteGenere = service.GenererCarteMembre(infoCarte, (fileName) => {
+            var basePath = require('path').dirname(__dirname);
+            const file = basePath + '/cartes/' + fileName;
 
-        var basePath = require('path').dirname(__dirname);
-        const file = basePath + `/image.png`;
-
-        response.download(file);
-
+            response.download(file);
+        });
     });
-
 });
 
 
