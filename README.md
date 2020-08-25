@@ -24,17 +24,7 @@ Executer les scriptes de création de la base de donnée et remplacer les creden
 
 ### Schéma de la base de donnée
 
-```sql
-INSERT INTO public.type_adhesion (numero_sequence,nom,date_debut,date_fin,nombre_jour,montant,montant_etudiant) VALUES 
-(1,'Saisonnier hiver','1971-01-01','1971-04-30',NULL,30,25),
-(2,'Saisonnier été','1971-05-01','1971-08-31',NULL,30,25),
-(3,'Saisonnier automne','1971-09-01','1971-12-31',NULL,30,25),
-(4,'Annuel',NULL,NULL,365,70,60),
-(5,'Journalière',NULL,NULL,1,10,10)
-;
 
-ALTER SEQUENCE type_adhesion_numero_sequence_seq START WITH 6;
-```
 
 ```sql
 CREATE TABLE public.type_adhesion (
@@ -48,6 +38,16 @@ CREATE TABLE public.type_adhesion (
 	adresse_carte varchar NULL,
 	CONSTRAINT type_adhesion_pkey PRIMARY KEY (numero_sequence)
 );
+
+INSERT INTO public.type_adhesion (numero_sequence,nom,date_debut,date_fin,nombre_jour,montant,montant_etudiant) VALUES 
+(1,'Saisonnier hiver','1971-01-01','1971-04-30',NULL,30,25),
+(2,'Saisonnier été','1971-05-01','1971-08-31',NULL,30,25),
+(3,'Saisonnier automne','1971-09-01','1971-12-31',NULL,30,25),
+(4,'Annuel',NULL,NULL,365,70,60),
+(5,'Journalière',NULL,NULL,1,10,10)
+;
+
+ALTER SEQUENCE type_adhesion_numero_sequence_seq START WITH 6;
 ```
 
 ```sql
