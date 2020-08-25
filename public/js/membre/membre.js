@@ -106,6 +106,9 @@ $(function(window, $) {
                 data: 'date_fin',
                 title: 'Date fin'
             }, {
+                data: 'numero_membre',
+                title: 'Numero de membre'
+            }, {
                 data: 'nom',
                 title: 'Adhésion',
                 render: function(data, type, row, meta) {

@@ -6,29 +6,30 @@ const utilitaireDB = require('../db/utilitaireDB');
 
 /**
  * Middleware permettant de retirer l'indexation des robots
- * @param {object} req Request
- * @param {Object} res Response
+ * @param {object} request Request
+ * @param {Object} response Response
  * @param {callback} next Passage au middleware suivant
  */
-router.use(function(req, res, next) {
-    res.header('X-Robots-Tag', 'noindex');
+router.use(function(request, response, next) {
+    response.header('X-Robots-Tag', 'noindex');
+    //res.header('Cache-Control', 'no-store');
     next();
 });
 
 
 /**
  * Middleware permettant de rediriger vers la page d'authentification si la personne n'est pas connecté
- * @param {object} req Request
- * @param {Object} res Response
+ * @param {object} request Request
+ * @param {Object} response Response
  * @param {callback} next Passage au middleware suivant
  */
-router.use(function(req, res, next) {
-    var session = req.session;
+router.use(function(request, response, next) {
+    var session = request.session;
 
-    var url = 'http://' + req.headers.host + '/login';
+    var url = 'http://' + request.headers.host + '/login';
 
-    if (!req.session.connecte) {
-        res.redirect(301, url)
+    if (!request.session.connecte) {
+        response.redirect(301, url)
     } else {
         next();
     }
@@ -40,16 +41,16 @@ router.use(function(req, res, next) {
  * 
  * Aide utilisé :
  * https://stackoverflow.com/questions/9285880/node-js-express-js-how-to-override-intercept-res-render-function
- * @param {object} req Request
- * @param {Object} res Response
+ * @param {object} request Request
+ * @param {Object} response Response
  * @param {callback} next Passage au middleware suivant
  */
-router.use(function(req, res, next) {
+router.use(function(request, response, next) {
     utilitaireDB.getCompteurs((compteur) => {
         // grab reference of render
-        var _render = res.render;
+        var _render = response.render;
         // override logic
-        res.render = function(view, options, fn) {
+        response.render = function(view, options, fn) {
             if (typeof options === 'undefined') options = {}
 
             // do some custom logic

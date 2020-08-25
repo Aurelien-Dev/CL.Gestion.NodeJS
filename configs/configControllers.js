@@ -1,34 +1,39 @@
-const express = require('express');
-
-
+/**
+ * Méthode de configuration des controlleurs
+ * L'ordre de référencement est important par rapport aux middlewares
+ * @param {Object} app Application web
+ */
 function ConrigurationControllers(app) {
-
-
+    //Controlleurs de la WebAPI
     var formulaireApi = require('../controllerAPI/formulaireController');
-    app.use(formulaireApi);
     var membreApi = require('../controllerAPI/membreController');
-    app.use(membreApi);
     var configurationApi = require('../controllerAPI/configurationController');
-    app.use(configurationApi);
     var adhesionApi = require('../controllerAPI/adhesionController');
-    app.use(adhesionApi);
     var utilitaireAPI = require('../controllerAPI/utilitaireController');
+
+    //Controlleurs de l'interface web
+    var authentificationController = require('../controller/authentificationController');
+    var publicController = require('../controller/publicController');
+    var formulaireController = require('../controller/formulaireController');
+    var membreController = require('../controller/membreController');
+    var homeController = require('../controller/homeController');
+
+    //Middleware
+    var middlewareBase = require('../controller/middlewareBase');
+
+    app.use(formulaireApi);
+    app.use(membreApi);
+    app.use(configurationApi);
+    app.use(adhesionApi);
     app.use(utilitaireAPI);
 
-
-    var authentificationController = require('../controller/authentificationController');
     app.use(authentificationController);
-    var publicController = require('../controller/publicController');
     app.use(publicController);
 
-    var middlewareBase = require('../controller/middlewareBase');
     app.use(middlewareBase);
 
-    var formulaireController = require('../controller/formulaireController');
     app.use(formulaireController);
-    var membreController = require('../controller/membreController');
     app.use(membreController);
-    var homeController = require('../controller/homeController');
     app.use(homeController);
 }
 

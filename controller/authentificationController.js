@@ -2,16 +2,16 @@ const express = require('express');
 const router = express.Router();
 
 /*
- ** Affichage de la page des formulaires en attente
+ ** Affichage de la page de login
  */
 router.get('/login', function(request, response) {
     response.render('authentification/login', {
-        layout: false
+        layout: 'publicTemplate'
     });
 });
 
 /*
- ** Affichage de la page des formulaires en attente
+ ** Permet de ce déconnecter et de retourner à l'index
  */
 router.get('/logout', function(request, response) {
     request.session.connecte = false;
@@ -20,7 +20,7 @@ router.get('/logout', function(request, response) {
 });
 
 /*
- ** Affichage de la page des formulaires en attente
+ ** Soumission de la demande de connexion
  */
 router.post('/login', function(request, response) {
     request.session.connecte = true;

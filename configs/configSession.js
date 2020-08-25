@@ -1,6 +1,11 @@
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
 
+/**
+ * Méthode de configuration pour l'utilisation des cookies
+ * Il reste de la configuration a pofiner
+ * @param {Object} app Application web
+ */
 function ConrigurationSession(app) {
     app.use(cookieParser());
 

@@ -4,10 +4,14 @@ const bodyParser = require('body-parser');
 
 const utils = require('../utils/utilitaires.js');
 
+/**
+ * Configuration du moteur de rendu, ici handlebars et expressjs
+ * @param {Object} app Application web
+ */
 function ConrigurationRendu(app) {
     var hbs = expressHandle.create({
         layoutsDir: 'views/layout/',
-        defaultLayout: 'templateBase',
+        defaultLayout: 'template',
         helpers: utils.helpers
     });
 

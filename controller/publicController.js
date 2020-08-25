@@ -7,7 +7,7 @@ const router = express.Router();
  */
 router.get('/public/formulaire/ajouter', function(request, response) {
     response.render('formulaire/formulaire', {
-        layout: 'publicTemplateBase',
+        layout: 'publicTemplate',
         public: true
     });
 });
@@ -16,7 +16,7 @@ router.get('/public/formulaire/ajouter', function(request, response) {
  */
 router.get('/public/formulaire/recu', function(request, response) {
     response.render('formulaire/formulaire-recu', {
-        layout: 'publicTemplateBase'
+        layout: 'publicTemplate'
     });
 });
 
