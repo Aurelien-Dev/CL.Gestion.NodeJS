@@ -15,9 +15,15 @@ const utilitaireDB = require('../db/utilitaireDB')
  * @param {callback} next Passage au middleware suivant
  */
 router.use(function(req, res, next) {
-    var value = req.session;
+    var session = req.session;
 
-    next();
+    var url = 'http://' + req.headers.host + '/login';
+
+    if (!req.session.connecte) {
+        res.redirect(301, url)
+    } else {
+        next();
+    }
 });
 
 

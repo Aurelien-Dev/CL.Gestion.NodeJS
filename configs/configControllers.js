@@ -16,16 +16,18 @@ function ConrigurationControllers(app) {
     app.use(utilitaireAPI);
 
 
+    var authentificationController = require('../controller/authentificationController');
+    app.use(authentificationController);
+
     var middlewareBase = require('../controller/middlewareBase');
     app.use(middlewareBase);
+
     var formulaireController = require('../controller/formulaireController');
     app.use(formulaireController);
     var membreController = require('../controller/membreController');
     app.use(membreController);
     var homeController = require('../controller/homeController');
     app.use(homeController);
-    var authentificationController = require('../controller/authentificationController');
-    app.use(authentificationController);
 }
 
 module.exports = { config: ConrigurationControllers };
