@@ -18,6 +18,8 @@ function ConrigurationControllers(app) {
 
     var authentificationController = require('../controller/authentificationController');
     app.use(authentificationController);
+    var publicController = require('../controller/publicController');
+    app.use(publicController);
 
     var middlewareBase = require('../controller/middlewareBase');
     app.use(middlewareBase);

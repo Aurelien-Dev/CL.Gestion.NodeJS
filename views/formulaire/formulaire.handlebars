@@ -1,4 +1,8 @@
-<form action="/formulaire/ajouter" method="post" id="frm">
+{{#if this.public}}
+    <form action="/public/formulaire/ajouter" method="post" id="frm">
+{{else}}
+    <form action="/formulaire/ajouter" method="post" id="frm">
+{{/if}}
 
     <div class="container">
         <div class="row">
