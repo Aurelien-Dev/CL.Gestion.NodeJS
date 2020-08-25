@@ -1,20 +1,16 @@
-const formulaireDB = require('../db/formulaireDB')
-const membreDB = require('../db/membreDB')
-const typeAdhesionDB = require('../db/typeAdhesionDB');
-
 const express = require('express');
 const router = express.Router();
 const async = require('async');
-const json = require('../configs/enumerations.json');
-const utilitaires = require('../utils/utilitaires');
 var helpers = require('handlebars-helpers')();
-const middlewareBase = require('./middlewareBase');
-const service = require('../services/genererCarteMembre')
 const fs = require('fs');
 
-middlewareBase.forEach((middleware, index) => {
-    router.use(middleware);
-});
+const formulaireDB = require('../db/formulaireDB')
+const membreDB = require('../db/membreDB')
+const typeAdhesionDB = require('../db/typeAdhesionDB');
+const json = require('../configs/enumerations.json');
+const utilitaires = require('../utils/utilitaires');
+const service = require('../services/genererCarteMembre');
+
 
 
 /*

@@ -1,11 +1,6 @@
 const formulaireDB = require('../db/formulaireDB');
 const express = require('express');
 const router = express.Router();
-const middlewareBase = require('./middlewareBase');
-
-middlewareBase.forEach((middleware, index) => {
-    router.use(middleware);
-});
 
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
