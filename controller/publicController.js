@@ -16,7 +16,7 @@ router.get('/public/formulaire/ajouter', function(request, response) {
  */
 router.get('/public/formulaire/recu', function(request, response) {
     response.render('formulaire/formulaire-recu', {
-        layout: false
+        layout: 'publicTemplateBase'
     });
 });
 

@@ -1,141 +1,147 @@
-{{#if this.public}}
-    <form action="/public/formulaire/ajouter" method="post" id="frm">
-{{else}}
-    <form action="/formulaire/ajouter" method="post" id="frm">
-{{/if}}
+<!-- Nested Row within Card Body -->
+<div class="row">
+    <div class="col-lg-12">
+                  
+        {{#if this.public}}
+            <form action="/public/formulaire/ajouter" method="post" id="frm">
+        {{else}}
+            <form action="/formulaire/ajouter" method="post" id="frm">
+        {{/if}}
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-2 text-center">
-                <img class="logo_entete" src="/img/logo.jpg" />
-            </div>
-            <div class="col-sm-10">
-                <h2 class="titre_formulaire">Attestation de prise de connaissance et d'acceptation des risques encourus par le participant</h2>
-            </div>
-        </div>
-
-
-        <p>
-            <div class="form-row">
-                <label for="nom" class="col-sm-3 col-form-label champ">
-                   Nom <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-2 text-center">
+                        <img class="logo_entete" src="/img/logo.jpg" />
+                    </div>
+                    <div class="col-sm-10">
+                        <h2 class="titre_formulaire">Attestation de prise de connaissance et d'acceptation des risques encourus par le participant</h2>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-                <label for="prenom" class="col-sm-3 col-form-label champ">
-                   Prénom <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="adresse_courriel" class="col-sm-3 col-form-label champ">
-                   Adresse courriel <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="telephone" class="col-sm-3 col-form-label champ">
-                   Téléphone <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
-                </div>
-            </div>
-        </p>
-
-        <p class="text-formulaire">
-            Je, soussigné(e), reconnais que la pratique des activités de plein air du Club L’Aval telles que la
-            randonnée, le ski, la raquette, le camping, le vélo, le canot, le kayak ou tout autre sport/activité pratiqué par le
-            Club L’Aval comporte des risques inhérents et aléatoires ainsi que certains dangers pouvant causer ou mener à
-            la mort ainsi qu’à des blessures, dommages à la propriété, maladies, handicaps et traumatismes mentaux ou
-            émotionnels. Les risques comprennent : l’environnement naturel ou sauvage, les risques associés au jugement
-            personnel, au parcours, à la situation géographique, à l’équipement, à la cuisine et autres corvées en camping,
-            ainsi que tout autre risque lié aux activités de plein air.
-        </p>
-
-        <p class="text-formulaire">
-            Je reconnais avoir les habiletés et les capacités physiques et intellectuelles nécessaires pour pratiquer de façon
-            sécuritaire les activités du Club L’Aval. Par ailleurs, je reconnais que j’ai, pour chaque activité, l’occasion de
-            m’informer des aptitudes et du matériel requis ainsi que des risques spécifiques à l’activité auprès de
-            l’animateur lors de la réunion de préparation de l’activité et en tout temps avant l’activité par l’intermédiaire de
-            la fonction de contact du site internet du Club L’Aval.
-        </p>
-        <p class="text-formulaire">
-            En cas d’accident, j’accepte que les animateurs du Club L’Aval interviennent et qu’ils communiquent avec les
-            services d’urgence si nécessaire. Il est de mon devoir de détenir toutes les assurances de responsabilité civile et
-            personnelle en cas d’accident, de frais ambulanciers, de bris, de perte ou vol d’objets personnels. Dans le cas
-            contraire, je comprends que je dois assumer personnellement tous les frais inhérents.
-        </p>
-        <p class="text-formulaire">
-            Le Club L’Aval n’est en aucun cas responsable de la perte, du vol ou des dommages causés aux biens personnels
-            du participant.
-        </p>
-        <p class="text-formulaire">
-            Je déclare que j’ai lu et que je comprends cette attestation. Je reconnais avoir pu poser toute question
-            concernant ce document auprès d’un représentant du Club L’Aval et j’accepte le tout.
-        </p>
 
 
-        <p><strong>Contact en cas d’urgence</strong></p>
+                <p>
+                    <div class="form-row">
+                        <label for="nom" class="col-sm-3 col-form-label champ">
+                        Nom <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="prenom" class="col-sm-3 col-form-label champ">
+                        Prénom <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="adresse_courriel" class="col-sm-3 col-form-label champ">
+                        Adresse courriel <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="telephone" class="col-sm-3 col-form-label champ">
+                        Téléphone <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
+                        </div>
+                    </div>
+                </p>
 
-        <p>
-            <div class="form-row">
-                <label for="nom_prenom_contact" class="col-sm-3 col-form-label champ">
-                   Nom & prénom <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="nom_prenom_contact" id="nom_prenom_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{nom_prenom_contact}}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="lien_contact" class="col-sm-3 col-form-label champ">
-                   Lien <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="lien_contact" id="lien_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{lien_contact}}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="telephone_contact" class="col-sm-3 col-form-label champ">
-                   Téléphone <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="telephone_contact" id="telephone_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone_contact}}" required>
-                </div>
-            </div>
-            <div class="form-row">
-                <label for="adresse_contact" class="col-sm-3 col-form-label champ">
-                   Adresse <strong class="obligatoire">*</strong>
-                </label>
-                <div class="col-sm-9">
-                    <input name="adresse_contact" id="adresse_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{adresse_contact}}" required>
-                </div>
-            </div>
-        </p>
+                <p class="text-formulaire">
+                    Je, soussigné(e), reconnais que la pratique des activités de plein air du Club L’Aval telles que la
+                    randonnée, le ski, la raquette, le camping, le vélo, le canot, le kayak ou tout autre sport/activité pratiqué par le
+                    Club L’Aval comporte des risques inhérents et aléatoires ainsi que certains dangers pouvant causer ou mener à
+                    la mort ainsi qu’à des blessures, dommages à la propriété, maladies, handicaps et traumatismes mentaux ou
+                    émotionnels. Les risques comprennent : l’environnement naturel ou sauvage, les risques associés au jugement
+                    personnel, au parcours, à la situation géographique, à l’équipement, à la cuisine et autres corvées en camping,
+                    ainsi que tout autre risque lié aux activités de plein air.
+                </p>
 
-        <p class="champ">
-            <div class="form-check">
-                <input name="accepte_risque" id="accepte_risque" class="form-check-input" placeholder="" type="checkbox" required>
-                
-                <label class="form-check-label" for="accepte_risque">
-                    <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong> <strong class="obligatoire">*</strong>
-                </label>
+                <p class="text-formulaire">
+                    Je reconnais avoir les habiletés et les capacités physiques et intellectuelles nécessaires pour pratiquer de façon
+                    sécuritaire les activités du Club L’Aval. Par ailleurs, je reconnais que j’ai, pour chaque activité, l’occasion de
+                    m’informer des aptitudes et du matériel requis ainsi que des risques spécifiques à l’activité auprès de
+                    l’animateur lors de la réunion de préparation de l’activité et en tout temps avant l’activité par l’intermédiaire de
+                    la fonction de contact du site internet du Club L’Aval.
+                </p>
+                <p class="text-formulaire">
+                    En cas d’accident, j’accepte que les animateurs du Club L’Aval interviennent et qu’ils communiquent avec les
+                    services d’urgence si nécessaire. Il est de mon devoir de détenir toutes les assurances de responsabilité civile et
+                    personnelle en cas d’accident, de frais ambulanciers, de bris, de perte ou vol d’objets personnels. Dans le cas
+                    contraire, je comprends que je dois assumer personnellement tous les frais inhérents.
+                </p>
+                <p class="text-formulaire">
+                    Le Club L’Aval n’est en aucun cas responsable de la perte, du vol ou des dommages causés aux biens personnels
+                    du participant.
+                </p>
+                <p class="text-formulaire">
+                    Je déclare que j’ai lu et que je comprends cette attestation. Je reconnais avoir pu poser toute question
+                    concernant ce document auprès d’un représentant du Club L’Aval et j’accepte le tout.
+                </p>
+
+
+                <p><strong>Contact en cas d’urgence</strong></p>
+
+                <p>
+                    <div class="form-row">
+                        <label for="nom_prenom_contact" class="col-sm-3 col-form-label champ">
+                        Nom & prénom <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="nom_prenom_contact" id="nom_prenom_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{nom_prenom_contact}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="lien_contact" class="col-sm-3 col-form-label champ">
+                        Lien <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="lien_contact" id="lien_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{lien_contact}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="telephone_contact" class="col-sm-3 col-form-label champ">
+                        Téléphone <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="telephone_contact" id="telephone_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone_contact}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="adresse_contact" class="col-sm-3 col-form-label champ">
+                        Adresse <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="adresse_contact" id="adresse_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{adresse_contact}}" required>
+                        </div>
+                    </div>
+                </p>
+
+                <p class="champ">
+                    <div class="form-check">
+                        <input name="accepte_risque" id="accepte_risque" class="form-check-input" placeholder="" type="checkbox" required>
+                        
+                        <label class="form-check-label" for="accepte_risque">
+                            <strong>En cochant cette case j'atteste avoir lu et compris l'enssemble du formulaire et en accepte les termes mensionnés.</strong> <strong class="obligatoire">*</strong>
+                        </label>
+                    </div>
+                </p>
+
+                <p class="champ text-center">
+                    <input class="btn btn-dark" type="submit" value="Valider le formulaire de consentement" />
+                </p>
+
             </div>
-        </p>
-
-        <p class="champ text-center">
-            <input class="btn btn-dark" type="submit" value="Valider le formulaire de consentement" />
-        </p>
-
+        </form>
     </div>
-</form>
+</div>
 
 
 {{#contentFor "pageStyles"}}
