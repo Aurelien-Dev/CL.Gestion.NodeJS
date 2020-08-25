@@ -2,14 +2,22 @@ const express = require('express');
 const router = express.Router();
 const _ = require('underscore');
 
-const utilitaireDB = require('../db/utilitaireDB')
+const utilitaireDB = require('../db/utilitaireDB');
+
+/**
+ * Middleware permettant de retirer l'indexation des robots
+ * @param {object} req Request
+ * @param {Object} res Response
+ * @param {callback} next Passage au middleware suivant
+ */
+router.use(function(req, res, next) {
+    res.header('X-Robots-Tag', 'noindex');
+    next();
+});
 
 
 /**
  * Middleware permettant de rediriger vers la page d'authentification si la personne n'est pas connecté
- * 
- * Aide utilisé :
- * https://stackoverflow.com/questions/9285880/node-js-express-js-how-to-override-intercept-res-render-function
  * @param {object} req Request
  * @param {Object} res Response
  * @param {callback} next Passage au middleware suivant
