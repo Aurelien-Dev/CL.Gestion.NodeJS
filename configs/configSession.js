@@ -4,9 +4,18 @@ const cookieParser = require('cookie-parser');
 function ConrigurationSession(app) {
     app.use(cookieParser());
 
-    app.set('trust proxy', 1); // trust first proxy
+    app.set('trust proxy', 1); // si l'application Node est derrière un proxy (comme Nginx), nous devrons définir le proxy sur true
 
-    app.use(session({ secret: "Shh, its a secret!" }));
+    app.use(session({
+        secret: "Shh, its a secret!",
+        resave: true,
+        saveUninitialized: true,
+        cookie: {
+            httpOnly: true,
+            sameSite: true,
+            maxAge: 24 * 60 * 60 * 100 // Time is in miliseconds
+        }
+    }));
 }
 
 module.exports = { config: ConrigurationSession };
