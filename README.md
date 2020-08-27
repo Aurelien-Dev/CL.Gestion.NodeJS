@@ -14,6 +14,8 @@ npm install
 ```
 Executer les scriptes de création de la base de donnée et remplacer les credentials de PostgreSql afin de ce connecter à vôtre BD.
 
+Créer ces variables d'environement
+
 ### Librairies utilisés
 
 - NodeJS

@@ -24,9 +24,11 @@ router.use(function(request, response, next) {
  * @param {callback} next Passage au middleware suivant
  */
 router.use(function(request, response, next) {
-    var session = request.session;
-
     var url = 'http://' + request.headers.host + '/login';
+
+    if ((process.env.NODE_ENV || 'dev') == 'dev') {
+        request.session.connecte = true;
+    }
 
     if (!request.session.connecte) {
         response.redirect(301, url)
