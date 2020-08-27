@@ -27,3 +27,12 @@ h2 {
 strong.obligatoire {
     color: red;
 }
+
+
+/* Ajout au template de base */
+
+.bg-recu-image {
+    background: url("/img/logo.jpg");
+    background-position: center;
+    background-size: cover;
+}

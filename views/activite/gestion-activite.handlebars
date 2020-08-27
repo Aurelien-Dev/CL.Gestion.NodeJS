@@ -1,0 +1,41 @@
+<div class="container">
+    <h2 class="text-center">Nom sortie</h2>
+        
+    {{!-- Information membre --}}
+    <div class="card shadow mb-4">
+        <!-- Card Header - Accordion -->
+        <a href="#collapseCardIG" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardIG">
+            <h6 class="m-0 font-weight-bold text-primary">Information sur la sortie</h6>
+        </a>
+        <!-- Card Content - Collapse -->
+        <div class="collapse show" id="collapseCardIG">
+            <div class="card-body">
+                <input type="hidden" name="numero_sequence_membre" id="numero_sequence_membre" value="{{membre.numero_sequence}}" />
+                <div class="row">
+                    <div class="col-1">
+                        <i class="far fa-envelope"></i>
+                    </div>
+                    <div class="col-11">
+                        Description
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="col-11">
+                        Difficulté
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-1">
+                        <i class="far fa-calendar-check"></i>
+                    </div>
+                    <div class="col-11">
+                        Vlolet
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
