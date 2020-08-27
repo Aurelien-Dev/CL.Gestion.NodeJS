@@ -17,6 +17,7 @@ function ConrigurationControllers(app) {
     var formulaireController = require('../controller/formulaireController');
     var membreController = require('../controller/membreController');
     var homeController = require('../controller/homeController');
+    var activiteController = require('../controller/activiteController');
 
     //Middleware
     var middlewareBase = require('../controller/middlewareBase');
@@ -35,6 +36,7 @@ function ConrigurationControllers(app) {
     app.use(formulaireController);
     app.use(membreController);
     app.use(homeController);
+    app.use(activiteController);
 }
 
 module.exports = { config: ConrigurationControllers };
