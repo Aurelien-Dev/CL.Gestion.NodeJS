@@ -17,7 +17,6 @@ Executer les scriptes de création de la base de donnée et remplacer les creden
 Créer ces variables d'environement dans un fichier .env a côté du app.js
 
 ```bash
-DATABASE_URL=
 PG_USER=
 PG_HOST=
 PG_DATABASE=
