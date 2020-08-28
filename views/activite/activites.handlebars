@@ -1,0 +1,40 @@
+<div class="container">
+    <div class="table-responsive-sm">
+        <h3>Liste des activités provenant du portail du club.</h3>
+        <table class="table table-bordered table-sm" id="tbl-activites">
+            <thead>
+                <tr>
+                    <th>Actions</th>
+                    <th>Nom de l'activite</th>
+                    <th>Date début</th>
+                    <th>Date fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each activites}}
+                    <tr data-info-fiche="{{this.nom}} {{this.prenom}}" data-seq-fiche="{{this.numero_sequence}}">
+                        <td>
+                            <a href="/activite/gerer/{{this.numero_sequence}}">
+                                <i class="fas fa-file-alt"></i>
+                            </a>
+                        </td>
+                        <td>{{this.nom}}</td>
+                        <td>{{this.date_heure_debut}}</td>
+                        <td>{{this.date_heure_fin}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+
+    
+</div>
+
+
+{{#contentFor "pageStyles"}}
+    <link href="/lib/datatable/datatables.min.css" rel="stylesheet">
+{{/contentFor}}
+
+{{#contentFor "pageScripts"}}
+    <script src="/lib/datatable/datatables.min.js" asp-append-version="true"></script>
+{{/contentFor}}

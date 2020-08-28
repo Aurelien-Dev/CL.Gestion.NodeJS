@@ -11,5 +11,13 @@ router.get('/activite/gerer/:id', function(request, response) {
     });
 });
 
+router.get('/activites', function(request, response) {
+    activiteDB.getActivites((activites) => {
+        response.render('activite/activites', {
+            activites: activites
+        });
+    });
+});
+
 
 module.exports = router;

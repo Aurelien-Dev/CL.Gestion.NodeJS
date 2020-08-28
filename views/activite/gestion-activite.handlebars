@@ -12,26 +12,42 @@
             <div class="card-body">
                 <input type="hidden" name="numero_sequence_membre" id="numero_sequence_membre" value="{{membre.numero_sequence}}" />
                 <div class="row">
-                    <div class="col-1">
+                    <div class="col-2">
                         <i class="fas fa-info-circle"></i>
                     </div>
-                    <div class="col-11">
+                    <div class="col-10">
                         {{description}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-1">
-                        <i class="fas fa-mobile-alt"></i>
+                    <div class="col-2">
+                        <i class="far fa-calendar-alt"></i> Début :
                     </div>
-                    <div class="col-11">
+                    <div class="col-10">
+                        {{date_heure_debut}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fas fa-calendar-alt"></i> Fin :
+                    </div>
+                    <div class="col-10">
+                        {{date_heure_fin}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-2">
+                        <i class="fas fa-hiking"></i> Difficulté :
+                    </div>
+                    <div class="col-10">
                         {{difficulte}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-1">
-                        <i class="far fa-calendar-check"></i>
+                    <div class="col-2">
+                        <i class="far fa-compass"></i> Volet :
                     </div>
-                    <div class="col-11">
+                    <div class="col-10">
                         {{volet}}
                     </div>
                 </div>
@@ -77,5 +93,9 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div>    
+
+    <p class="champ text-center">
+        <input class="btn btn-dark" type="button" value="retour" id="retour" />
+    </p>
 </div>
