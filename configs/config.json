@@ -1,10 +1,5 @@
 {
     "dev": {
-        "DATABASE_URL": "postgres://xtrtdlyjfpawxm:508417421874049ce26fc0a24d4324e885c6a577cb7279403695741be57cef0b@ec2-54-247-103-43.eu-west-1.compute.amazonaws.com:5432/d9rl40ucgr7bta",
-        "PG_USER": "xtrtdlyjfpawxm",
-        "PG_HOST": "ec2-54-247-103-43.eu-west-1.compute.amazonaws.com",
-        "PG_DATABASE": "d9rl40ucgr7bta",
-        "PG_PASSWD": "508417421874049ce26fc0a24d4324e885c6a577cb7279403695741be57cef0b",
-        "PG_PORT": 5432
+
     }
 }

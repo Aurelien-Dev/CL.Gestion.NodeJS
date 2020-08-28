@@ -1,12 +1,15 @@
 //Définition dse modules
 const express = require('express');
 const nocache = require('nocache');
+const dotenv = require('dotenv');
 
 const helper = require('./utils/helperscomponents.js');
 const configs = require('./config');
 const configRendu = require('./configs/configMoteurRendu');
 const configSession = require('./configs/configSession');
 const configControllers = require('./configs/configControllers');
+
+dotenv.config();
 
 const router = express.Router();
 var app = module.exports = express();
