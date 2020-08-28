@@ -23,7 +23,8 @@ router.get('/logout', function(request, response) {
  ** Soumission de la demande de connexion
  */
 router.post('/login', function(request, response) {
-    request.session.connecte = true;
+
+    request.session.connecte = request.body.motPasse === process.env.PASSWD_WEB;
     response.redirect('./');
 });
 

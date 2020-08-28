@@ -23,6 +23,7 @@ PG_HOST=
 PG_DATABASE=
 PG_PASSWD=
 PG_PORT=
+PASSWD_WEB=
 ```
 
 ### Librairies utilisés
