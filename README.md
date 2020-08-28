@@ -14,7 +14,16 @@ npm install
 ```
 Executer les scriptes de création de la base de donnée et remplacer les credentials de PostgreSql afin de ce connecter à vôtre BD.
 
-Créer ces variables d'environement
+Créer ces variables d'environement dans un fichier .env a côté du app.js
+
+```bash
+DATABASE_URL=
+PG_USER=
+PG_HOST=
+PG_DATABASE=
+PG_PASSWD=
+PG_PORT=
+```
 
 ### Librairies utilisés
 

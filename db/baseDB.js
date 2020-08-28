@@ -1,6 +1,5 @@
 const { Pool } = require('pg');
 
-//TODO: odifier la section pour ajouter des variables d'environement
 const pool = new Pool({
     user: process.env.PG_USER,
     host: process.env.PG_HOST,
