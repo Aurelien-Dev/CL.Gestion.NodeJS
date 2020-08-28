@@ -21,7 +21,7 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
                where adh.numero_sequence_membre = $1
             order by adh.date_debut desc`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -53,7 +53,7 @@ const createAdhesion = (datas, callback) => {
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
-                return next(error);
+                throw error;
             }
             callback(results.rows);
         });
@@ -65,7 +65,7 @@ const deleteAdhesionByNumeroSequence = (id, callback) => {
                 from public.adhesion 
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });

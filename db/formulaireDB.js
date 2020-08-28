@@ -61,7 +61,7 @@ const getFormulaireByNumeroSequence = (id, callback) => {
                 from public.formulaire_risque 
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -83,7 +83,7 @@ const getFormulaireByNumeroSequenceMembre = (id, callback) => {
                 from public.formulaire_risque 
                where numero_sequence_membre = $1`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -114,7 +114,7 @@ const createFormulaire = (datas, callback) => {
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
-                return next(error);
+                throw error;
             }
             callback(results.rows);
         });
@@ -125,7 +125,7 @@ const deleteFormulaireByNumeroSequence = (id, callback) => {
                 from public.formulaire_risque 
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -136,7 +136,7 @@ const associeMembre = (numSeqFormulaire, numSeqMembre, callback) => {
                  set numero_sequence_membre = $2 
                where numero_sequence = $1`, [numSeqFormulaire, numSeqMembre], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback();
     });
@@ -147,7 +147,7 @@ const dissocierMembre = (numSeqFormulaire, callback) => {
                  set numero_sequence_membre = null 
                where numero_sequence = $1`, [numSeqFormulaire], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback();
     });

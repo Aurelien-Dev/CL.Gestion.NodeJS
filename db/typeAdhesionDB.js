@@ -11,7 +11,7 @@ const getTypeAdhesion = (callback) => {
                      montant_etudiant
                 from public.type_adhesion`, [], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });

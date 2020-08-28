@@ -13,7 +13,7 @@ const getMembres = (callback) => {
                 from public.membre
                where (est_supprime is null or est_supprime = false)`, [], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -32,7 +32,7 @@ const getMembreByNumeroSequence = (id, callback) => {
                where numero_sequence = $1
                  and (est_supprime is null or est_supprime = false)`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -51,7 +51,7 @@ const getInformationCarteMembre = (idMembre, idAdhesion, callback) => {
                inner join type_adhesion ta on a.numero_sequence_type_adhesion = ta.numero_sequence
                where m.numero_sequence = $1`, [idMembre, idAdhesion], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows[0]);
     });
@@ -74,7 +74,7 @@ const createMembre = (datas, callback) => {
            returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
-                return next(error);
+                throw error;
             }
             callback(results.rows[0].numero_sequence);
         });
@@ -87,7 +87,7 @@ const modifierRoleMembre = (id, role, callback) => {
                  set role = $2
                where numero_sequence = $1`, [id, role], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -99,7 +99,7 @@ const desactivationMembreByNumeroSequence = (id, callback) => {
                 set est_supprime = true 
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });

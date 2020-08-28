@@ -6,7 +6,7 @@ const getActivites = (callback) => {
                      url
                 from public.fiche_inscription`, (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows);
     });
@@ -19,7 +19,7 @@ const getActiviteByNumeroSequence = (id, callback) => {
                 from public.fiche_inscription
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
-            return next(error);
+            throw error;
         }
         callback(results.rows[0]);
     });
