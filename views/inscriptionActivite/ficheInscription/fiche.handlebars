@@ -1,37 +1,11 @@
 <div class="container">
     <h2 class="text-center">
-        Fiche d'inscription de la sortie <br /> <strong>{{nom}}</strong>
-    </h2>
-        
-    {{!-- Information sur la sortie --}}
-    <div class="card shadow mb-4">
-        <!-- Card Header - Accordion -->
-        <a href="#collapseCardIS" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardIS">
-            <h6 class="m-0 font-weight-bold text-primary">Information sur la sortie</h6>
+        Fiche d'inscription de la sortie <br /> 
+        <a href="{{url}}" target="new">
+            <strong>{{nom_activite}}</strong>
         </a>
-        <!-- Card Content - Collapse -->
-        <div class="collapse show" id="collapseCardIS">
-            <div class="card-body">
-                <input type="hidden" name="numero_sequence_membre" id="numero_sequence_membre" value="{{membre.numero_sequence}}" />
-                <div class="row">
-                    <div class="col-2">
-                        <i class="far fa-calendar-alt"></i> Début :
-                    </div>
-                    <div class="col-10">
-                        {{date_heure_debut}}
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-2">
-                        <i class="fas fa-calendar-alt"></i> Fin :
-                    </div>
-                    <div class="col-10">
-                        {{date_heure_fin}}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>  
+    </h2>
+     
 
     {{!-- Ajout d'un membre --}}
     <div class="card shadow mb-4">

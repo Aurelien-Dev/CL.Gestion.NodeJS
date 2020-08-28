@@ -4,10 +4,9 @@
         <table class="table table-bordered table-sm" id="tbl-activites">
             <thead>
                 <tr>
-                    <th>Actions</th>
+                    <th></th>
+                    <th></th>
                     <th>Nom de l'activite</th>
-                    <th>Date début</th>
-                    <th>Date fin</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,11 +15,16 @@
                         <td>
                             <a href="/activite/gerer/{{this.numero_sequence}}">
                                 <i class="fas fa-file-alt"></i>
+                                Fiche d'inscription
                             </a>
                         </td>
-                        <td>{{this.nom}}</td>
-                        <td>{{this.date_heure_debut}}</td>
-                        <td>{{this.date_heure_fin}}</td>
+                        <td>
+                            <a href="{{this.url}}" target="_new">
+                                <i class="fas fa-link"></i>
+                                Lien
+                            </a>
+                        </td>
+                        <td>{{this.nom_activite}}</td>
                     </tr>
                 {{/each}}
             </tbody>
