@@ -12,6 +12,7 @@ router.get('/activite/gerer/:id', function(request, response) {
 });
 
 router.get('/activites', function(request, response) {
+    //TODO: Obtenir les données des activités via un service web du wordpress du club
     activiteDB.getActivites((activites) => {
         response.render('inscriptionActivite/activites', {
             activites: activites
