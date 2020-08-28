@@ -11,7 +11,7 @@ router.get('/formulaire/consulter/:id', function(request, response) {
     //Procéder a l'enregistrement des données
     formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
         if (result.length == 1) {
-            response.render('formulaire/formulaire-lecture', result[0]);
+            response.render('inscriptionMembre/formulaire/formulaire-lecture', result[0]);
         } else {
             response.redirect('./');
         }

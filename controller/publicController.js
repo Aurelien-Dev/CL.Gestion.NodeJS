@@ -6,7 +6,7 @@ const router = express.Router();
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
 router.get('/public/formulaire/ajouter', function(request, response) {
-    response.render('formulaire/formulaire', {
+    response.render('inscriptionMembre/formulaire/formulaire', {
         layout: 'publicTemplate',
         public: true
     });
@@ -15,7 +15,7 @@ router.get('/public/formulaire/ajouter', function(request, response) {
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
 router.get('/public/formulaire/recu', function(request, response) {
-    response.render('formulaire/formulaire-recu', {
+    response.render('inscriptionMembre/formulaire/formulaire-recu', {
         layout: 'publicTemplate'
     });
 });
@@ -27,7 +27,7 @@ router.get('/public/formulaire/recu', function(request, response) {
 router.post('/public/formulaire/ajouter', function(request, response) {
     //Procéder a l'enregistrement des données
     formulaireDB.createFormulaire(request.body, (results) => {
-        response.redirect('/public/formulaire/recu');
+        response.redirect('inscriptionMembre//public/formulaire/recu');
     });
 });
 

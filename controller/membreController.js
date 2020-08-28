@@ -47,7 +47,7 @@ router.get('/membre/consulter/:id', function(request, response) {
         }
     ], function(err, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion) {
         if (infoMembre.length == 1) {
-            response.render('membre/membre-lecture', {
+            response.render('inscriptionMembre/membre/membre-lecture', {
                 membre: infoMembre[0],
                 formulaires: infoFormulairesMembre,
                 enumeration: listEnum,

@@ -75,13 +75,9 @@ CREATE TABLE public.adhesion (
 ALTER TABLE public.adhesion ADD CONSTRAINT adhesion_numero_sequence_membre_fkey FOREIGN KEY (numero_sequence_membre) REFERENCES membre(numero_sequence) ON DELETE SET NULL;
 ALTER TABLE public.adhesion ADD CONSTRAINT adhesion_numero_sequence_type_adhesion_fkey FOREIGN KEY (numero_sequence_type_adhesion) REFERENCES type_adhesion(numero_sequence) ON DELETE SET NULL;
 
--- public.activite definition
-CREATE TABLE public.activite (
+-- public.fiche_inscription definition
+CREATE TABLE public.fiche_inscription (
 	numero_sequence serial NOT NULL,
-	nom varchar NOT NULL,
-	description varchar NULL,
-	difficulte varchar NULL,
-	volet varchar NULL,
-	date_heure_debut date NOT NULL,
-	date_heure_fin date NOT NULL
+	nom_activite varchar NOT NULL,
+	url varchar NOT NULL
 );

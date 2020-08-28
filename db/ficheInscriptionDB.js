@@ -1,12 +1,10 @@
-const db = require('../db/baseDB');
+const db = require('./baseDB');
 
 const getActivites = (callback) => {
     db.query(`select numero_sequence,
-                     nom,
-                     to_char(date_heure_debut, 'YYYY-MM-DD HH24hMI') as date_heure_debut,
-                     to_char(date_heure_fin, 'YYYY-MM-DD HH24hMI') as date_heure_fin,
+                     nom_activite,
                      url
-                from public.activite`, (error, results) => {
+                from public.fiche_inscription`, (error, results) => {
         if (error) {
             return next(error);
         }
@@ -16,11 +14,9 @@ const getActivites = (callback) => {
 
 const getActiviteByNumeroSequence = (id, callback) => {
     db.query(`select numero_sequence,
-                     nom,
-                     to_char(date_heure_debut, 'YYYY-MM-DD HH24hMI') as date_heure_debut,
-                     to_char(date_heure_fin, 'YYYY-MM-DD HH24hMI') as date_heure_fin,
+                     nom_activite,
                      url
-                from public.activite
+                from public.fiche_inscription
                where numero_sequence = $1`, [id], (error, results) => {
         if (error) {
             return next(error);
