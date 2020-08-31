@@ -27,7 +27,7 @@ router.get('/public/formulaire/recu', function(request, response) {
 router.post('/public/formulaire/ajouter', function(request, response) {
     //Procéder a l'enregistrement des données
     formulaireDB.createFormulaire(request.body, (results) => {
-        response.redirect('inscriptionMembre//public/formulaire/recu');
+        response.redirect('public/formulaire/recu');
     });
 });
 
