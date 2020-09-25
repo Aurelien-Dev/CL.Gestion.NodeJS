@@ -166,19 +166,19 @@ $(function(window, $) {
                 }
             }, {
                 data: 'nom_prenom_contact',
-                title: "Nom du contact d'urgence"
+                title: "Contact"
             }, {
                 data: 'adresse_contact',
-                title: 'Adresse du contact'
+                title: 'Adresse'
             }, {
                 data: 'telephone_contact',
-                title: 'Téléphone du contact'
+                title: 'Téléphone'
             }, {
                 data: 'lien_contact',
-                title: 'Lien de parenté'
+                title: 'Lien'
             }, {
                 data: 'date_acceptation',
-                title: 'Date de signature'
+                title: 'Signé le'
             }]
         };
         jQuery.extend(configDatatable, window.CL.Configuration.DatatableOptionsBase);

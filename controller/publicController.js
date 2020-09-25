@@ -2,6 +2,7 @@ const formulaireDB = require('../db/formulaireDB');
 const express = require('express');
 const router = express.Router();
 
+
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
@@ -11,6 +12,8 @@ router.get('/public/formulaire/ajouter', function(request, response) {
         public: true
     });
 });
+
+
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
