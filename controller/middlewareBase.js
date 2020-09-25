@@ -3,6 +3,7 @@ const router = express.Router();
 const _ = require('underscore');
 
 const utilitaireDB = require('../db/utilitaireDB');
+const config = require('../config');
 
 /**
  * Middleware permettant de retirer l'indexation des robots
@@ -52,7 +53,7 @@ router.use(function(request, response, next) {
             if (typeof options === 'undefined') options = {}
 
             // do some custom logic
-            _.extend(options, { compteur: compteur });
+            _.extend(options, { compteur: compteur, info_envir: config.INFO_ENVIR });
             // continue with original render
             _render.call(this, view, options, fn);
         }

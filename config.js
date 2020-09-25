@@ -5,4 +5,4 @@ var config = require('./configs/config.json')[env];
 
 _.extend(process.env, config);
 
-module.exports = config;
+module.exports = process.env;
