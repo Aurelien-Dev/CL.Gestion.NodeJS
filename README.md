@@ -2,9 +2,13 @@
 
 ### installation
 
-- NodeJS : https://nodejs.org/en/download/
+- NodeJS
 
-- Cloner le repo :
+https://nodejs.org/en/download/
+
+
+- Cloner le repo
+
 ```bash
 git clone https://github.com/Aurelien-Dev/CL.Gestion.NodeJS.git
 ```
@@ -14,6 +18,7 @@ git clone https://github.com/Aurelien-Dev/CL.Gestion.NodeJS.git
 ```bash
 npm install
 ```
+
 - Executer les scriptes de création de la base de donnée et remplacer les credentials de PostgreSql afin de ce connecter à vôtre BD.
 
 - Créer ces variables d'environement dans un fichier .env a côté du app.js
