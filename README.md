@@ -29,7 +29,7 @@ PG_HOST=
 PG_DATABASE=
 PG_PASSWD=
 PG_PORT=
-PG_SSL=
+PG_SSL= (false pour une BD de test chez héroku)
 PASSWD_WEB=
 ```
 
