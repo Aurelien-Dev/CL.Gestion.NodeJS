@@ -2,15 +2,17 @@
 
 ### installation
 
-Installer NodeJS
+NodeJS :
+```bash
 NodeJS : https://nodejs.org/en/download/
+```
 
-Cloner le repo
+Cloner le repo :
 ```bash
 git clone https://github.com/Aurelien-Dev/CL.Gestion.NodeJS.git
 ```
 
-installer les packages nécéssaires
+Installation des packages nécéssaires
 
 ```bash
 npm install
