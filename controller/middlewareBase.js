@@ -13,7 +13,6 @@ const config = require('../config');
  */
 router.use(function(request, response, next) {
     response.header('X-Robots-Tag', 'noindex');
-    //res.header('Cache-Control', 'no-store');
     next();
 });
 

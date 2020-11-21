@@ -2,6 +2,9 @@
 
 ### installation
 
+Installer NodeJS
+NodeJS : https://nodejs.org/en/download/
+
 Cloner le repo
 ```bash
 git clone https://github.com/Aurelien-Dev/CL.Gestion.NodeJS.git
@@ -33,6 +36,12 @@ PASSWD_WEB=
 - Handlebars
 - Bootstrap
 - PostgresSQL
+
+### Plugin VSCode
+- markdownlint
+- npm
+- npm Intellisense
+
 
 ### Schéma de la base de donnée
 
