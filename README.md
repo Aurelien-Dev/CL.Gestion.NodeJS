@@ -41,3 +41,7 @@ Execution du script de création de la base de données.
 ```bash
 db.sql
 ```
+
+### Logiciel que j'utilise pour la BD
+
+DBeaver : https://dbeaver.io/
