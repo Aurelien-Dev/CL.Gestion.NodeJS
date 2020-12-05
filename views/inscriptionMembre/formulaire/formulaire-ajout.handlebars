@@ -18,6 +18,43 @@
                     </div>
                 </div>
 
+                <p><strong>Informations du participant</strong></p>
+
+                <p>
+                    <div class="form-row">
+                        <label for="nom" class="col-sm-3 col-form-label champ">
+                        Nom <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="prenom" class="col-sm-3 col-form-label champ">
+                        Prénom <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="adresse_courriel" class="col-sm-3 col-form-label champ">
+                        Adresse courriel <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="telephone" class="col-sm-3 col-form-label champ">
+                        Téléphone <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
+                        </div>
+                    </div>
+                </p>
+
                 <p class="text-formulaire">
                     Je, soussigné(e), reconnais que la pratique des activités de plein air du Club L’Aval telles que la
                     randonnée, le ski, la raquette, le camping, le vélo, le canot, le kayak ou tout autre sport/activité pratiqué par le
@@ -50,101 +87,42 @@
                     concernant ce document auprès d’un représentant du Club L’Aval et j’accepte le tout.
                 </p>
 
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p><strong>Informations du participant</strong></p>
+                <p><strong>Contact en cas d’urgence</strong></p>
 
-                        <p>
-                            <div class="form-row">
-                                <label for="nom" class="col-sm-6 col-form-label champ">
-                                Nom <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="prenom" class="col-sm-6 col-form-label champ">
-                                Prénom <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="adresse_courriel" class="col-sm-6 col-form-label champ">
-                                Adresse courriel <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="telephone" class="col-sm-6 col-form-label champ">
-                                Téléphone <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
-                                </div>
-                            </div>
-                        </p>
-                    </div>
-
-                    <div class="col-sm-6">
-                        <p><strong>Contact en cas d’urgence</strong></p>
-
-                        <p>
-                            <div class="form-row">
-                                <label for="nom_prenom_contact" class="col-sm-6 col-form-label champ">
-                                Nom et prénom <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="nom_prenom_contact" id="nom_prenom_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{nom_prenom_contact}}" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="lien_contact" class="col-sm-6 col-form-label champ">
-                                Lien <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="lien_contact" id="lien_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{lien_contact}}" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="telephone_contact" class="col-sm-6 col-form-label champ">
-                                Téléphone <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="telephone_contact" id="telephone_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone_contact}}" required>
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <label for="adresse_contact" class="col-sm-6 col-form-label champ">
-                                Adresse <strong class="obligatoire">*</strong>
-                                </label>
-                                <div class="col-sm-6">
-                                    <input name="adresse_contact" id="adresse_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{adresse_contact}}" required>
-                                </div>
-                            </div>
-                        </p>
-                    </div>
-                </div>
-
-                <p><strong>Adhésion</strong></p>
-
-                <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Membre <strong class="obligatoire">*</strong></label>
-                    <div class="col-sm-3">
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="etudiant" id="etudiant1" value="true" checked>
-                            <label class="form-check-label" for="etudiant1">Étudiant</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="etudiant" id="etudiant2" value="false">
-                            <label class="form-check-label" for="etudiant2">Non étudiant</label>
+                <p>
+                    <div class="form-row">
+                        <label for="nom_prenom_contact" class="col-sm-3 col-form-label champ">
+                        Nom et prénom <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="nom_prenom_contact" id="nom_prenom_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{nom_prenom_contact}}" required>
                         </div>
                     </div>
-                </div>
+                    <div class="form-row">
+                        <label for="lien_contact" class="col-sm-3 col-form-label champ">
+                        Lien <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="lien_contact" id="lien_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{lien_contact}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="telephone_contact" class="col-sm-3 col-form-label champ">
+                        Téléphone <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="telephone_contact" id="telephone_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone_contact}}" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <label for="adresse_contact" class="col-sm-3 col-form-label champ">
+                        Adresse <strong class="obligatoire">*</strong>
+                        </label>
+                        <div class="col-sm-9">
+                            <input name="adresse_contact" id="adresse_contact" class="form-control form-control-sm" placeholder="" type="text" value="{{adresse_contact}}" required>
+                        </div>
+                    </div>
+                </p>
 
                 <p class="champ">
                     <div class="form-check">
