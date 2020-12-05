@@ -142,27 +142,10 @@
                         <hr>
                         {{!-- TODO: Générer automatiquement ces données --}}
                         <strong>Hiver</strong> 1 janvier au 30 avril<br />
-                        <strong>Été</strong>  1 mai au 31 août<br />
+                        <strong>Été</strong> 1 mai au 31 août<br />
                         <strong>Automne</strong> 1 septembre au 31 décembre
                     </div>
 
-                    <div class="form-group row">
-                        <label for="type_adhesion" class="col-sm-4 col-form-label">Type d'adhésion <strong class="obligatoire">*</strong></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="type_adhesion" id="type_adhesion" required>                                
-                                <option></option>
-                                {{#each typeAdhesion}}
-                                    <option value="{{this.numero_sequence}}" 
-                                            data-montant="{{this.montant}}" 
-                                            data-montant-etudiant="{{this.montant_etudiant}}" 
-                                            data-nbr-jour="{{this.nombre_jour}}"
-                                            data-debut="{{this.date_debut}}" 
-                                            data-fin="{{this.date_fin}}">{{this.nom}}
-                                    </option>
-                                {{/each}}
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Membre <strong class="obligatoire">*</strong></label>
                         <div class="col-sm-8">

@@ -13,7 +13,6 @@ function ConrigurationControllers(app) {
 
     //Controlleurs de l'interface web
     var authentificationController = require('../controller/authentificationController');
-    var publicController = require('../controller/publicController');
     var formulaireController = require('../controller/formulaireController');
     var membreController = require('../controller/membreController');
     var homeController = require('../controller/homeController');
@@ -29,7 +28,6 @@ function ConrigurationControllers(app) {
     app.use(utilitaireAPI);
 
     app.use(authentificationController);
-    app.use(publicController);
 
     app.use(middlewareBase);
 

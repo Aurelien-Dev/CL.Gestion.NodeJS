@@ -1,6 +1,7 @@
 /* Overrride Bootstrap */
+
 .container {
-    max-width: 880px !important;
+    max-width: 1024 !important;
 }
 
 #page-content-wrapper {
@@ -26,4 +27,3 @@
     text-align: justify;
     text-justify: inter-word;
 }
-

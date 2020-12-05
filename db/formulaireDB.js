@@ -102,15 +102,16 @@ const createFormulaire = (datas, callback) => {
         datas.lien_contact.trim(),
         (datas.accepte_risque != undefined ? true : false),
         moment().format('l'),
+        datas.numero_sequence_membre,
         moment().add(1, 'y')
     ];
 
     db.query(`insert into public.formulaire_risque 
                      (nom, prenom, adresse_courriel, telephone, 
                       nom_prenom_contact, adresse_contact, telephone_contact, 
-                      lien_contact, accepte_risque, date_acceptation, date_expiration)
+                      lien_contact, accepte_risque, date_acceptation, numero_sequence_membre, date_expiration)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
@@ -131,28 +132,6 @@ const deleteFormulaireByNumeroSequence = (id, callback) => {
     });
 };
 
-const associeMembre = (numSeqFormulaire, numSeqMembre, callback) => {
-    db.query(`update public.formulaire_risque 
-                 set numero_sequence_membre = $2 
-               where numero_sequence = $1`, [numSeqFormulaire, numSeqMembre], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        callback();
-    });
-};
-
-const dissocierMembre = (numSeqFormulaire, callback) => {
-    db.query(`update public.formulaire_risque 
-                 set numero_sequence_membre = null 
-               where numero_sequence = $1`, [numSeqFormulaire], (error, results) => {
-        if (error) {
-            throw error;
-        }
-        callback();
-    });
-};
-
 module.exports = {
     getFormulaires,
     getFormulairesNonAssocie,
@@ -160,6 +139,4 @@ module.exports = {
     getFormulaireByNumeroSequenceMembre,
     createFormulaire,
     deleteFormulaireByNumeroSequence,
-    associeMembre,
-    dissocierMembre
 };

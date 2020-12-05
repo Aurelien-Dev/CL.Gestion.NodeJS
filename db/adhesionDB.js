@@ -59,7 +59,6 @@ const createAdhesion = (datas, callback) => {
         });
 };
 
-
 const deleteAdhesionByNumeroSequence = (id, callback) => {
     db.query(`delete 
                 from public.adhesion 

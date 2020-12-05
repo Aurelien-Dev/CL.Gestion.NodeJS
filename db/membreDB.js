@@ -61,6 +61,7 @@ const createMembre = (datas, callback) => {
     var donnees = [
         datas.nom.trim(),
         datas.prenom.trim(),
+        'password',
         datas.adresse_courriel.trim().toLowerCase(),
         datas.telephone.trim(),
         moment().format('l'),
@@ -68,9 +69,9 @@ const createMembre = (datas, callback) => {
     ];
 
     db.query(`insert into public.membre 
-                     (nom, prenom, adresse_courriel, telephone, date_creation, est_supprime)
+                     (nom, prenom, passhash, adresse_courriel, telephone, date_creation, est_supprime)
               values     
-                     ($1, $2, $3, $4, $5, $6) 
+                     ($1, $2, $3, $4, $5, $6, $7) 
            returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {

@@ -1,3 +1,8 @@
+--DROP TABLE public.fiche_inscription;
+--DROP TABLE public.adhesion;
+--DROP TABLE public.formulaire_risque;
+--DROP TABLE public.membre;
+--DROP TABLE public.type_adhesion;
 
 CREATE TABLE public.type_adhesion (
 	numero_sequence serial NOT NULL,
@@ -31,6 +36,7 @@ CREATE TABLE public.membre (
 	"role" text NULL,
 	date_creation date NOT NULL,
 	est_supprime bool NULL,
+	passhash text NOT NULL,
 	CONSTRAINT membre_pkey PRIMARY KEY (numero_sequence)
 );
 

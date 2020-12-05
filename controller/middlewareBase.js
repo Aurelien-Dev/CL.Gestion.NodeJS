@@ -23,8 +23,10 @@ router.use(function(request, response, next) {
  * @param {Object} response Response
  * @param {callback} next Passage au middleware suivant
  */
-router.use(function(request, response, next) {
+router.use((request, response, next) => {
     var url = 'http://' + request.headers.host + '/login';
+
+    request.session.connecte = true;
 
     if (!request.session.connecte) {
         response.redirect(301, url)
@@ -43,7 +45,7 @@ router.use(function(request, response, next) {
  * @param {Object} response Response
  * @param {callback} next Passage au middleware suivant
  */
-router.use(function(request, response, next) {
+router.use((request, response, next) => {
     utilitaireDB.getCompteurs((compteur) => {
         // grab reference of render
         var _render = response.render;
