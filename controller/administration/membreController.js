@@ -4,13 +4,12 @@ const async = require('async');
 var helpers = require('handlebars-helpers')();
 const fs = require('fs');
 
-const formulaireDB = require('../db/formulaireDB')
-const membreDB = require('../db/membreDB')
-const typeAdhesionDB = require('../db/typeAdhesionDB');
-const json = require('../configs/enumerations.json');
-const utilitaires = require('../utils/utilitaires');
-const service = require('../services/genererCarteMembre');
-
+const formulaireDB = require('../../db/formulaireDB')
+const membreDB = require('../../db/membreDB')
+const typeAdhesionDB = require('../../db/typeAdhesionDB');
+const json = require('../../configs/enumerations.json');
+const utilitaires = require('../../utils/utilitaires');
+const service = require('../../services/genererCarteMembre');
 
 /*
  ** Permet de consulter un membre existant, sinon retourne a la page d'accueil
@@ -46,7 +45,7 @@ router.get('/membre/consulter/:id', (request, response) => {
         }
     ], (err, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion) => {
         if (infoMembre.length == 1) {
-            response.render('inscriptionMembre/membre/membre-lecture', {
+            response.render('administration/membre/membre-lecture', {
                 membre: infoMembre[0],
                 formulaires: infoFormulairesMembre,
                 enumeration: listEnum,

@@ -12,14 +12,14 @@ function ConrigurationControllers(app) {
     var utilitaireAPI = require('../controllerAPI/utilitaireController');
 
     //Controlleurs de l'interface web
-    var authentificationController = require('../controller/authentificationController');
-    var formulaireController = require('../controller/formulaireController');
-    var membreController = require('../controller/membreController');
-    var homeController = require('../controller/homeController');
-    var ficheInscriptionController = require('../controller/ficheInscriptionController');
+    var authentificationController = require('../controller/utilitaire/authentificationController');
+    var formulaireController = require('../controller/espaceMembre/formulaireRisqueController');
+    var membreController = require('../controller/administration/membreController');
+    var homeController = require('../controller/administration/listeController');
+    var ficheInscriptionController = require('../controller/administration/activite/inscriptionActiviteController');
 
     //Middleware
-    var middlewareBase = require('../controller/middlewareBase');
+    var middlewareBase = require('../controller/utilitaire/middlewareBase');
 
     app.use(formulaireApi);
     app.use(membreApi);

@@ -1,5 +1,5 @@
-const formulaireDB = require('../db/formulaireDB');
-const membreDB = require('../db/membreDB');
+const formulaireDB = require('../../db/formulaireDB');
+const membreDB = require('../../db/membreDB');
 const express = require('express');
 const router = express.Router();
 const async = require('async');
@@ -13,7 +13,7 @@ router.get('/formulaire/consulter/:id', (request, response) => {
     //Procéder a l'enregistrement des données
     formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
         if (result.length == 1) {
-            response.render('inscriptionMembre/formulaire/formulaire-lecture', result[0]);
+            response.render('espaceMembre/formulaireRisque/formulaire-lecture', result[0]);
         } else {
             response.redirect('./');
         }
@@ -23,8 +23,8 @@ router.get('/formulaire/consulter/:id', (request, response) => {
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
-router.get('/public/formulaire/ajouter', (request, response) => {
-    response.render('inscriptionMembre/formulaire/formulaire-ajout', {
+router.get('/public/formulaireRisque/ajouter', (request, response) => {
+    response.render('espaceMembre/formulaireRisque/formulaire-ajout', {
         layout: 'publicTemplate',
         public: true
     });
@@ -33,8 +33,8 @@ router.get('/public/formulaire/ajouter', (request, response) => {
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
-router.get('/public/formulaire/recu', (request, response) => {
-    response.render('inscriptionMembre/formulaire/formulaire-recu', {
+router.get('/public/formulaireRisque/recu', (request, response) => {
+    response.render('espaceMembre/formulaireRisque/formulaire-recu', {
         layout: 'publicTemplate'
     });
 });
@@ -43,7 +43,7 @@ router.get('/public/formulaire/recu', (request, response) => {
 /*
  ** Permet d'ajouter le formulaire 
  */
-router.post('/public/formulaire/ajouter', (request, response) => {
+router.post('/public/formulaireRisque/ajouter', (request, response) => {
 
     async.waterfall([
             //Création du membre
@@ -62,7 +62,7 @@ router.post('/public/formulaire/ajouter', (request, response) => {
             }
         ],
         () => {
-            response.redirect('/public/formulaire/recu');
+            response.redirect('/public/formulaireRisque/recu');
         }
     );
 });

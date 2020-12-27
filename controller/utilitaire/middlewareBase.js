@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const _ = require('underscore');
 
-const utilitaireDB = require('../db/utilitaireDB');
-const config = require('../config');
+const utilitaireDB = require('../../db/utilitaireDB');
+const config = require('../../config');
 
 /**
  * Middleware permettant de retirer l'indexation des robots

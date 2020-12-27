@@ -1,13 +1,7 @@
 <!-- Nested Row within Card Body -->
 <div class="row">
-    <div class="col-lg-12">
-                  
-        {{#if this.public}}
-            <form action="/public/formulaire/ajouter" method="post" id="frm">
-        {{else}}
-            <form action="/formulaire/ajouter" method="post" id="frm">
-        {{/if}}
-
+    <div class="col-lg-12">          
+        <form action="/public/formulaireRisque/ajouter" method="post" id="frm">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-2 text-center">
