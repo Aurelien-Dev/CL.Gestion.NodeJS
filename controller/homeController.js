@@ -1,6 +1,7 @@
 const formulaireDB = require('../db/formulaireDB')
 const membreDB = require('../db/membreDB');
 const express = require('express');
+const session = require('express-session');
 const router = express.Router();
 const config = require('../configs/enumerations.json')
 
@@ -39,8 +40,17 @@ router.get('/home/membres', function(request, response) {
  */
 router.get('/home/calculette', function(request, response) {
     console.log('je suis dans la calculette!');
+    console.log(request.session.maliste);
 
-        response.render('home/calculette');
+    if (typeof request.session.maliste == 'undefined')
+    {
+        request.session.maliste = [];
+        console.log('je reset!');
+    }
+    
+    
+        response.render('home/calculette',
+            {membres: request.session.maliste});
 
 });
 module.exports = router;

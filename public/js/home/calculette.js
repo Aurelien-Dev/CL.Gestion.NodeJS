@@ -3,6 +3,9 @@ $(function(window, $) {
 
     const SELECTOR_SUPP_MBR = '.supprimer-membre';
     const SELECTOR_TBL_MEMBRES = '#tbl-membres';
+    const SELECTOR_FRM_ENR_ASSO = '#frmAjouterParticipant';
+    const SELECTOR_MDL_CREER_ADH = '#modalAjouterParticipant';
+    const SELECTOR_LIER_FRM = '#ajouterParticipant';
 
     var modalSupMembre = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -27,6 +30,8 @@ $(function(window, $) {
      */
     function initialiserPage() {
         $(SELECTOR_SUPP_MBR).click(eventClickSupprimerMembre);
+        $(SELECTOR_FRM_ENR_ASSO).submit(eventEnregistrerParticipant);
+        $(SELECTOR_LIER_FRM).click(eventClickModalAjouterParticipant);
 
         initialiserDatatale();
     }
@@ -53,6 +58,40 @@ $(function(window, $) {
         $that = $(this);
         modalSupMembre.ligne = $that.parents('tr');
         modalSupMembre.AfficherModal();
+    }
+
+    function eventClickModalAjouterParticipant(e) {
+        $that = $(this);
+
+        modalInstance = $(SELECTOR_MDL_CREER_ADH).modal();
+
+        //var ligne = $(e.currentTarget).parents('tr');
+        //var info_fiche = ligne.data('info-fiche');
+        //var seq_fiche = ligne.data('seq-fiche');
+
+        //$('#infoFiche').html(info_fiche);
+        //modalInstance.ligne = ligne;
+    }
+
+    function eventEnregistrerParticipant(e) {
+        e.preventDefault();
+        modalAjouterParticipant = $(SELECTOR_MDL_CREER_ADH).modal();
+
+        var ligne = $('#nom').val()
+        var href = '/api/calculette/membre';
+        console.log(href);
+        console.log(ligne);
+        $.ajax({
+            url: href,
+            method: 'post',
+            data: {nom: ligne},
+            success: function(result, statut) {
+                console.log('un succès');
+                location.reload();
+            }
+        });
+        
+        //alert('stop');
     }
 
     /**
