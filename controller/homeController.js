@@ -34,5 +34,13 @@ router.get('/home/membres', function(request, response) {
     });
 });
 
+/*
+ ** Affichage de la calculette
+ */
+router.get('/home/calculette', function(request, response) {
+    console.log('je suis dans la calculette!');
 
+        response.render('home/calculette');
+
+});
 module.exports = router;
