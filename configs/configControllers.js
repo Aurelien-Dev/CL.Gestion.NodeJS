@@ -6,6 +6,7 @@
 function ConrigurationControllers(app) {
     //Controlleurs de la WebAPI
     var formulaireApi = require('../controllerAPI/formulaireController');
+    var calculetteApi = require('../controllerAPI/calculetteController');
     var membreApi = require('../controllerAPI/membreController');
     var configurationApi = require('../controllerAPI/configurationController');
     var adhesionApi = require('../controllerAPI/adhesionController');
@@ -27,6 +28,7 @@ function ConrigurationControllers(app) {
     app.use(configurationApi);
     app.use(adhesionApi);
     app.use(utilitaireAPI);
+    app.use(calculetteApi);
 
     app.use(authentificationController);
 
