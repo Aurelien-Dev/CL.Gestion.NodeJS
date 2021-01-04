@@ -11,7 +11,7 @@ const router = express.Router();
 router.get('/api/formulaires/:id', function(request, response) {
     const id = parseInt(request.params.id);
 
-    formulaireDB.getFormulaireByNumeroSequenceMembre(id, (infoFicheMembre) => {
+    formulaireDB.getFormulairesByNumeroSequenceMembre(id, (infoFicheMembre) => {
         response.status(200).json({ data: infoFicheMembre });
     });
 });

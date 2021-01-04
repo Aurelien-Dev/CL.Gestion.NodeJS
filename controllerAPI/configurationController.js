@@ -12,6 +12,10 @@ router.get('/api/configuration', function(request, response) {
             });
         }
     ], function(err, typeAdhesion) {
+        if (typeof err != 'undefined') {
+            response.status(500);
+        }
+
         var configurationGlobal = {
             Enums: configEnum,
             TypeAdhesion: typeAdhesion

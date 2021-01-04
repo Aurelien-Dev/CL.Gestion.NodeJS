@@ -1,4 +1,115 @@
 <div class="container">
     <h2 class="text-center">{{membre.prenom}} {{membre.nom}}</h2>
     
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-4 ">
+            {{!-- Information membre --}}
+            <div class="card shadow border-left-primary">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardIG" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardIG">
+                    <h6 class="m-0 font-weight-bold text-primary">Information générales</h6>
+                </a>
+
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardIG">
+
+
+                    <div class="card-body">
+                    
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="far fa-envelope"></i>
+                            </div>
+                            <div class="col-4">
+                                <strong>Adresse mail :</strong>
+                            </div>
+                            <div class="col-7">
+                                {{membre.adresse_courriel}}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="col-4">
+                                <strong>Téléphone : </strong>
+                            </div>
+                            <div class="col-7">{{membre.telephone}}</div>
+                        </div>
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="far fa-calendar-check"></i>
+                            </div>
+                            <div class="col-4">
+                                <strong>Date d'inscription au club : </strong>
+                            </div>
+                            <div class="col-7">{{membre.date_creation}}</div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="far fa-calendar-check"></i>
+                            </div>
+                            <div class="col-4">
+                                <strong>Expiration de l'attestation des risques:</strong>
+                            </div>
+                            <div class="col-7">
+                                {{formulaire.date_expiration}} 
+                                <a href="/formulaire/consulter/{{formulaire.numero_sequence}}">
+                                    <i class="fas fa-file-alt"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-xl-12 col-md-12 mb-4 ">
+            {{!-- Information membre --}}
+            <div class="card shadow border-left-primary">
+                <!-- Card Header - Accordion -->
+                <a href="#collapseCardCM" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardCM">
+                    <h6 class="m-0 font-weight-bold text-primary">Mes cartes de membres</h6>
+                </a>
+
+                <!-- Card Content - Collapse -->
+                <div class="collapse show" id="collapseCardCM">
+                    <div class="card-body row">
+                        
+                        <table class="table table-bordered table-sm" id="tblAdhesions">
+                            <thead>
+                                <tr>
+                                    <th>Catégorie</th>
+                                    <th>Date inscription</th>
+                                    <th>Date expiration</th>
+                                    <th>Carte</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each this.adhesions}}
+                                    <tr>
+                                        <td>{{this.nom}}</td>
+                                        <td>{{this.date_debut}}</td>
+                                        <td>{{this.date_fin}}</td>
+                                        <td>
+                                            <a href="/membre/carte/{{../membre.numero_sequence}}/{{this.numero_sequence}}">
+                                                <i class="far fa-address-card"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+
+                        <input class="btn btn-dark" type="button" value="Demander une nouvelle carte" id="btnCreerAdhesion"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

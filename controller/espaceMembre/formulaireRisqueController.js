@@ -13,7 +13,10 @@ router.get('/formulaire/consulter/:id', (request, response) => {
     //Procéder a l'enregistrement des données
     formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
         if (result.length == 1) {
-            response.render('espaceMembre/formulaireRisque/formulaire-lecture', result[0]);
+            response.render('espaceMembre/formulaireRisque/formulaire-lecture', {
+                layout: 'template-membre',
+                formulaire: result[0]
+            });
         } else {
             response.redirect('./');
         }
@@ -25,7 +28,7 @@ router.get('/formulaire/consulter/:id', (request, response) => {
  */
 router.get('/public/formulaireRisque/ajouter', (request, response) => {
     response.render('espaceMembre/formulaireRisque/formulaire-ajout', {
-        layout: 'publicTemplate',
+        layout: 'template-membre',
         public: true
     });
 });

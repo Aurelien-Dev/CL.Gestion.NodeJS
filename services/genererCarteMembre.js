@@ -14,6 +14,7 @@ function GenererCarteMembre(infoCarte, callback) {
     const context = canvas.getContext('2d')
     var dateAchat = '';
     var fileName = infoCarte.nom_prenom + '.png';
+    var basedir = require('path').dirname(__dirname);
 
     if (fs.existsSync(fileName)) {
         fs.unlinkSync(fileName);
@@ -23,7 +24,7 @@ function GenererCarteMembre(infoCarte, callback) {
         dateAchat = infoCarte.date_debut;
     }
 
-    loadImage(infoCarte.url_carte).then(image => {
+    loadImage(basedir + '/cartes/' + infoCarte.url_carte).then(image => {
         context.drawImage(image, 0, 0, 440, 228);
 
         context.font = "bold 17px Arial";
@@ -35,9 +36,9 @@ function GenererCarteMembre(infoCarte, callback) {
             context.fillText(dateAchat, 125, 172);
         }
         const buffer = canvas.toBuffer('image/png');
-        fs.writeFileSync('./cartes/' + fileName, buffer)
+        fs.writeFileSync(basedir + '/cartes/' + fileName, buffer)
 
-        callback(fileName);
+        callback(basedir + '/cartes/' + fileName);
     })
 }
 

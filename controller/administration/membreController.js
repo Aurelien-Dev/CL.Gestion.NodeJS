@@ -26,7 +26,7 @@ router.get('/membre/consulter/:id', (request, response) => {
         },
         //Obtention de ces formulaires de risques
         (infoMembre, callback) => {
-            formulaireDB.getFormulaireByNumeroSequenceMembre(id, (infoFormulairesMembre) => {
+            formulaireDB.getFormulairesByNumeroSequenceMembre(id, (infoFormulairesMembre) => {
                 callback(null, infoMembre, infoFormulairesMembre);
             });
         },
@@ -44,6 +44,11 @@ router.get('/membre/consulter/:id', (request, response) => {
             });
         }
     ], (err, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion) => {
+
+        if (typeof err != 'undefined') {
+            response.status(500);
+        }
+
         if (infoMembre.length == 1) {
             response.render('administration/membre/membre-lecture', {
                 membre: infoMembre[0],
@@ -70,10 +75,7 @@ router.get('/membre/carte/:idM/:idAdh', (request, response) => {
                 response.status(404);
             }
 
-            var basePath = require('path').dirname(__dirname);
-            const file = basePath + '/cartes/' + fileName;
-
-            response.download(file);
+            response.download(fileName);
         });
     });
 });
