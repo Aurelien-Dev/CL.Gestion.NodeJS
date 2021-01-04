@@ -47,10 +47,15 @@ router.get('/home/calculette', function(request, response) {
         request.session.maliste = [];
         console.log('je reset!');
     }
+    if (typeof request.session.listeDepenses == 'undefined')
+    {
+        request.session.listeDepenses = [];
+    }
     
     
         response.render('home/calculette',
-            {membres: request.session.maliste});
+            {membres: request.session.maliste,
+            depenses: request.session.listeDepenses});
 
 });
 module.exports = router;
