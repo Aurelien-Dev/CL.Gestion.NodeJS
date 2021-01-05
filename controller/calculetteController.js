@@ -11,52 +11,25 @@ const json = require('../configs/enumerations.json');
 const utilitaires = require('../utils/utilitaires');
 const service = require('../services/genererCarteMembre');
 
+router.get('/calculette', function(request, response) {
+    console.log('je suis dans la calculette!');
+    console.log(request.session.maliste);
 
+    if (typeof request.session.maliste == 'undefined')
+    {
+        request.session.maliste = [];
+        console.log('je reset!');
+    }
+    if (typeof request.session.listeDepenses == 'undefined')
+    {
+        request.session.listeDepenses = [];
+    }
+    
+    
+        response.render('home/calculette',
+            {membres: request.session.maliste,
+            depenses: request.session.listeDepenses});
 
-/*
- ** Permet de consulter un formulaire existant, sinon retourne a la page d'accueil
- */
-router.get('/calculette/consulter/:id', function(request, response) {
-    const id = parseInt(request.params.id);
-
-    async.waterfall([
-        //Obtention des informations du membre
-        function(callback) {
-            membreDB.getMembreByNumeroSequence(id, (infoMembre) => {
-                callback(null, infoMembre);
-            });
-        },
-        //Obtention de ces formulaires de risques
-        function(infoMembre, callback) {
-            formulaireDB.getFormulaireByNumeroSequenceMembre(id, (infoFormulairesMembre) => {
-                callback(null, infoMembre, infoFormulairesMembre);
-            });
-        },
-        //Obtention des énumérations pour l'affichage de la page
-        function(infoMembre, infoFormulairesMembre, callback) {
-            var listEnum = {
-                ROLE: utilitaires.EnumToList(json.ROLE),
-                TYPE_TRANSAC: utilitaires.EnumToList(json.TYPE_TRANSAC)
-            };
-            callback(null, infoMembre, infoFormulairesMembre, listEnum);
-        },
-        function(infoMembre, infoFormulairesMembre, listEnum, callback) {
-            typeAdhesionDB.getTypeAdhesion((typeAdhesion) => {
-                callback(null, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion);
-            });
-        }
-    ], function(err, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion) {
-        if (infoMembre.length == 1) {
-            response.render('inscriptionMembre/membre/membre-lecture', {
-                membre: infoMembre[0],
-                formulaires: infoFormulairesMembre,
-                enumeration: listEnum,
-                typeAdhesion: typeAdhesion
-            });
-        } else {
-            response.redirect('./');
-        }
-    });
 });
 
 module.exports = router;

@@ -19,6 +19,7 @@ function ConrigurationControllers(app) {
     var membreController = require('../controller/administration/membreController');
     var listeController = require('../controller/administration/listeController');
     var inscriptionActiviteController = require('../controller/administration/activite/inscriptionActiviteController');
+    var calculetteController = require('../controller/calculetteController.js');
 
     //Middleware
     var middlewareBase = require('../controller/utilitaire/middlewareBase');
@@ -38,6 +39,7 @@ function ConrigurationControllers(app) {
     app.use(informationMembreController);
     app.use(membreController);
     app.use(listeController);
+    app.use(calculetteController);
     app.use(inscriptionActiviteController);
 }
 
