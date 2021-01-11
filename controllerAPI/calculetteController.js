@@ -16,6 +16,9 @@ router.post('/api/calculette/participant', function(request, response) {
 });
 
 router.post('/api/calculette/depense', function(request, response) {
+    request.body.participants.forEach(function (item, index) { 
+        if(request.body.participants[index] === 'true') {request.body.participants[index] = true;} else {request.body.participants[index] = false;}
+    })
     console.log(request.body);
     request.session.listeDepenses.push(request.body);
     response.status(200).json({ success: true });
@@ -27,6 +30,16 @@ router.delete('/api/calculette/participant/:id', function(request, response) {
         item.participants.splice(request.params.id,1);
     });
     request.session.maliste.splice(request.params.id,1);
+
+    response.status(200).json({ success: true });
+});
+
+router.delete('/api/calculette/depense/:id', function(request, response) {
+
+    /*request.session.listeDepenses.forEach(function (item, index) {
+        item.participants.splice(request.params.id,1);
+    });*/
+    request.session.listeDepenses.splice(request.params.id,1);
 
     response.status(200).json({ success: true });
 });

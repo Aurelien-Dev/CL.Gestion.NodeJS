@@ -9,6 +9,7 @@ $(function(window, $) {
     const SELECTOR_FRM_AJT_DEPENSE = '#frmAjouterDepense';
     const SELECTOR_AJT_DEPENSE = '#ajouterDepense';
     const SELECTOR_MDL_AJT_DEPENSE = '#modalAjouterDepense';
+    const SELECTOR_SUPP_DEPENSE = '.supprimer-depense';
 
     var modalSupParticipant = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -26,6 +27,22 @@ $(function(window, $) {
         }]
     });
 
+    var modalSupDepense = new window.CL.Utilitaires.Modal({
+        titre: 'Suppression',
+        body: 'Veux-tu supprimer la dépense ?',
+        boutons: [{
+            texte: 'Oui',
+            callback: function() {
+                detruireDepense(modalSupDepense.ligne);
+            }
+        }, {
+            texte: 'Non',
+            callback: function() {
+                modalSupDepense.CacherModal();
+            }
+        }]
+    });
+
     initialiserPage();
 
     /**
@@ -37,6 +54,7 @@ $(function(window, $) {
         $(SELECTOR_AJT_PARTICIPANT).click(eventClickModalAjouterParticipant);
         $(SELECTOR_FRM_AJT_DEPENSE).submit(eventEnregistrerDepense);
         $(SELECTOR_AJT_DEPENSE).click(eventClickModalAjouterDepense);
+        $(SELECTOR_SUPP_DEPENSE).click(eventClickSupprimerDepense);
 
         initialiserDatatale();
     }
@@ -63,6 +81,14 @@ $(function(window, $) {
         $that = $(this);
         modalSupParticipant.ligne = $that.parents('tr');
         modalSupParticipant.AfficherModal();
+    }
+
+    function eventClickSupprimerDepense(e) {
+        e.preventDefault();
+
+        $that = $(this);
+        modalSupDepense.ligne = $that.parents('tr');
+        modalSupDepense.AfficherModal();
     }
 
     function eventClickModalAjouterParticipant(e) {
@@ -132,6 +158,19 @@ $(function(window, $) {
             method: 'DELETE',
             success: function(result, statut) {
                 modalSupParticipant.CacherModal();
+                $(ligne).hide('slow');
+            }
+        });
+    }
+
+    function detruireDepense(ligne) {
+        var href = $(ligne).find(SELECTOR_SUPP_DEPENSE).attr('href');
+        console.log(href);
+        $.ajax({
+            url: href,
+            method: 'DELETE',
+            success: function(result, statut) {
+                modalSupDepense.CacherModal();
                 $(ligne).hide('slow');
             }
         });

@@ -35,7 +35,15 @@
                 {{#each depenses}}
                     <tr>
                         <td>
-                            {{this.description}} {{this.montant}} {{#each ../membres}} {{this.nom}} {{/each}}
+                        <a href="/api/calculette/depense/{{@index}}" class="supprimer-depense">
+                                <i class="far fa-trash-alt"></i>  
+                        </td>   
+                        <td>
+                            {{this.description}} {{this.montant}}
+                            <div><b>Participants</b> </div>
+                            <div>{{#each this.participants}} 
+                                <div>{{#if this}}<i class="fas fa-check" display="{{../participants.[1]}}"></i>{{/if}}{{#with (lookup ../../membres @index)}}{{this.nom}}{{/with}} 
+                                </div>{{/each}}</div>
                         </td>
                     </tr>
                 {{/each}}
