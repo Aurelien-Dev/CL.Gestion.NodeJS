@@ -16,12 +16,12 @@ CREATE TABLE public.type_adhesion (
 	CONSTRAINT type_adhesion_pkey PRIMARY KEY (numero_sequence)
 );
 
-INSERT INTO public.type_adhesion (numero_sequence,nom,date_debut,date_fin,nombre_jour,montant,montant_etudiant, adresse_contact) VALUES 
+INSERT INTO public.type_adhesion (numero_sequence,nom,date_debut,date_fin,nombre_jour,montant,montant_etudiant, adresse_carte) VALUES 
 (1,'Saisonnier hiver','1971-01-01','1971-04-30',NULL,30,25, 'rectoCarteHiver.png'),
 (2,'Saisonnier été','1971-05-01','1971-08-31',NULL,30,25, 'rectoCarteEte.png'),
 (3,'Saisonnier automne','1971-09-01','1971-12-31',NULL,30,25, 'rectoCarteAutomne.png'),
 (4,'Annuel',NULL,NULL,365,70,60, 'rectoCarteAnnuelle.png'),
-(5,'Journalière',NULL,NULL,1,10,10);
+(5,'Journalière',NULL,NULL,1,10,10, '');
 
 ALTER SEQUENCE type_adhesion_numero_sequence_seq START WITH 6;
 
