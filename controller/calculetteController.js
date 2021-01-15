@@ -32,4 +32,12 @@ router.get('/calculette', function(request, response) {
 
 });
 
+router.get('/calculette/editerDepense/:id', function( request, response) {
+console.log(request.session.maliste);
+    response.render('home/calculette/editerDepense',
+    {depense: request.session.listeDepenses[request.params.id],
+        participants: request.session.maliste,
+        href: request.params.id})
+})
+
 module.exports = router;

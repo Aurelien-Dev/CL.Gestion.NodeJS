@@ -10,6 +10,7 @@ $(function(window, $) {
     const SELECTOR_AJT_DEPENSE = '#ajouterDepense';
     const SELECTOR_MDL_AJT_DEPENSE = '#modalAjouterDepense';
     const SELECTOR_SUPP_DEPENSE = '.supprimer-depense';
+    const SELECTOR_MOD_DEPENSE = '.modifier-depense';
 
     var modalSupParticipant = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -55,6 +56,7 @@ $(function(window, $) {
         $(SELECTOR_FRM_AJT_DEPENSE).submit(eventEnregistrerDepense);
         $(SELECTOR_AJT_DEPENSE).click(eventClickModalAjouterDepense);
         $(SELECTOR_SUPP_DEPENSE).click(eventClickSupprimerDepense);
+        $(SELECTOR_MOD_DEPENSE).click(eventClickModalModifierDepense);
 
         initialiserDatatale();
     }
@@ -100,9 +102,14 @@ $(function(window, $) {
 
     function eventClickModalAjouterDepense(e) {
         $that = $(this);
-        console.log('modal!');
+
         modalInstance = $(SELECTOR_MDL_AJT_DEPENSE).modal();
 
+    }
+
+    function eventClickModalModifierDepense(e) {
+        
+        $that = $(this);
     }
 
     function eventEnregistrerParticipant(e) {
@@ -158,7 +165,7 @@ $(function(window, $) {
             method: 'DELETE',
             success: function(result, statut) {
                 modalSupParticipant.CacherModal();
-                $(ligne).hide('slow');
+                location.reload();
             }
         });
     }
@@ -171,7 +178,7 @@ $(function(window, $) {
             method: 'DELETE',
             success: function(result, statut) {
                 modalSupDepense.CacherModal();
-                $(ligne).hide('slow');
+                location.reload();
             }
         });
     }

@@ -8,6 +8,7 @@
                 <tr>
                     <th>Actions</th>
                     <th>Participant</th>
+                    <th>Montant</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,7 +20,7 @@
                             </a>
                         </td>
                         <td>
-                            {{this.nom}}  {{this.montant}}
+                            {{this.nom}}<td> {{this.montant}}</td>
                         </td>
                     </tr>
                 {{/each}}
@@ -28,7 +29,9 @@
          <table class="table table-bordered table-sm" id="tbl-depenses">
             <thead>
                 <tr>
+                    <th>Actions</th>
                     <th>Dépenses</th>
+                    <th>Montant</th>
                 </tr>
             </thead>
             <tbody>
@@ -37,14 +40,16 @@
                         <td>
                         <a href="/api/calculette/depense/{{@index}}" class="supprimer-depense">
                                 <i class="far fa-trash-alt"></i>  
-                        </td>   
+                        <a href="/calculette/editerDepense/{{@index}}" class="modifier-depense" id="{{@index}}">
+                                <i class="fas fa-edit"></i>  
+                        </td>     
                         <td>
-                            {{this.description}} {{this.montant}}
+                            {{this.description}} 
                             <div><b>Participants</b> </div>
                             <div>{{#each this.participants}} 
-                                <div>{{#if this}}<i class="fas fa-check" display="{{../participants.[1]}}"></i>{{/if}}{{#with (lookup ../../membres @index)}}{{this.nom}}{{/with}} 
+                                <div>{{#if this}}<i class="fas fa-check"></i>{{/if}}{{#with (lookup ../../membres @index)}}{{this.nom}}{{/with}} 
                                 </div>{{/each}}</div>
-                        </td>
+                        </td><td>{{this.montant}}</td>
                     </tr>
                 {{/each}}
             </tbody>
@@ -98,7 +103,7 @@
                     <div class="form-group row">
                         <label class="col-sm-4 col-form-label">Description</label>
                         <div class="col-sm-8">
-                            <input id="description"/>
+                            <input id="description" value="{{this.description}}"/>{{this.description}}
                         </div>
                         <label class="col-sm-4 col-form-label">Montant</label>
                         <div class="col-sm-8">
@@ -108,7 +113,7 @@
 
                 Participants
                 {{#each membres}}
-                    <li><input type="checkbox" id="dep{{@index}}" value="Yé!" name="participants" checked> {{this.nom}} </li>
+                    <li><input type="checkbox" id="dep{{@index}}" name="participants" checked> {{this.nom}} </li>
                 {{/each}}
                
                 </div>
