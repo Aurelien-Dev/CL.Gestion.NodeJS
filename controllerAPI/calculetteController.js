@@ -28,7 +28,9 @@ router.post('/api/calculette/depense', function(request, response) {
         request.body.participants.forEach(function (item, index) { 
             if(request.body.participants[index] === 'true') {request.body.participants[index] = true;} else {request.body.participants[index] = false;}
     })}
-
+    request.body.rembourser = parseInt(request.body.rembourser);
+    request.body.kilometres = parseInt(request.body.kilometres);
+    console.log(request.body);
     request.session.listeDepenses.push(request.body);
     reCalculerRepartition(request.session.maliste, request.session.listeDepenses);
     response.status(200).json({ success: true });
@@ -42,7 +44,11 @@ router.put('/api/calculette/depense/:id', function (request, response) {
             if(request.body.participants[index] === 'true') {request.body.participants[index] = true;} else {request.body.participants[index] = false;}
     })}
 
+    request.body.rembourser = parseInt(request.body.rembourser);
+    request.body.kilometres = parseInt(request.body.kilometres);
+
     request.session.listeDepenses[request.params.id] = request.body;
+
     reCalculerRepartition(request.session.maliste, request.session.listeDepenses);
     response.status(200).json({ success: true });   
 })
@@ -80,10 +86,17 @@ function reCalculerRepartition (participants, depenses) {
             item.participants.forEach(function (item, index) {
                if(item) {nb_payeur ++;}
             })
+            var montant_total = parseInt(item.montant);
 
+            montant_total = montant_total + item.kilometres * 0.12;
+ 
             item.participants.forEach(function (participant, indexp) {
                 console.log(item);
-                if (participant) {participants[indexp].montant = participants[indexp].montant + item.montant / nb_payeur;}
+                if (participant) {participants[indexp].montant = participants[indexp].montant + montant_total / nb_payeur;}
+
+                if(item.rembourser === indexp) {participants[indexp].montant = participants[indexp].montant - montant_total}
+
+                participants[indexp].montant = Math.round((participants[indexp].montant + Number.EPSILON) * 100) / 100;
             })
         }
     })

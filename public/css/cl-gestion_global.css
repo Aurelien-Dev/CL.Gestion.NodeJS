@@ -28,7 +28,9 @@ strong.obligatoire {
     color: red;
 }
 
-
+.nombre {
+    text-align: right;
+}
 /* Ajout au template de base */
 
 .bg-recu-image {

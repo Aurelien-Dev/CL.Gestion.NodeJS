@@ -24,7 +24,9 @@ $(function(window, $) {
         });
         var ligne = {description: $('#description').val(),
                     montant: $('#montant').val(),
-                    participants: participants}
+                    participants: participants,
+                    rembourser: $("select[name=rembourser]").val(),
+                    kilometres: parseInt($('#kilometres').val())}
         var href = '/api/calculette/depense/' + location.href.substring(location.href.lastIndexOf("/")+1);
         console.log(ligne);
         $.ajax({

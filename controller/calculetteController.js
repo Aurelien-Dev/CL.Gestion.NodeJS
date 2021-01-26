@@ -33,6 +33,11 @@ router.get('/calculette', function(request, response) {
 });
 
 router.get('/calculette/editerDepense/:id', function( request, response) {
+
+    request.session.maliste.forEach(function (item, index) {
+        if(index.toString() === request.session.listeDepenses[request.params.id].rembourser) {item.rembourser = 1} else {item.rembourser = 0}
+    })
+
 console.log(request.session.maliste);
     response.render('home/calculette/editerDepense',
     {depense: request.session.listeDepenses[request.params.id],
