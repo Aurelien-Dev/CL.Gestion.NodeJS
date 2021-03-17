@@ -3,17 +3,19 @@ const router = express.Router();
 const async = require('async');
 const fs = require('fs');
 
+const gererConnexion = require('../../services/gererConnexion')
 const formulaireDB = require('../../db/formulaireDB')
 const membreDB = require('../../db/membreDB')
 const typeAdhesionDB = require('../../db/typeAdhesionDB');
 const json = require('../../configs/enumerations.json');
 const utilitaires = require('../../utils/utilitaires');
 const service = require('../../services/genererCarteMembre');
+var helpers = require('handlebars-helpers')();
 
 /*
  ** Permet de consulter un membre existant, sinon retourne a la page d'accueil
  */
-router.get('/membre/consulter/:id', (request, response) => {
+router.get('/membre/consulter/:id', [gererConnexion.gererMembre, (request, response) => {
     const id = parseInt(request.params.id);
 
     async.waterfall([
@@ -44,22 +46,22 @@ router.get('/membre/consulter/:id', (request, response) => {
         }
     ], (err, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion) => {
 
-        if (typeof err != 'undefined') {
+        if (typeof err !== 'undefined' && err !== null) {
             response.status(500);
         }
 
-        if (infoMembre.length == 1) {
+        if (infoMembre !== null && typeof infoMembre !== 'undefined') {
             response.render('administration/membre/membre-lecture', {
-                membre: infoMembre[0],
+                membre: infoMembre,
                 formulaires: infoFormulairesMembre,
                 enumeration: listEnum,
                 typeAdhesion: typeAdhesion
             });
         } else {
-            response.redirect('./');
+            response.redirect('/');
         }
     });
-});
+}]);
 
 /**
  * Permet d'obtenir la d'un membre

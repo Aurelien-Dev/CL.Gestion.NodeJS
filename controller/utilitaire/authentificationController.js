@@ -36,13 +36,16 @@ router.post('/login', function(request, response) {
             });
         },
         (infoMembreConnecte, callback) => {
-            formulaireDB.getFormulaireActifByNumeroSequenceMembre(infoMembreConnecte.numero_sequence, (formulaire) => {
-                callback(null, infoMembreConnecte, formulaire);
-            })
+            if (infoMembreConnecte === null || typeof infoMembreConnecte === 'undefined') {
+                callback(null, null, null);
+            } else {
+                formulaireDB.getFormulaireActifByNumeroSequenceMembre(infoMembreConnecte.numero_sequence, (formulaire) => {
+                    callback(null, infoMembreConnecte, formulaire);
+                })
+            }
         }
     ], (err, infoMembreConnecte, infoFormulaireRisque) => {
-        if (typeof infoMembreConnecte !== 'undefined' && infoMembreConnecte != null) {
-
+        if (infoMembreConnecte != null && typeof infoMembreConnecte !== 'undefined') {
             infoMembreConnecte.formulaireRisqueActif = infoFormulaireRisque;
 
             request.session.connecte = true;

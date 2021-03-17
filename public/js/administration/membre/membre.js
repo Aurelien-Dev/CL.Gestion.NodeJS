@@ -152,17 +152,11 @@ $(function(window, $) {
             ajax: '/api/formulaires/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
                 data: 'numero_sequence',
-                width: '50px',
+                width: '25px',
                 render: (data, type, row, meta) => {
-                    return `<a href="/api/formulaires/dissocier/` + data + `" class="dissocier-formulaire">
-                                <i class="fas fa-unlink"></i>
-                            </a>
-                            &nbsp;
-                            <a href="/formulaire/consulter/` + data + `">
+                    return `<a href="/formulaire/consulter/` + data + `">
                                 <i class="fas fa-file-alt"></i>
-                            </a>
-                            
-                            `;
+                            </a>`;
                 }
             }, {
                 data: 'nom_prenom_contact',

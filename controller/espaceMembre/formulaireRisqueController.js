@@ -6,9 +6,17 @@ const gererConnexion = require('../../services/gererConnexion');
 /*
  ** Permet de consulter un formulaire existant, sinon retourne a la page d'accueil
  */
+router.get('/formulaire/consulter/:id', [gererConnexion.gererAdmin, (request, response) => {
+    const id = request.params.id;
+    ConsulterFormulaireRisque(request, response, id);
+}]);
+
 router.get('/formulaire/consulter', [gererConnexion.gererMembre, (request, response) => {
     const id = request.session.userConnected.formulaireRisqueActif.numero_sequence;
+    ConsulterFormulaireRisque(request, response, id);
+}]);
 
+function ConsulterFormulaireRisque(request, response, id) {
     formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
         if (result.length == 1) {
             response.render('espaceMembre/formulaireRisque/formulaire-lecture', {
@@ -19,7 +27,7 @@ router.get('/formulaire/consulter', [gererConnexion.gererMembre, (request, respo
             response.redirect('./');
         }
     });
-}]);
+}
 
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
