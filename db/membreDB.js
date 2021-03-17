@@ -61,17 +61,18 @@ const createMembre = (datas, callback) => {
     var donnees = [
         datas.nom.trim(),
         datas.prenom.trim(),
-        'password',
+        datas.password.trim(),
         datas.adresse_courriel.trim().toLowerCase(),
         datas.telephone.trim(),
         moment().format('l'),
+        datas.date_naissance,
         false
     ];
 
     db.query(`insert into public.membre 
-                     (nom, prenom, passhash, adresse_courriel, telephone, date_creation, est_supprime)
+                     (nom, prenom, passhash, adresse_courriel, telephone, date_creation, date_naissance, est_supprime)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7) 
+                     ($1, $2, $3, $4, $5, $6, $7, $8) 
            returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {

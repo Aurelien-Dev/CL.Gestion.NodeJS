@@ -34,6 +34,7 @@ CREATE TABLE public.membre (
 	telephone text NOT NULL,
 	"role" text NULL,
 	date_creation date NOT NULL,
+	date_naissance date NOT NULL,
 	est_supprime bool NULL,
 	passhash text NOT NULL,
 	CONSTRAINT membre_pkey PRIMARY KEY (numero_sequence)

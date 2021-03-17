@@ -18,25 +18,6 @@ router.use(function(request, response, next) {
 
 
 /**
- * Middleware permettant de rediriger vers la page d'authentification si la personne n'est pas connecté
- * @param {object} request Request
- * @param {Object} response Response
- * @param {callback} next Passage au middleware suivant
- */
-router.use((request, response, next) => {
-    var url = 'http://' + request.headers.host + '/login';
-
-    request.session.connecte = true;
-
-    if (!request.session.connecte) {
-        response.redirect(301, url)
-    } else {
-        next();
-    }
-});
-
-
-/**
  * Middleware permettant d'ajouter les informations de compteur automatiquement au changement de la page
  * 
  * Aide utilisé :

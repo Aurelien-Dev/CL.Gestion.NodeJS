@@ -4,14 +4,19 @@ const async = require('async');
 const formulaireDB = require('../../db/formulaireDB');
 const membreDB = require('../../db/membreDB');
 const adhesionDB = require('../../db/adhesionDB');
+const gererConnexion = require('../../services/gererConnexion');
 const router = express.Router();
+
 
 /*
  ** Affichage de la page de login
  */
-router.get('/mon-espace', function(request, response) {
+router.get('/mon-espace', [gererConnexion.gererMembre, funcMonEspace]);
 
-    var id = 13;
+function funcMonEspace(request, response) {
+    const id = request.session.userConnected.numero_sequence;
+
+    // var id = 13;
     async.waterfall([
         //Obtention des informations du membre
         (callback) => {
@@ -47,7 +52,7 @@ router.get('/mon-espace', function(request, response) {
             response.redirect('./');
         }
     });
-});
+}
 
 
 module.exports = router;

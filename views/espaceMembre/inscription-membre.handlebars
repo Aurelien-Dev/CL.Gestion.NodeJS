@@ -1,0 +1,44 @@
+<!-- Nested Row within Card Body -->
+<div class="row">
+    <div class="col-lg-5 d-none d-lg-block">
+        Détails du Consentement ?
+    </div>
+    <div class="col-lg-7">
+        <div class="p-5">
+
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Inscription au club de plein air L'AVAL</h1>
+            </div>
+            <form action="inscription" method="POST">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Prénom</label>
+                    <input type="text" class="form-control" id="prenom" name="prenom">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Nom</label>
+                    <input type="text" class="form-control" id="nom" name="nom" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Adresse courriel</label>
+                    <input type="email" class="form-control" id="adresse_courriel" name="adresse_courriel" aria-describedby="emailHelp">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Date de naissance</label>
+                    <input type="date" class="form-control" id="date_naissance" name="date_naissance">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">téléphone</label>
+                    <input type="tel" class="form-control" id="telephone" name="telephone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Mot de passe</label>
+                    <input type="password" class="form-control" id="password" name="password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Valider</button>
+            </form>
+            
+        </div>
+    </div>
+</div>

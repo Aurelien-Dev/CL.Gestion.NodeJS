@@ -15,9 +15,11 @@ function ConrigurationControllers(app) {
     var authentificationController = require('../controller/utilitaire/authentificationController');
     var formulaireRisqueController = require('../controller/espaceMembre/formulaireRisqueController');
     var informationMembreController = require('../controller/espaceMembre/informationMembreController');
+    var inscriptionMembreController = require('../controller/espaceMembre/inscriptionMembreController');
     var membreController = require('../controller/administration/membreController');
     var listeController = require('../controller/administration/listeController');
     var inscriptionActiviteController = require('../controller/administration/activite/inscriptionActiviteController');
+    var homeController = require('../controller/homeController');
 
     //Middleware
     var middlewareBase = require('../controller/utilitaire/middlewareBase');
@@ -32,8 +34,10 @@ function ConrigurationControllers(app) {
 
     app.use(middlewareBase);
 
+    app.use(homeController);
     app.use(formulaireRisqueController);
     app.use(informationMembreController);
+    app.use(inscriptionMembreController);
     app.use(membreController);
     app.use(listeController);
     app.use(inscriptionActiviteController);

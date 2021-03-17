@@ -1,26 +1,39 @@
-
-            <!-- Nested Row within Card Body -->
-            <div class="row">
-              <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-              <div class="col-lg-6">
-                <div class="p-5">
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                  </div>
-                  <form class="user" method="POST" action="./login">
-                    <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="motPasse" name="motPasse" placeholder="Quel est ton mot de passe ?!">
-                    </div>
-                    <input type="submit" value="Connexion" href="index.html" class="btn btn-primary btn-user btn-block" />
-                  </form>
-                  <br />
-                  <br />
-                  <br />
-                  <br />
-                </div>
-              </div>
+<!-- Nested Row within Card Body -->
+<div class="row">
+    <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+    <div class="col-lg-6">
+        <div class="p-5">
+            <br />
+            <br />
+            <br />
+            <br />
+            <div class="text-center">
+                <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
             </div>
+
+            {{#if datas.erreur}}
+                <div class="alert alert-danger" role="alert">
+                    {{datas.erreur}}
+                </div>
+            {{/if}}
+
+            <form class="user" method="POST" action="/login">
+                <div class="form-group">
+                    <label>Adresse courriel</label>
+                    <input type="email" class="form-control form-control-user" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" class="form-control form-control-user" id="motPasse" name="motPasse">
+                </div>
+                <input type="submit" value="Connexion" href="index.html" class="btn btn-primary btn-user btn-block" />
+            </form>
+
+            <br />
+            <a href="/inscription" >Créer un compte</a>
+            <br />
+            <br />
+            <br />
+        </div>
+    </div>
+</div>

@@ -2,6 +2,7 @@ const formulaireDB = require('../../db/formulaireDB');
 const membreDB = require('../../db/membreDB');
 const express = require('express');
 const router = express.Router();
+const gererConnexion = require('../../services/gererConnexion');
 const async = require('async');
 
 /*
@@ -36,18 +37,17 @@ router.get('/public/formulaireRisque/ajouter', (request, response) => {
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
-router.get('/public/formulaireRisque/recu', (request, response) => {
+router.get('/public/formulaireRisque/recu', [gererConnexion.gererMembre, (request, response) => {
     response.render('espaceMembre/formulaireRisque/formulaire-recu', {
         layout: 'publicTemplate'
     });
-});
+}]);
 
 
 /*
  ** Permet d'ajouter le formulaire 
  */
 router.post('/public/formulaireRisque/ajouter', (request, response) => {
-
     async.waterfall([
             //Création du membre
             (callback) => {
