@@ -31,7 +31,7 @@
         "nocache": "^2.1.0",
         "pg": "^8.3.0",
         "scrollreveal": "^3.1.4",
-        "socket.io": "^2.2.0",
+        "socket.io": "^2.4.0",
         "underscore": "^1.10.2",
         "web-push": "^3.3.5",
         "yql-node": "^0.2.1"
