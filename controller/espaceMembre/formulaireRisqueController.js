@@ -1,17 +1,14 @@
 const formulaireDB = require('../../db/formulaireDB');
-const membreDB = require('../../db/membreDB');
 const express = require('express');
 const router = express.Router();
 const gererConnexion = require('../../services/gererConnexion');
-const async = require('async');
 
 /*
  ** Permet de consulter un formulaire existant, sinon retourne a la page d'accueil
  */
-router.get('/formulaire/consulter/:id', (request, response) => {
-    const id = parseInt(request.params.id);
+router.get('/formulaire/consulter', [gererConnexion.gererMembre, (request, response) => {
+    const id = request.session.userConnected.formulaireRisqueActif.numero_sequence;
 
-    //Procéder a l'enregistrement des données
     formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
         if (result.length == 1) {
             response.render('espaceMembre/formulaireRisque/formulaire-lecture', {
@@ -22,24 +19,21 @@ router.get('/formulaire/consulter/:id', (request, response) => {
             response.redirect('./');
         }
     });
-});
+}]);
 
 /*
  ** Affichage de la page d'ajout d'un nouveau formulaire
  */
-router.get('/public/formulaireRisque/ajouter', (request, response) => {
+router.get('/formulaireRisque/ajouter', [gererConnexion.gererMembre, (request, response) => {
+    var userConnected = request.session.userConnected;
+
     response.render('espaceMembre/formulaireRisque/formulaire-ajout', {
         layout: 'template-membre',
-        public: true
-    });
-});
-
-/*
- ** Affichage de la page d'ajout d'un nouveau formulaire
- */
-router.get('/public/formulaireRisque/recu', [gererConnexion.gererMembre, (request, response) => {
-    response.render('espaceMembre/formulaireRisque/formulaire-recu', {
-        layout: 'publicTemplate'
+        numero_sequence: userConnected.numero_sequence,
+        nom: userConnected.nom,
+        prenom: userConnected.prenom,
+        adresse_courriel: userConnected.adresse_courriel,
+        telephone: userConnected.telephone
     });
 }]);
 
@@ -47,27 +41,10 @@ router.get('/public/formulaireRisque/recu', [gererConnexion.gererMembre, (reques
 /*
  ** Permet d'ajouter le formulaire 
  */
-router.post('/public/formulaireRisque/ajouter', (request, response) => {
-    async.waterfall([
-            //Création du membre
-            (callback) => {
-                membreDB.createMembre(request.body, (result) => {
-                    callback(null, result);
-                });
-            },
-            //Création de son formulaire
-            (numeroSequenceMembre, callback) => {
-                request.body.numero_sequence_membre = numeroSequenceMembre;
-
-                formulaireDB.createFormulaire(request.body, (results) => {
-                    callback(numeroSequenceMembre);
-                });
-            }
-        ],
-        () => {
-            response.redirect('/public/formulaireRisque/recu');
-        }
-    );
+router.post('/formulaireRisque/ajouter', (request, response) => {
+    formulaireDB.createFormulaire(request.body, (results) => {
+        response.redirect('/');
+    });
 });
 
 

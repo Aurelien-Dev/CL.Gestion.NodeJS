@@ -1,6 +1,8 @@
 const express = require('express');
+const async = require('async');
 const router = express.Router();
 const authentificationDB = require('../../db/authentificationDB');
+const formulaireDB = require('../../db/formulaireDB');
 
 /*
  ** Affichage de la page de login
@@ -26,12 +28,25 @@ router.get('/logout', function(request, response) {
  */
 router.post('/login', function(request, response) {
 
-    authentificationDB.isValidMember(request.body.email, request.body.motPasse, (membre) => {
+    async.waterfall([
+        //Obtention des information de l'utilisateur connecter 
+        (callback) => {
+            authentificationDB.isValidMember(request.body.email, request.body.motPasse, (membre) => {
+                callback(null, membre);
+            });
+        },
+        (infoMembreConnecte, callback) => {
+            formulaireDB.getFormulaireActifByNumeroSequenceMembre(infoMembreConnecte.numero_sequence, (formulaire) => {
+                callback(null, infoMembreConnecte, formulaire);
+            })
+        }
+    ], (err, infoMembreConnecte, infoFormulaireRisque) => {
+        if (typeof infoMembreConnecte !== 'undefined' && infoMembreConnecte != null) {
 
-        if (typeof membre !== 'undefined' && membre != null) {
-            // request.session.connecte = request.body.motPasse === process.env.PASSWD_WEB;
+            infoMembreConnecte.formulaireRisqueActif = infoFormulaireRisque;
+
             request.session.connecte = true;
-            request.session.userConnected = membre;
+            request.session.userConnected = infoMembreConnecte;
 
             response.redirect('/');
         } else  {

@@ -1,7 +1,7 @@
 <!-- Nested Row within Card Body -->
 <div class="row">
     <div class="col-lg-12">          
-        <form action="/public/formulaireRisque/ajouter" method="post" id="frm">
+        <form action="/formulaireRisque/ajouter" method="post" id="frm">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-2 text-center">
@@ -20,7 +20,8 @@
                         Nom <strong class="obligatoire">*</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required>
+                            <input name="nom" id="nom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{nom}}" required readonly>
+                            <input name="numero_sequence_membre" id="numero_sequence_membre" type="hidden" value="{{numero_sequence}}">
                         </div>
                     </div>
                     <div class="form-row">
@@ -28,7 +29,7 @@
                         Prénom <strong class="obligatoire">*</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required>
+                            <input name="prenom" id="prenom" class="form-control form-control-sm" placeholder="" type="text" minlength="3" value="{{prenom}}" required readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -36,7 +37,7 @@
                         Adresse courriel <strong class="obligatoire">*</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required>
+                            <input name="adresse_courriel" id="adresse_courriel" class="form-control form-control-sm" placeholder="" type="email" value="{{adresse_courriel}}" required readonly>
                         </div>
                     </div>
                     <div class="form-row">
@@ -44,7 +45,7 @@
                         Téléphone <strong class="obligatoire">*</strong>
                         </label>
                         <div class="col-sm-9">
-                            <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required>
+                            <input name="telephone" id="telephone" class="form-control form-control-sm" placeholder="" type="text" value="{{telephone}}" required readonly>
                         </div>
                     </div>
                 </p>

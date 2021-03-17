@@ -30,7 +30,7 @@ function funcMonEspace(request, response) {
                 callback(null, infoMembre, infoFormulairesMembre);
             });
         },
-        //Obtention de ces formulaires de risques
+        //Obtention de ces adhésions
         (infoMembre, infoFormulairesMembre, callback) => {
             adhesionDB.getAdhesionByNumeroSequenceMembre(id, (infoAdhesionsMembre) => {
                 callback(null, infoMembre, infoFormulairesMembre, infoAdhesionsMembre);
@@ -41,16 +41,12 @@ function funcMonEspace(request, response) {
             response.status(500);
         }
 
-        if (infoMembre.length == 1) {
-            response.render('espaceMembre/espace-personnel', {
-                layout: 'template-membre',
-                membre: infoMembre[0],
-                formulaire: infoFormulairesMembre[0],
-                adhesions: infoAdhesionsMembre
-            });
-        } else {
-            response.redirect('./');
-        }
+        response.render('espaceMembre/espace-personnel', {
+            layout: 'template-membre',
+            membre: infoMembre,
+            formulaire: infoFormulairesMembre,
+            adhesions: infoAdhesionsMembre
+        });
     });
 }
 

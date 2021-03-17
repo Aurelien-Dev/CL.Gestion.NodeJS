@@ -89,7 +89,7 @@ const getFormulairesByNumeroSequenceMembre = (id, callback) => {
     });
 };
 
-const getIdFormulaireActifByNumeroSequenceMembre = (id, callback) => {
+const getFormulaireActifByNumeroSequenceMembre = (id, callback) => {
     db.query(`select numero_sequence,
                      to_char(date_expiration, 'YYYY-MM-DD') as date_expiration
                 from public.formulaire_risque 
@@ -98,7 +98,7 @@ const getIdFormulaireActifByNumeroSequenceMembre = (id, callback) => {
         if (error) {
             throw error;
         }
-        callback(results.rows);
+        callback(results.rows[0]);
     });
 };
 
@@ -150,7 +150,7 @@ module.exports = {
     getFormulairesNonAssocie,
     getFormulaireByNumeroSequence,
     getFormulairesByNumeroSequenceMembre,
-    getFormulaireActifByNumeroSequenceMembre: getIdFormulaireActifByNumeroSequenceMembre,
+    getFormulaireActifByNumeroSequenceMembre,
     createFormulaire,
     deleteFormulaireByNumeroSequence,
 };

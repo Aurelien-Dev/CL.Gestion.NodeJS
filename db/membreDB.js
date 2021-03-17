@@ -27,6 +27,7 @@ const getMembreByNumeroSequence = (id, callback) => {
                      telephone, 
                      role,
                      to_char(date_creation, 'YYYY-MM-DD') as date_creation,
+                     to_char(date_naissance, 'YYYY-MM-DD') as date_naissance,
                      est_supprime
                 from public.membre 
                where numero_sequence = $1
@@ -34,7 +35,7 @@ const getMembreByNumeroSequence = (id, callback) => {
         if (error) {
             throw error;
         }
-        callback(results.rows);
+        callback(results.rows[0]);
     });
 };
 

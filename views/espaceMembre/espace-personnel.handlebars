@@ -17,10 +17,8 @@
                     <div class="card-body">
                     
                         <div class="row">
-                            <div class="col-1">
-                                <i class="far fa-envelope"></i>
-                            </div>
                             <div class="col-4">
+                                <i class="far fa-envelope"></i>
                                 <strong>Adresse mail :</strong>
                             </div>
                             <div class="col-7">
@@ -28,36 +26,49 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-1">
-                                <i class="fas fa-mobile-alt"></i>
-                            </div>
                             <div class="col-4">
+                                <i class="fas fa-mobile-alt"></i>
                                 <strong>Téléphone : </strong>
                             </div>
                             <div class="col-7">{{membre.telephone}}</div>
                         </div>
                         <div class="row">
-                            <div class="col-1">
-                                <i class="far fa-calendar-check"></i>
-                            </div>
                             <div class="col-4">
+                                <i class="fas fa-birthday-cake"></i>
+                                <strong>Date de naissance : </strong>
+                            </div>
+                            <div class="col-7">{{membre.date_naissance}}</div>
+                        </div>
+
+                        <hr class="sidebar-divider">
+
+                        <div class="row">
+                            <div class="col-4">
+                                <i class="far fa-calendar-check"></i>
                                 <strong>Date d'inscription au club : </strong>
                             </div>
                             <div class="col-7">{{membre.date_creation}}</div>
                         </div>
                         
                         <div class="row">
-                            <div class="col-1">
-                                <i class="far fa-calendar-check"></i>
-                            </div>
                             <div class="col-4">
+                                <i class="far fa-file"></i>
                                 <strong>Expiration de l'attestation des risques:</strong>
                             </div>
                             <div class="col-7">
-                                {{formulaire.date_expiration}} 
-                                <a href="/formulaire/consulter/{{formulaire.numero_sequence}}">
-                                    <i class="fas fa-file-alt"></i>
-                                </a>
+                                {{#if formulaire}}
+                                    {{formulaire.date_expiration}} 
+                                    <a href="/formulaire/consulter">
+                                        <i class="fas fa-file-alt"></i>
+                                    </a>
+                                {{else}}
+                                    <strong>
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        Votre formulaire de risque n'est plus valide, 
+                                        <a href="/formulaireRisque/ajouter">veuiller nous en fournir un pour pouvoir participer a nos activités</a>
+                                    </strong>
+                                {{/if}}
+
                             </div>
                         </div>
                     </div>
