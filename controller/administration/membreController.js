@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const async = require('async');
-var helpers = require('handlebars-helpers')();
 const fs = require('fs');
 
 const formulaireDB = require('../../db/formulaireDB')
