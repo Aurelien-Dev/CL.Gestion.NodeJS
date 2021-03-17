@@ -9,8 +9,6 @@ $(function(window, $) {
      * Initialisation de la page
      */
     function initialiserPage() {
-        $(SELECTOR_SUPP_MBR).click(eventClickSupprimerMembre);
-
         initialiserDatatale();
     }
 

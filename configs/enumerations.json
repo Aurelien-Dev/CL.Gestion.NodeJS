@@ -6,5 +6,10 @@
     "TYPE_TRANSAC": {
         "INTERAC": "Interac",
         "ESPC": "Espèce"
+    },
+    "STATUT_DEMANDE": {
+        "1": "En attente du paiement et d'un justificatif étudiant.",
+        "2": "En attente du paiement.",
+        "99": "Carte validée."
     }
 }

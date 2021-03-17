@@ -1,8 +1,10 @@
 <div class="container">
-    <h2 class="text-center">{{membre.prenom}} {{membre.nom}}</h2>
+    <h2 class="text-center">
+        <strong>{{membre.prenom}} {{membre.nom}}</strong>
+    </h2>
     
     <div class="row">
-        <div class="col-xl-12 col-md-12 mb-4 ">
+        <div class="col-xl-12 col-md-12 mb-4">
             {{!-- Information membre --}}
             <div class="card shadow border-left-primary">
                 <!-- Card Header - Accordion -->
@@ -80,9 +82,9 @@
 
 
     <div class="row">
-        <div class="col-xl-12 col-md-12 mb-4 ">
+        <div class="col-xl-12 col-md-12 mb-4">
             {{!-- Information membre --}}
-            <div class="card shadow border-left-primary">
+            <div class="card shadow">
                 <!-- Card Header - Accordion -->
                 <a href="#collapseCardCM" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardCM">
                     <h6 class="m-0 font-weight-bold text-primary">Mes cartes de membres</h6>
@@ -98,29 +100,137 @@
                                     <th>Catégorie</th>
                                     <th>Date inscription</th>
                                     <th>Date expiration</th>
+                                    <th>Statut de la demande</th>
                                     <th>Carte</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {{#each this.adhesions}}
                                     <tr>
-                                        <td>{{this.nom}}</td>
+                                        <td>
+                                            {{this.nom}}
+                                            {{#if (eq thie.etudiant true)}}
+                                                (Etudiant)
+                                            {{/if}}
+                                        </td>
                                         <td>{{this.date_debut}}</td>
                                         <td>{{this.date_fin}}</td>
+                                        <td>{{this.libelle_statut_demande}}</td>
                                         <td>
-                                            <a href="/membre/carte/{{../membre.numero_sequence}}/{{this.numero_sequence}}">
+                                            {{#if (eq this.numero_sequence_statut_demande 99)}}
+                                                <a href="/membre/carte/{{../membre.numero_sequence}}/{{this.numero_sequence}}">
+                                                    <i class="far fa-address-card"></i>
+                                                </a>
+                                            {{else}}
                                                 <i class="far fa-address-card"></i>
-                                            </a>
+                                            {{/if}}
                                         </td>
                                     </tr>
                                 {{/each}}
                             </tbody>
                         </table>
 
-                        <input class="btn btn-dark" type="button" value="Demander une nouvelle carte" id="btnCreerAdhesion"/>
+                        <input class="btn btn-dark" type="button" value="Demander une nouvelle carte" id="btnDemanderAdhesion" data-toggle="modal" data-target="#modalCreerAdhesion"/>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
+
+
+<form id="frmCreerAdhesion" action="/demander-carte" method="POST">
+    <div id="modalCreerAdhesion" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Demande de nouvelle carte</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="numero_sequence_membre" name="numero_sequence_membre" value="{{membre.numero_sequence}}" />
+                    <div class="alert alert-info" role="alert">
+                        <h5 class="alert-heading">
+                            <i class="fas fa-info-circle"></i>
+                            Informations
+                        </h5>
+                        <hr>
+                        <strong>Hiver :</strong> du 1er janvier au 30 avril<br />
+                        <strong>Été :</strong> du 1er mai au 31 août<br />
+                        <strong>Automne :</strong> du 1er septembre au 31 décembre<br />
+                        <strong>Annuel :</strong> 1 an à partire de la date de paiement
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Membre <strong class="obligatoire">*</strong></label>
+                        <div class="col-sm-8">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="etudiant" id="etudiant" value="true" checked>
+                                <label class="form-check-label" for="etudiant">Étudiant</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="etudiant" id="nonEtudiant" value="false">
+                                <label class="form-check-label" for="nonEtudiant">Non étudiant</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="type_transaction" class="col-sm-4 col-form-label">Type de carte souhaité <strong class="obligatoire">*</strong></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="type_carte" id="type_carte" required>
+                                <option></option>
+                                {{#each typeAdhesion}}
+                                    <option value="{{this.numero_sequence}}"
+                                            data-montant="{{this.montant}}"
+                                            data-montant-etudiant="{{this.montant_etudiant}}"
+                                            data-date-debut="{{this.date_debut}}"
+                                            data-date-fin="{{this.date_fin}}"
+                                            data-nbr-jour="{{this.nombre_jour}}">{{this.nom}}</option>
+                                {{/each}}
+                            </select>
+                            <input type="hidden" name="date_debut" id="date_debut">
+                            <input type="hidden" name="date_fin" id="date_fin">
+                            <input type="hidden" name="nbr_jour" id="nbr_jour">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="type_transaction" class="col-sm-4 col-form-label">Je souhaire payer par <strong class="obligatoire">*</strong></label>
+                        <div class="col-sm-4">
+                            <select class="form-control" name="type_transaction" id="type_transaction" required>
+                                <option></option>
+                                {{#each enumeration.TYPE_TRANSAC}}
+                                    <option value="{{this.code}}">{{this.libelle}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label for="type_transaction" class="col-sm-4 col-form-label">Montant de la carte</label>
+                        <div class="col-sm-4">
+                            <input name="montant" id="montant" class="form-control" placeholder="" type="text" readonly value="0">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Envoyer la demande</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form> 
+
+
+
+
+
+{{#contentFor "pageScripts"}}
+    <script src="/js/espaceMembre/espacePersonnel.js"></script>
+{{/contentFor}}

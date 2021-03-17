@@ -1,5 +1,6 @@
 const db = require('../db/baseDB');
 const moment = require('moment');
+const json = require('../configs/enumerations.json');
 
 const getAdhesionByNumeroSequenceMembre = (id, callback) => {
     db.query(`select adh.numero_sequence, 
@@ -12,6 +13,7 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
                      etudiant,
                      tadh.nom,
                      tadh.adresse_carte,
+                     numero_sequence_statut_demande,
                      NOW() < adh.date_fin as adh_actif,
                      commentaire,
                      numero_membre
@@ -23,7 +25,13 @@ const getAdhesionByNumeroSequenceMembre = (id, callback) => {
         if (error) {
             throw error;
         }
-        callback(results.rows);
+
+        var adhesions = results.rows.map(adhesion => {
+            adhesion.libelle_statut_demande = json.STATUT_DEMANDE[adhesion.numero_sequence_statut_demande];
+            return adhesion;
+        })
+
+        callback(adhesions);
     });
 };
 
@@ -38,18 +46,25 @@ const createAdhesion = (datas, callback) => {
         datas.etudiant,
         datas.numero_sequence_membre,
         datas.numero_sequence_type_adhesion,
+        datas.numero_sequence_statut_demande,
         datas.commentaire,
         moment(datas.date_debut).format('YYYY') + datas.numero_sequence_type_adhesion + datas.numero_sequence_membre
     ];
 
     db.query(`insert into public.adhesion 
-                     (date_debut, date_fin, montant_paye, 
-                      date_transaction, type_transaction, 
-                      etudiant, numero_sequence_membre, 
+                     (date_debut, 
+                      date_fin, 
+                      montant_paye, 
+                      date_transaction, 
+                      type_transaction, 
+                      etudiant, 
+                      numero_sequence_membre, 
                       numero_sequence_type_adhesion, 
-                      commentaire, numero_membre)
+                      numero_sequence_statut_demande,
+                      commentaire, 
+                      numero_membre)
               values     
-                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)
+                     ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)
               returning numero_sequence`, donnees,
         (error, results) => {
             if (error) {
