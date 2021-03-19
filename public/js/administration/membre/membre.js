@@ -1,17 +1,12 @@
 $(function(window, $) {
     if ('undefined' == typeof(window.CL.View.membre)) { window.CL.View.membre = {}; }
 
-    const SELECTOR_TYPE_ADHESION = '#type_adhesion';
     const SELECTOR_ROLE_MEMBRE = '#role';
     const SELECTOR_NO_SEQ_MEMBRE = '#numero_sequence_membre';
     const SELECTOR_BTN_ENR_ROLE = '#enregistrerRole';
-    const SELECTOR_MODAL_CREER_ADH = '#modalCreerAdhesion';
-    const SELECTOR_FRM_CREER_ADH = '#frmCreerAdhesion';
     const SELECTOR_TBL_ADHESION = '#tblAdhesions';
     const SELECTOR_TBL_FICH_RISQ = '#tblFicheRisque';
     const SELECTOR_SUPP_ADH = '.supprimer-adhesion';
-    const SELECTOR_BTN_CREER_ADH = '#btnCreerAdhesion';
-    const SELECTOR_INPUT_DAT_DEB = '#date_debut';
 
     var modalSupAdhesion = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -19,7 +14,7 @@ $(function(window, $) {
         boutons: [{
             texte: 'Oui',
             callback: function() {
-                supprimerFormulaireRisque(modalSupAdhesion.ligne);
+                supprimerAdhesion(modalSupAdhesion.ligne);
             }
         }, {
             texte: 'Non',
@@ -35,16 +30,11 @@ $(function(window, $) {
      * Permet d'initialiser la page
      */
     function initialiserPage() {
-        $(SELECTOR_BTN_CREER_ADH).click((e) => { $(SELECTOR_MODAL_CREER_ADH).modal(); });
-        $(SELECTOR_TYPE_ADHESION).change(appliquerInformationsAdhesion);
-        $(SELECTOR_BTN_ENR_ROLE).click(modifierRole);
-        $(SELECTOR_FRM_CREER_ADH).submit(eventCreerAdhesion);
-        $('input[name=etudiant]').change(appliquerInformationsEtudiant);
+        $(SELECTOR_BTN_ENR_ROLE).on('click', modifierRole);
         $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
-        $(SELECTOR_INPUT_DAT_DEB).change(eventModifierDateFin);
 
-        initialiserDatatableAdh();
-        initialiserDatatableFiche();
+        initialiserDatatableAdhesion();
+        initialiserDatatableFormulaireRisque();
         initialiserMasks();
     }
 
@@ -58,7 +48,7 @@ $(function(window, $) {
     /**
      * Initialisation du datatable pour les adhésions
      */
-    function initialiserDatatableAdh() {
+    function initialiserDatatableAdhesion() {
 
         var configDatatable = {
             paging: false,
@@ -66,30 +56,39 @@ $(function(window, $) {
             ordering: false,
             ajax: '/api/adhesion/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
-                width: '50px',
+                width: '25px',
                 render: function(data, type, row, meta) {
                     var composants = `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
-                                            <i class="far fa-trash-alt"></i>                   
-                                        </a>`;
+                    <i class="far fa-trash-alt"></i>                   
+                  </a>
+                  <br>
+                <a href="#" class="cl-icons editer-adhesion">
+                    <i class="far fa-edit"></i>                 
+                </a><br>`;
 
-                    if (row.adresse_carte !== null) {
-                        composants += `&nbsp;
-                                        <a href="/membre/carte/` + row.numero_sequence_membre + `/` + row.numero_sequence + `">
+                    if (row.numero_sequence_statut_demande === 99) {
+                        if (row.adresse_carte !== null) {
+                            composants += `<a href="/membre/carte/` + row.numero_sequence_membre + `/` + row.numero_sequence + `">
                                             <i class="far fa-address-card"></i>
                                         </a>`;
+                        }
+                    } else {
+                        composants += `<i class="far fa-address-card"></i>`;
                     }
 
                     return composants;
                 }
             }, {
+                data: 'numero_membre',
+                title: 'Numero de membre'
+            }, {
+                width: '95px',
                 data: 'date_debut',
                 title: 'Date début'
             }, {
+                width: '95px',
                 data: 'date_fin',
                 title: 'Date fin'
-            }, {
-                data: 'numero_membre',
-                title: 'Numero de membre'
             }, {
                 data: 'nom',
                 title: 'Adhésion',
@@ -106,8 +105,12 @@ $(function(window, $) {
                 data: 'type_transaction_libelle',
                 title: 'Transaction'
             }, {
+                width: '175px',
                 data: 'commentaire',
                 title: 'Commentaire'
+            }, {
+                data: 'libelle_statut_demande',
+                title: 'Statut demande'
             }],
             rowCallback: function(row, data) {
                 if (data.adh_actif) {
@@ -125,7 +128,7 @@ $(function(window, $) {
     /**
      * Initialisation du datatable pour les fuche de risques
      */
-    function initialiserDatatableFiche() {
+    function initialiserDatatableFormulaireRisque() {
 
         var configDatatable = {
             paging: false,
@@ -162,30 +165,6 @@ $(function(window, $) {
         $(SELECTOR_TBL_FICH_RISQ).DataTable(configDatatable);
     }
 
-
-    /**
-     * Permet de mettre à jour la date de fin au changement de la date de début
-     * @param {jQuery Event} e Evenement
-     */
-    function eventModifierDateFin(e) {
-        var optionSelected = $(SELECTOR_TYPE_ADHESION + '>option:selected');
-
-        var anneeCourante = new Date().getFullYear();
-        var dateDebut = $(SELECTOR_INPUT_DAT_DEB).val();
-        var dateFin = null;
-        var dateFin = optionSelected.data('fin');
-        var nbrJour = optionSelected.data('nbr-jour');
-
-        if (typeof nbrJour === 'undefined' || nbrJour === null || nbrJour === "") {
-            dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
-        } else {
-            dateFin = moment(dateDebut).add(nbrJour, 'd').format('YYYY-MM-DD');
-        }
-
-        $(SELECTOR_MODAL_CREER_ADH + ' #date_fin').val(dateFin);
-    }
-
-
     /**
      * Evenement permettant de faire la suppression d'une adhésion
      * @param {jQuery} e event object
@@ -198,36 +177,11 @@ $(function(window, $) {
         modalSupAdhesion.AfficherModal();
     }
 
-
-    /**
-     * Permet de créer l'adhésion et de l'associer au membre
-     * @param {event JQuery} e event
-     */
-    function eventCreerAdhesion(e) {
-        e.preventDefault();
-
-        var donnees = window.CL.Utilitaires.getFormData($(this));
-        donnees.numero_sequence_membre = $(SELECTOR_NO_SEQ_MEMBRE).val();
-        donnees.numero_sequence_type_adhesion = donnees.type_adhesion;
-
-        $.ajax({
-            url: '/api/adhesion/' + donnees.numero_sequence_membre,
-            data: donnees,
-            method: 'POST',
-            success: function(result, statut) {
-                $(SELECTOR_TBL_ADHESION).DataTable().ajax.reload();
-                $(SELECTOR_MODAL_CREER_ADH).modal('hide');
-                $(SELECTOR_FRM_CREER_ADH)[0].reset();
-            }
-        });
-    }
-
-
     /**
      * Permet de supprimer une adhésion via une requête AJAX et de recharger le tableau
      * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
      */
-    function supprimerFormulaireRisque(ligne) {
+    function supprimerAdhesion(ligne) {
         var href = $(ligne).find('.supprimer-adhesion').attr('href');
 
         $.ajax({
@@ -239,7 +193,6 @@ $(function(window, $) {
             }
         });
     }
-
 
     /**
      * Permet d'effectuer la modification du rôle du membre
@@ -260,64 +213,6 @@ $(function(window, $) {
                 });
             }
         });
-    }
-
-
-    /**
-     * Permet de mettre à jour le montant lorsque l'on choisi étidiant ou non
-     * @param {event JQuery} e Event
-     */
-    function appliquerInformationsEtudiant(e) {
-        var option = $('#type_adhesion>option:selected');
-        if (option.val() === '') {
-            return;
-        }
-
-        var etudiant = $('input[name=etudiant]:checked').val()
-        var montantPaye = 0;
-
-        if (etudiant.toLowerCase() === 'true') {
-            montantPaye = option.data('montant-etudiant');
-        } else {
-            montantPaye = option.data('montant');
-        }
-
-        $(SELECTOR_MODAL_CREER_ADH + ' #montant_paye').val(montantPaye);
-    }
-
-
-    /**
-     * Permet d'insérer les informations du type d'adhésion aux champs
-     * @param {event JQuery} e Event
-     */
-    function appliquerInformationsAdhesion(e) {
-        var option = $('#type_adhesion>option:selected');
-        var etudiant = $('input[name=etudiant]:checked').val()
-
-        var anneeCourante = new Date().getFullYear();
-
-        var dateDebut = option.data('debut');
-        var dateFin = option.data('fin');
-        var nbrJour = option.data('nbr-jour');
-        var montantPaye = 0;
-
-        if (etudiant.toLowerCase() === 'true') {
-            montantPaye = option.data('montant-etudiant');
-        } else {
-            montantPaye = option.data('montant');
-        }
-
-        if (typeof nbrJour === 'undefined' || nbrJour === null || nbrJour === "") {
-            dateDebut = moment(dateDebut, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
-            dateFin = moment(dateFin, 'YYYY-MM-DD').year(anneeCourante).format('YYYY-MM-DD');
-        } else {
-            dateDebut = moment().format('YYYY-MM-DD');
-            dateFin = moment().add(nbrJour, 'd').format('YYYY-MM-DD');
-        }
-
-        $(SELECTOR_MODAL_CREER_ADH + ' #date_debut').val(dateDebut);
-        $(SELECTOR_MODAL_CREER_ADH + ' #date_fin').val(dateFin);
-        $(SELECTOR_MODAL_CREER_ADH + ' #montant_paye').val(montantPaye);
     }
 
 }(window, $));

@@ -18,13 +18,13 @@ router.get('/formulaire/consulter', [gererConnexion.gererMembre, (request, respo
 
 function ConsulterFormulaireRisque(request, response, id) {
     formulaireDB.getFormulaireByNumeroSequence(id, (result) => {
-        if (result.length == 1) {
+        if (result !== null) {
             response.render('espaceMembre/formulaireRisque/formulaire-lecture', {
                 layout: 'template-membre',
-                formulaire: result[0]
+                formulaire: result
             });
         } else {
-            response.redirect('./');
+            response.redirect('/');
         }
     });
 }
@@ -50,8 +50,11 @@ router.get('/formulaireRisque/ajouter', [gererConnexion.gererMembre, (request, r
  ** Permet d'ajouter le formulaire 
  */
 router.post('/formulaireRisque/ajouter', (request, response) => {
-    formulaireDB.createFormulaire(request.body, (results) => {
-        response.redirect('/');
+    formulaireDB.createFormulaire(request.body, (noSeqFormulaire) => {
+        formulaireDB.getFormulaireByNumeroSequence(noSeqFormulaire, (formulaire) => {
+            request.session.userConnected.formulaireRisqueActif = formulaire;
+            response.redirect('/');
+        });
     });
 });
 

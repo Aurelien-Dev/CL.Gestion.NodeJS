@@ -63,7 +63,7 @@ const getFormulaireByNumeroSequence = (id, callback) => {
         if (error) {
             throw error;
         }
-        callback(results.rows);
+        callback(results.rows[0]);
     });
 };
 
@@ -130,7 +130,7 @@ const createFormulaire = (datas, callback) => {
             if (error) {
                 throw error;
             }
-            callback(results.rows);
+            callback(results.rows[0].numero_sequence);
         });
 };
 

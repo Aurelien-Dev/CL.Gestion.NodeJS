@@ -1,18 +1,20 @@
 <div class="container">
     <h2 class="text-center">{{membre.prenom}} {{membre.nom}}</h2>
 
-        {{!-- Information membre --}}
+    {{!-- Information membre --}}
     <div class="row">
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card shadow border-left-primary">
                 <!-- Card Header - Accordion -->
-                <a href="#collapseCardIG" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardIG">
+                <a href="#collapseCardIG" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                    aria-expanded="true" aria-controls="collapseCardIG">
                     <h6 class="m-0 font-weight-bold text-primary">Information générales</h6>
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="collapseCardIG">
                     <div class="card-body">
-                        <input type="hidden" name="numero_sequence_membre" id="numero_sequence_membre" value="{{membre.numero_sequence}}" />
+                        <input type="hidden" name="numero_sequence_membre" id="numero_sequence_membre"
+                            value="{{membre.numero_sequence}}" />
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <i class="far fa-envelope"></i>
@@ -22,7 +24,7 @@
                                 {{membre.adresse_courriel}}
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <div class="col-xs-12 col-md-4">
                                 <i class="fas fa-mobile-alt"></i>
@@ -36,6 +38,30 @@
                                 <strong>Date de naissance : </strong>
                             </div>
                             <div class="col-xs-12 col-md-7">{{membre.date_naissance}}</div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <i class="far fa-id-badge"></i>
+                                <strong>Rôle : </strong>
+                            </div>
+                            <div class="col-xs-12 col-md-3">
+                                <select class="form-control form-control-sm" name="role" id="role"
+                                    data-value="{{membre.role}}">
+                                    <option></option>
+                                    {{#each enumeration.ROLE}}
+                                    {{#if (eq this.code ../membre.role)}}
+                                    <option value="{{this.code}}" selected>{{this.libelle}}</option>
+                                    {{else}}
+                                    <option value="{{this.code}}">{{this.libelle}}</option>
+                                    {{/if}}
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-md-2">
+                                <button class="btn btn-sm btn-primary" type="button" id="enregistrerRole"
+                                    data-loading-text="Chargement ..."> Enregistrer</button>
+                            </div>
                         </div>
 
                         <hr class="sidebar-divider">
@@ -57,12 +83,13 @@
         <div class="col-xl-12 col-md-12 mb-4">
             <div class="card shadow">
                 <!-- Card Header - Accordion -->
-                <a href="#collapseCardFiche" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardFiche">
+                <a href="#collapseCardFiche" class="d-block card-header py-3" data-toggle="collapse" role="button"
+                    aria-expanded="true" aria-controls="collapseCardFiche">
                     <h6 class="m-0 font-weight-bold text-primary">Formulaires risques</h6>
                 </a>
                 <div class="collapse show" id="collapseCardFiche">
                     <div class="card-body">
-                        <div class="table-responsive">
+                        <div class="table-responsive-sm">
                             <table class="table table-bordered table-sm" id="tblFicheRisque">
                             </table>
                         </div>
@@ -75,28 +102,31 @@
     {{!-- Adhésion --}}
     <div class="card shadow mb-4">
         <!-- Card Header - Accordion -->
-        <a href="#collapseCardAdh" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardAdh">
+        <a href="#collapseCardAdh" class="d-block card-header py-3" data-toggle="collapse" role="button"
+            aria-expanded="true" aria-controls="collapseCardAdh">
             <h6 class="m-0 font-weight-bold text-primary">Adhésions</h6>
         </a>
         <div class="collapse show" id="collapseCardAdh">
             <div class="card-body">
-                <div class="alert alert-info" role="alert">  
+                <div class="alert alert-info" role="alert">
                     <h5 class="alert-heading">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill"
+                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
                         </svg>
                         Informations
                     </h5>
                     <hr>
-                        Adhésions expirés en rouge
+                    Adhésions expirés en rouge
                 </div>
-                <div class="table-responsive">
+                <div class="table-responsive-sm">
                     <table class="table table-bordered table-sm" id="tblAdhesions">
                     </table>
                 </div>
                 <br />
-                
-                <input class="btn btn-dark" type="button" value="Créer une nouvelle adhésion" id="btnCreerAdhesion"/>
+
+                <input class="btn btn-dark" type="button" value="Créer une nouvelle adhésion" id="btnCreerAdhesion" />
 
             </div>
         </div>
@@ -108,117 +138,24 @@
 </p>
 
 
-<form id="frmCreerAdhesion">
-    <div id="modalCreerAdhesion" class="modal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Nouvelle adhésion</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="alert alert-info" role="alert">
-                        <h5 class="alert-heading">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM8 5.5a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
-                            </svg>
-                            Informations
-                        </h5>
-                        <hr>
-                        <strong>Hiver</strong> 1 janvier au 30 avril<br />
-                        <strong>Été</strong> 1 mai au 31 août<br />
-                        <strong>Automne</strong> 1 septembre au 31 décembre
-                    </div>
-
-                    <div class="form-group row">
-                        <label class="col-sm-4 col-form-label">Membre <strong class="obligatoire">*</strong></label>
-                        <div class="col-sm-8">
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="etudiant" id="etudiant1" value="true" checked>
-                                <label class="form-check-label" for="etudiant1">Étudiant</label>
-                            </div>
-                            <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="etudiant" id="etudiant2" value="false">
-                                <label class="form-check-label" for="etudiant2">Non étudiant</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="date_debut" class="col-sm-4 col-form-label">Date de début <strong class="obligatoire">*</strong></label>
-                        <div class="col-sm-8">
-                            <input type="date" class="form-control" name="date_debut" id="date_debut" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="date_fin" class="col-sm-4 col-form-label">Date de fin <strong class="obligatoire">*</strong></label>
-                        <div class="col-sm-8">
-                            <input type="date" class="form-control" name="date_fin" id="date_fin" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="montant_paye" class="col-sm-4 col-form-label">Montant payé <strong class="obligatoire">*</strong></label>
-                        <div class="input-group col-sm-8">
-                            <input type="number" class="form-control" name="montant_paye" id="montant_paye" required>
-                            <div class="input-group-prepend ">
-                                <div class="input-group-text">$</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="date_transaction" class="col-sm-4 col-form-label">Date de la transaction <strong class="obligatoire">*</strong></label>
-                        <div class="col-sm-8">
-                            <input type="date" class="form-control" name="date_transaction" id="date_transaction" required>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="type_transaction" class="col-sm-4 col-form-label">Type de transaction <strong class="obligatoire">*</strong></label>
-                        <div class="col-sm-8">
-                            <select class="form-control" name="type_transaction" id="type_transaction" required>
-                                <option></option>
-                                {{#each enumeration.TYPE_TRANSAC}}
-                                    <option value="{{this.code}}">{{this.libelle}}</option>
-                                {{/each}}                                
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="commentaire" class="col-sm-4 col-form-label">Commentaire</label>
-                        <div class="col-sm-8">
-                            <textarea name="commentaire" id="commentaire" class="form-control"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Enregistrer</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</form> 
-
-
-
 
 {{#contentFor "pageStyles"}}
-    <link href="/lib/datatable/datatables.min.css" rel="stylesheet">
+<link href="/lib/datatable/datatables.min.css" rel="stylesheet">
 {{/contentFor}}
 
 
 {{#contentFor "pageScripts"}}
-    <script src="/lib/datatable/datatables.min.js"></script>
+<script src="/lib/datatable/datatables.min.js"></script>
 
-    <script src="/js/administration/membre/membre.js"></script>
-    
-    <script>
-        $(function() {
+<script src="/js/administration/membre/membre.js"></script>
 
-            $('#retour').click(function() {
-                window.history.back();
-            }); 
+<script>
+    $(function () {
 
+        $('#retour').click(function () {
+            window.history.back();
         });
-    </script>
+
+    });
+</script>
 {{/contentFor}}
