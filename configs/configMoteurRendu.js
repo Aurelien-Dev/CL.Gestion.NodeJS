@@ -1,6 +1,7 @@
 const expressHandle = require('express-handlebars');
 const express = require('express');
 const bodyParser = require('body-parser');
+const moment = require('moment');
 
 const utils = require('../utils/utilitaires.js');
 
@@ -12,7 +13,14 @@ function ConrigurationRendu(app) {
     var hbs = expressHandle.create({
         layoutsDir: 'views/layout/',
         defaultLayout: 'template',
-        helpers: utils.helpers
+        helpers: {
+            _toInt: (str) => {
+                return parseInt(str, 10);
+            },
+            _year: (date) => {
+                return moment(date).year();
+            }
+        }
     });
 
     //définition du moteur de rendu (ici handlebars)

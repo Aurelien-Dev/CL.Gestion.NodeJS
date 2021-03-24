@@ -8,7 +8,7 @@ const config = require('../configs/enumerations.json')
  * Permet d'obtenir les adhésions d'un membre
  * @param {int} id Correspond à l'identifiant du membre
  */
-router.get('/api/adhesion/:id', function(request, response) {
+router.get('/api/adhesions/:id', function(request, response) {
     const id = parseInt(request.params.id);
 
     adhesionDB.getAdhesionByNumeroSequenceMembre(id, (infoAdhesionMembre) => {

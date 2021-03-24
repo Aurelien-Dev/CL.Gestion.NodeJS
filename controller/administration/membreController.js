@@ -1,16 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const async = require('async');
-const fs = require('fs');
+
+const membreDB = require('../../db/membreDB')
+const adhesionDB = require('../../db/adhesionDB')
+const typeAdhesionDB = require('../../db/typeAdhesionDB');
 
 const gererConnexion = require('../../services/gererConnexion')
-const formulaireDB = require('../../db/formulaireDB')
-const membreDB = require('../../db/membreDB')
-const typeAdhesionDB = require('../../db/typeAdhesionDB');
 const json = require('../../configs/enumerations.json');
 const utilitaires = require('../../utils/utilitaires');
 const service = require('../../services/genererCarteMembre');
-var helpers = require('handlebars-helpers')();
+
+require('handlebars-helpers')();
 
 /*
  ** Permet de consulter un membre existant, sinon retourne a la page d'accueil
@@ -25,26 +26,22 @@ router.get('/membre/consulter/:id', [gererConnexion.gererMembre, (request, respo
                 callback(null, infoMembre);
             });
         },
-        //Obtention de ces formulaires de risques
-        (infoMembre, callback) => {
-            formulaireDB.getFormulairesByNumeroSequenceMembre(id, (infoFormulairesMembre) => {
-                callback(null, infoMembre, infoFormulairesMembre);
-            });
-        },
         //Obtention des énumérations pour l'affichage de la page
-        (infoMembre, infoFormulairesMembre, callback) => {
+        (infoMembre, callback) => {
             var listEnum = {
                 ROLE: utilitaires.EnumToList(json.ROLE),
-                TYPE_TRANSAC: utilitaires.EnumToList(json.TYPE_TRANSAC)
+                TYPE_TRANSAC: utilitaires.EnumToList(json.TYPE_TRANSAC),
+                STATUT_DEMANDE: utilitaires.EnumToList(json.STATUT_DEMANDE)
             };
-            callback(null, infoMembre, infoFormulairesMembre, listEnum);
+            callback(null, infoMembre, listEnum);
         },
-        (infoMembre, infoFormulairesMembre, listEnum, callback) => {
+        //Obtention des types d'adhésions
+        (infoMembre, listEnum, callback) => {
             typeAdhesionDB.getTypeAdhesion((typeAdhesion) => {
-                callback(null, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion);
+                callback(null, infoMembre, listEnum, typeAdhesion);
             });
         }
-    ], (err, infoMembre, infoFormulairesMembre, listEnum, typeAdhesion) => {
+    ], (err, infoMembre, listEnum, typeAdhesion) => {
 
         if (typeof err !== 'undefined' && err !== null) {
             response.status(500);
@@ -53,9 +50,48 @@ router.get('/membre/consulter/:id', [gererConnexion.gererMembre, (request, respo
         if (infoMembre !== null && typeof infoMembre !== 'undefined') {
             response.render('administration/membre/membre-lecture', {
                 membre: infoMembre,
-                formulaires: infoFormulairesMembre,
                 enumeration: listEnum,
                 typeAdhesion: typeAdhesion
+            });
+        } else {
+            response.redirect('/');
+        }
+    });
+}]);
+
+
+/*
+ ** Permet de consulter un membre existant, sinon retourne a la page d'accueil
+ */
+router.get('/membre/ModalModifierAdhesion/:id', [gererConnexion.gererMembre, (request, response) => {
+    const id = parseInt(request.params.id);
+
+    async.waterfall([
+        //Obtention des informations du membre
+        (callback) => {
+            adhesionDB.getAdhesionByNumeroSequence(id, (infoAdhesion) => {
+                callback(null, infoAdhesion);
+            });
+        },
+        //Obtention des énumérations pour l'affichage de la page
+        (infoAdhesion, callback) => {
+            var listEnum = {
+                TYPE_TRANSAC: utilitaires.EnumToList(json.TYPE_TRANSAC),
+                STATUT_DEMANDE: utilitaires.EnumToList(json.STATUT_DEMANDE)
+            };
+            callback(null, infoAdhesion, listEnum);
+        }
+    ], (err, infoAdhesion, listEnum) => {
+
+        if (typeof err !== 'undefined' && err !== null) {
+            response.status(500);
+        }
+
+        if (infoAdhesion !== null && typeof infoAdhesion !== 'undefined') {
+            response.render('administration/membre/modalModifierAdhesion', {
+                layout: false,
+                infoAdhesion: infoAdhesion,
+                enumeration: listEnum
             });
         } else {
             response.redirect('/');

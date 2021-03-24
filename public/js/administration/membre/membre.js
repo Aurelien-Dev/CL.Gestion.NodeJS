@@ -3,10 +3,14 @@ $(function(window, $) {
 
     const SELECTOR_ROLE_MEMBRE = '#role';
     const SELECTOR_NO_SEQ_MEMBRE = '#numero_sequence_membre';
+
     const SELECTOR_BTN_ENR_ROLE = '#enregistrerRole';
+    const SELECTOR_BTN_MODIFIERADH = '#btnModifierAdhesion';
+    const SELECTOR_BTN_SUPP_ADH = '#btnSupprimerAdhesion';
+
+    const SELECTOR_MODAL_ADH = '#modalModifierAdhesion';
     const SELECTOR_TBL_ADHESION = '#tblAdhesions';
     const SELECTOR_TBL_FICH_RISQ = '#tblFicheRisque';
-    const SELECTOR_SUPP_ADH = '.supprimer-adhesion';
 
     var modalSupAdhesion = new window.CL.Utilitaires.Modal({
         titre: 'Suppression',
@@ -31,7 +35,8 @@ $(function(window, $) {
      */
     function initialiserPage() {
         $(SELECTOR_BTN_ENR_ROLE).on('click', modifierRole);
-        $(SELECTOR_TBL_ADHESION).on('click', SELECTOR_SUPP_ADH, eventClickSupprimerAdhesion);
+        $(SELECTOR_BTN_SUPP_ADH).on('click', eventClickSupprimerAdhesion);
+        $(SELECTOR_BTN_MODIFIERADH).on('click', eventClickModifierAdhesion);
 
         initialiserDatatableAdhesion();
         initialiserDatatableFormulaireRisque();
@@ -54,29 +59,11 @@ $(function(window, $) {
             paging: false,
             searching: false,
             ordering: false,
-            ajax: '/api/adhesion/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
+            ajax: '/api/adhesions/' + $(SELECTOR_NO_SEQ_MEMBRE).val(),
             columns: [{
                 width: '25px',
                 render: function(data, type, row, meta) {
-                    var composants = `<a href="/api/adhesion/` + row.numero_sequence + `" class="cl-icons supprimer-adhesion">
-                    <i class="far fa-trash-alt"></i>                   
-                  </a>
-                  <br>
-                <a href="#" class="cl-icons editer-adhesion">
-                    <i class="far fa-edit"></i>                 
-                </a><br>`;
-
-                    if (row.numero_sequence_statut_demande === 99) {
-                        if (row.adresse_carte !== null) {
-                            composants += `<a href="/membre/carte/` + row.numero_sequence_membre + `/` + row.numero_sequence + `">
-                                            <i class="far fa-address-card"></i>
-                                        </a>`;
-                        }
-                    } else {
-                        composants += `<i class="far fa-address-card"></i>`;
-                    }
-
-                    return composants;
+                    return '<input type="radio" name="action" value="' + row.numero_sequence + '">';
                 }
             }, {
                 data: 'numero_membre',
@@ -92,13 +79,13 @@ $(function(window, $) {
             }, {
                 data: 'nom',
                 title: 'Adhésion',
-                render: function(data, type, row, meta) {
+                render: (data, type, row, meta) => {
                     return data + (row.etudiant ? ' (étudiant)' : ' (non étudiant)');
                 }
             }, {
                 data: 'montant_paye',
-                title: 'Montant payé',
-                render: function(data, type, row, meta) {
+                title: 'Montant',
+                render: (data, type, row, meta) => {
                     return data + ' $';
                 }
             }, {
@@ -111,6 +98,23 @@ $(function(window, $) {
             }, {
                 data: 'libelle_statut_demande',
                 title: 'Statut demande'
+            }, {
+                data: 'numero_sequence_membre',
+                title: 'Carte',
+                render: (data, type, row, meta) => {
+                    var composants = '';
+                    if (row.numero_sequence_statut_demande === 99) {
+                        if (row.adresse_carte !== null) {
+                            composants += `<a href="/membre/carte/` + data + `/` + row.numero_sequence + `">
+                                                    <i class="far fa-address-card"></i>
+                                                </a>`;
+                        }
+                    } else {
+                        composants += `<i class="far fa-address-card"></i>`;
+                    }
+
+                    return composants;
+                }
             }],
             rowCallback: function(row, data) {
                 if (data.adh_actif) {
@@ -178,11 +182,28 @@ $(function(window, $) {
     }
 
     /**
+     * Evenement permettant de faire la suppression d'une adhésion
+     * @param {jQuery} e event object
+     */
+    function eventClickModifierAdhesion(e) {
+        var href = '/membre/ModalModifierAdhesion/' + $('input[name=action]:checked').val();
+
+        $.ajax({
+            url: href,
+            method: 'get',
+            success: function(result, statut) {
+                $('#appendModal').html(result);
+                $('#modalModifierAdhesion').modal('toggle');
+            }
+        });
+    }
+
+    /**
      * Permet de supprimer une adhésion via une requête AJAX et de recharger le tableau
      * @param {$ligne} ligne Élément jQuery qui correspond à la ligne d'un formulaire
      */
     function supprimerAdhesion(ligne) {
-        var href = $(ligne).find('.supprimer-adhesion').attr('href');
+        var href = '/api/adhesion/' + $('input[name=action]:checked').val();
 
         $.ajax({
             url: href,
