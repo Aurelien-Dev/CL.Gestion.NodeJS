@@ -63,7 +63,9 @@ $(function(window, $) {
             columns: [{
                 width: '25px',
                 render: function(data, type, row, meta) {
-                    return '<input type="radio" name="action" value="' + row.numero_sequence + '">';
+                    var check = '';
+                    if (meta.row == 0) check = 'checked';
+                    return '<input type="radio" name="action" value="' + row.numero_sequence + '" ' + check + '>';
                 }
             }, {
                 data: 'numero_membre',

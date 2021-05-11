@@ -68,6 +68,28 @@ const getAdhesionByNumeroSequence = (id, callback) => {
     });
 };
 
+const updateAdhesionByNumeroSequence = (datas, callback) => {
+    var donnees = [
+        datas.numero_sequence,
+        datas.type_transaction,
+        datas.numero_sequence_statut_demande,
+        datas.date_debut,
+        datas.date_fin
+    ];
+
+    db.query(`update public.adhesion 
+                 set (type_transaction, numero_sequence_statut_demande, date_debut, date_fin)
+                      =
+                     ($2, $3, $4, $5)
+               where numero_sequence = $1`, donnees,
+        (error, results) => {
+            if (error) {
+                throw error;
+            }
+            callback(results.rows);
+        });
+}
+
 
 const createAdhesion = (datas, callback) => {
     var donnees = [
@@ -122,5 +144,6 @@ module.exports = {
     getAdhesionByNumeroSequenceMembre,
     getAdhesionByNumeroSequence,
     createAdhesion,
-    deleteAdhesionByNumeroSequence
+    deleteAdhesionByNumeroSequence,
+    updateAdhesionByNumeroSequence,
 };

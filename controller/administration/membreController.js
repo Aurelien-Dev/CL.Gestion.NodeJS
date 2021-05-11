@@ -64,6 +64,11 @@ router.get('/membre/consulter/:id', [gererConnexion.gererMembre, (request, respo
  ** Permet de consulter un membre existant, sinon retourne a la page d'accueil
  */
 router.get('/membre/ModalModifierAdhesion/:id', [gererConnexion.gererMembre, (request, response) => {
+    if (request.params.id == 'undefined') {
+        response.status(500);
+        return;
+    }
+
     const id = parseInt(request.params.id);
 
     async.waterfall([
@@ -98,6 +103,53 @@ router.get('/membre/ModalModifierAdhesion/:id', [gererConnexion.gererMembre, (re
         }
     });
 }]);
+
+
+/*
+ ** Permet de consulter un membre existant, sinon retourne a la page d'accueil
+ */
+router.post('/membre/ModalModifierAdhesion/:id', [gererConnexion.gererMembre, (request, response) => {
+    var donnees = {
+        numero_sequence: parseInt(request.params.id),
+        numero_sequence_statut_demande: parseInt(request.body.statut_demande),
+        type_transaction: request.body.type_transaction,
+        date_debut: request.body.date_debut,
+        date_fin: request.body.date_fin
+    };
+
+    var numeroSequenceMembre = request.body.numero_sequence_membre;
+
+    //Statut, type, DD, DF
+    async.waterfall([
+        //Obtention des informations du membre
+        (callback) => {
+            adhesionDB.updateAdhesionByNumeroSequence(donnees, (infoAdhesion) => {
+                callback(null, infoAdhesion);
+            });
+        },
+        //Obtention des énumérations pour l'affichage de la page
+        (infoAdhesion, callback) => {
+            var listEnum = {
+                TYPE_TRANSAC: utilitaires.EnumToList(json.TYPE_TRANSAC),
+                STATUT_DEMANDE: utilitaires.EnumToList(json.STATUT_DEMANDE)
+            };
+            callback(null, infoAdhesion, listEnum);
+        }
+    ], (err, infoAdhesion, listEnum) => {
+
+        if (typeof err !== 'undefined' && err !== null) {
+            response.status(500);
+        }
+
+        if (infoAdhesion !== null && typeof infoAdhesion !== 'undefined') {
+            response.redirect('/membre/consulter/' + numeroSequenceMembre);
+        } else {
+            response.redirect('/');
+        }
+    });
+}]);
+
+
 
 /**
  * Permet d'obtenir la d'un membre
